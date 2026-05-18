@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Currency by Market — JamesEdition Sales Reference</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Prata&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --je-teal-deep: #006C75;
+    --je-teal-deep-hover: #19818A;
+    --je-gold-dark: #b9a16f;
+    --je-black: #151515;
+    --je-mid-gray: #606060;
+    --je-light-gray: #878787;
+    --je-muted-gray: #ADADAD;
+    --je-border: #E0E0E0;
+    --je-divider: #ececec;
+    --je-off-white: #F5F5F5;
+    --je-near-white: #F7F7F7;
+    --je-white: #FFFFFF;
+    --font-sans: 'Inter', Arial, sans-serif;
+    --font-serif: 'Prata', serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--je-black);
+    background: var(--je-white);
+    -webkit-font-smoothing: antialiased;
+  }
+  .page { max-width: 900px; margin: 0 auto; padding: 48px 40px; }
+
+  /* Header */
+  .header { margin-bottom: 40px; border-bottom: 1px solid var(--je-divider); padding-bottom: 24px; }
+  .header-label { font-size: 11px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--je-light-gray); margin-bottom: 8px; }
+  .header h1 { font-family: var(--font-serif); font-weight: 400; font-size: 28px; line-height: 1.3; color: var(--je-black); margin-bottom: 8px; }
+  .header p { font-size: 13px; color: var(--je-mid-gray); max-width: 560px; line-height: 1.6; }
+
+  /* Controls */
+  .controls { display: flex; gap: 12px; align-items: center; margin-bottom: 20px; flex-wrap: wrap; }
+  .search-wrap { position: relative; flex: 1; min-width: 200px; max-width: 320px; }
+  .search-wrap input {
+    width: 100%;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    padding: 9px 12px 9px 34px;
+    border: 1px solid var(--je-border);
+    border-radius: 4px;
+    color: var(--je-black);
+    background: var(--je-white);
+    outline: none;
+    transition: border-color 200ms;
+  }
+  .search-wrap input:focus { border-color: var(--je-mid-gray); }
+  .search-wrap input::placeholder { color: var(--je-muted-gray); }
+  .search-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--je-muted-gray); font-size: 14px; pointer-events: none; }
+  .filters { display: flex; gap: 6px; flex-wrap: wrap; }
+  .filter-btn {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid var(--je-border);
+    background: var(--je-white);
+    color: var(--je-mid-gray);
+    cursor: pointer;
+    transition: all 180ms;
+  }
+  .filter-btn:hover { border-color: var(--je-muted-gray); color: var(--je-black); }
+  .filter-btn.active { background: var(--je-teal-deep); color: white; border-color: var(--je-teal-deep); }
+
+  /* Count */
+  .meta-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+  .count { font-size: 12px; color: var(--je-light-gray); }
+
+  /* Table */
+  table { width: 100%; border-collapse: collapse; }
+  thead th {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: var(--je-mid-gray);
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--je-black);
+    white-space: nowrap;
+  }
+  th.col-country { width: 22%; }
+  th.col-region  { width: 18%; }
+  th.col-curr    { width: 10%; }
+  th.col-notes   { width: 50%; }
+
+  tbody tr { border-bottom: 1px solid var(--je-divider); transition: background 120ms; }
+  tbody tr:hover { background: var(--je-near-white); }
+  tbody td { padding: 10px 14px; font-size: 13px; vertical-align: middle; }
+  td.country { font-weight: 500; color: var(--je-black); }
+  td.region { color: var(--je-mid-gray); }
+  td.notes { color: var(--je-mid-gray); font-size: 12px; line-height: 1.5; }
+
+  /* Badges */
+  .badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    padding: 3px 9px;
+    border-radius: 20px;
+  }
+  .badge-usd { background: #dbeeff; color: #0a4a8a; }
+  .badge-eur { background: #d4f0e8; color: #0a5038; }
+  .badge-gbp { background: #fdf0d5; color: #7a4a00; }
+  .badge-either { background: var(--je-off-white); color: var(--je-mid-gray); border: 1px solid var(--je-border); }
+
+  /* Region group headers */
+  .group-row td {
+    padding: 14px 14px 6px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--je-light-gray);
+    border-bottom: none;
+    background: var(--je-white);
+  }
+
+  /* Empty state */
+  .empty { text-align: center; padding: 48px 24px; color: var(--je-light-gray); font-size: 13px; }
+
+  /* Footer */
+  .footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--je-divider); font-size: 11px; color: var(--je-muted-gray); display: flex; justify-content: space-between; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="header-label">Sales Reference</div>
+    <h1>Currency by Market</h1>
+    <p>Default currency to propose for each market. Use EUR or USD based on this guide; request GBP billing for UK accounts. Review "Flexible" markets case by case.</p>
+  </div>
+
+  <div class="controls">
+    <div class="search-wrap">
+      <span class="search-icon">⌕</span>
+      <input type="text" id="search" placeholder="Search country or region…" oninput="render()">
+    </div>
+    <div class="filters">
+      <button class="filter-btn active" onclick="setFilter('all',this)">All</button>
+      <button class="filter-btn" onclick="setFilter('USD',this)">USD</button>
+      <button class="filter-btn" onclick="setFilter('EUR',this)">EUR</button>
+      <button class="filter-btn" onclick="setFilter('GBP',this)">GBP</button>
+      <button class="filter-btn" onclick="setFilter('Either',this)">Flexible</button>
+    </div>
+  </div>
+
+  <div class="meta-row">
+    <span class="count" id="count"></span>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th class="col-country">Country / Market</th>
+        <th class="col-region">Region</th>
+        <th class="col-curr">Currency</th>
+        <th class="col-notes">Notes</th>
+      </tr>
+    </thead>
+    <tbody id="tbody"></tbody>
+  </table>
+  <div id="empty" class="empty" style="display:none">No markets match your search.</div>
+
+  <div class="footer">
+    <span>JamesEdition — Internal Sales Reference</span>
+    <span id="date"></span>
+  </div>
+</div>
+
+<script>
+const DATA = [
+  ["United States","Americas","USD","Default for all US accounts"],
+  ["Canada","Americas","USD","USD standard for luxury RE transactions"],
+  ["Mexico","Americas","USD","Luxury market prices in USD despite MXN"],
+  ["Brazil","Americas","USD","USD preferred for high-value RE"],
+  ["Argentina","Americas","USD","Dollarized market; USD strongly preferred"],
+  ["Colombia","Americas","USD","Luxury segment quotes in USD"],
+  ["Chile","Americas","USD","USD standard for premium RE"],
+  ["Peru","Americas","USD","USD standard for premium RE"],
+  ["Caribbean (all markets)","Americas","USD","USD universally used"],
+  ["Central America","Americas","USD","USD standard across the region"],
+  ["UAE","Middle East","USD","Pegged to USD; market quotes in USD"],
+  ["Saudi Arabia","Middle East","USD","Pegged to USD; market quotes in USD"],
+  ["Qatar","Middle East","USD","Pegged to USD"],
+  ["Kuwait","Middle East","USD","Pegged to USD"],
+  ["Bahrain","Middle East","USD","Pegged to USD"],
+  ["Oman","Middle East","USD","Pegged to USD"],
+  ["Israel","Middle East","USD","USD standard for luxury RE"],
+  ["Jordan","Middle East","USD","USD preferred for high-value RE"],
+  ["France","Eurozone","EUR",""],
+  ["Spain","Eurozone","EUR",""],
+  ["Italy","Eurozone","EUR",""],
+  ["Germany","Eurozone","EUR",""],
+  ["Portugal","Eurozone","EUR",""],
+  ["Greece","Eurozone","EUR",""],
+  ["Netherlands","Eurozone","EUR",""],
+  ["Belgium","Eurozone","EUR",""],
+  ["Austria","Eurozone","EUR",""],
+  ["Luxembourg","Eurozone","EUR",""],
+  ["Ireland","Eurozone","EUR",""],
+  ["Finland","Eurozone","EUR",""],
+  ["Croatia","Eurozone","EUR","Joined eurozone 2023"],
+  ["Cyprus","Eurozone","EUR",""],
+  ["Malta","Eurozone","EUR",""],
+  ["Monaco","Eurozone","EUR",""],
+  ["Poland","Non-eurozone EU","EUR","EUR preferred over PLN for luxury RE"],
+  ["Czech Republic","Non-eurozone EU","EUR","EUR preferred over CZK"],
+  ["Hungary","Non-eurozone EU","EUR","EUR preferred over HUF; weak currency"],
+  ["Romania","Non-eurozone EU","EUR","EUR standard for luxury RE"],
+  ["Bulgaria","Non-eurozone EU","EUR","BGN pegged to EUR"],
+  ["United Kingdom","Western Europe","EUR","EUR standard. USD not appropriate."],
+  ["Switzerland","Western Europe","EUR","EUR standard. CHF for domestic-only accounts if pushed."],
+  ["Norway","Western Europe","EUR","EUR preferred over NOK for international accounts"],
+  ["Sweden","Western Europe","EUR","EUR preferred over SEK for international accounts"],
+  ["Denmark","Western Europe","EUR","EUR preferred over DKK for international accounts"],
+  ["Turkey","EMEA — Other","EUR","EUR better than USD; primary buyers are European"],
+  ["South Africa","EMEA — Other","USD","ZAR weak; USD preferred for luxury segment"],
+  ["Morocco","EMEA — Other","EUR","Strong European buyer base"],
+  ["Egypt","EMEA — Other","USD","USD standard for luxury / international RE"],
+  ["Singapore","Asia-Pacific","USD","USD standard for luxury RE"],
+  ["Hong Kong","Asia-Pacific","USD","Pegged to USD; market quotes in USD"],
+  ["Thailand","Asia-Pacific","USD","USD standard for foreign buyers"],
+  ["Indonesia","Asia-Pacific","USD","USD standard for luxury / foreign buyer segment"],
+  ["Philippines","Asia-Pacific","USD","USD standard for high-value RE"],
+  ["Japan","Asia-Pacific","USD","USD for international accounts; JPY for domestic"],
+  ["Australia","Asia-Pacific","USD","USD acceptable; AUD for pure domestic accounts"],
+  ["New Zealand","Asia-Pacific","USD","USD acceptable; NZD for pure domestic accounts"],
+];
+
+let activeFilter = 'all';
+
+function setFilter(f, btn) {
+  activeFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  render();
+}
+
+function render() {
+  const s = document.getElementById('search').value.toLowerCase().trim();
+  const filtered = DATA.filter(r => {
+    const matchSearch = !s || r[0].toLowerCase().includes(s) || r[1].toLowerCase().includes(s);
+    const matchFilter = activeFilter === 'all' || r[2] === activeFilter || (activeFilter === 'Either' && r[2] === 'Either');
+    return matchSearch && matchFilter;
+  });
+
+  document.getElementById('count').textContent = filtered.length + ' market' + (filtered.length !== 1 ? 's' : '');
+  document.getElementById('empty').style.display = filtered.length ? 'none' : 'block';
+
+  const tbody = document.getElementById('tbody');
+  tbody.innerHTML = '';
+
+  // Group by region
+  const groups = {};
+  filtered.forEach(r => {
+    if (!groups[r[1]]) groups[r[1]] = [];
+    groups[r[1]].push(r);
+  });
+
+  // Only show group headers when not filtering by currency and no search
+  const showGroups = !s && activeFilter === 'all';
+
+  Object.entries(groups).forEach(([region, rows]) => {
+    if (showGroups) {
+      const gr = document.createElement('tr');
+      gr.className = 'group-row';
+      gr.innerHTML = `<td colspan="4">${region}</td>`;
+      tbody.appendChild(gr);
+    }
+    rows.forEach(r => {
+      const bc = r[2]==='USD'?'badge-usd':r[2]==='EUR'?'badge-eur':r[2]==='GBP'?'badge-gbp':'badge-either';
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td class="country">${r[0]}</td>
+        <td class="region">${r[1]}</td>
+        <td><span class="badge ${bc}">${r[2]}</span></td>
+        <td class="notes">${r[3]}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+  });
+}
+
+document.getElementById('date').textContent = new Date().toLocaleDateString('en-GB', {month:'long',year:'numeric'});
+render();
+</script>
+</body>
+</html>
