@@ -910,14 +910,31 @@ function render() {
     </div>
   `).join('');
 
-  // Origins (country-level only — v2 is now an array)
-  const originTitle = document.getElementById('origin-title');
-  originTitle.textContent = isRegion
-    ? `Where viewers of ${currentCountry.name} listings come from (country-wide)`
-    : `Where viewers of ${currentCountry.name} listings come from`;
+  // Origins — prefer region-level data when available and PVs are sufficient
+  const MIN_REGION_PV = 5000;
+  const regionHasTraffic = isRegion
+    && currentRegion.traffic_split_by_viewer_country
+    && currentRegion.traffic_split_by_viewer_country.length > 0
+    && (currentRegion.total_pv || 0) >= MIN_REGION_PV;
 
-  const traffic = currentCountry.traffic_split_by_viewer_country || [];
-  const entries = [...traffic].sort((a,b) => b.share_pct - a.share_pct);
+  const trafficSource = regionHasTraffic
+    ? currentRegion.traffic_split_by_viewer_country
+    : currentCountry.traffic_split_by_viewer_country || [];
+
+  const originTitle = document.getElementById('origin-title');
+  if (regionHasTraffic) {
+    originTitle.innerHTML = `Where viewers of ${currentRegion.name.split(' (')[0]} listings come from <span style="font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--je-muted-gray);">— region-specific</span>`;
+  } else if (isRegion) {
+    // Region selected but no/insufficient region data — show country-wide with explanation
+    const reason = (currentRegion.total_pv || 0) === 0
+      ? 'no region data available'
+      : `only ${(currentRegion.total_pv || 0).toLocaleString('en-US')} page views — too thin for reliable split`;
+    originTitle.innerHTML = `Where viewers of ${currentCountry.name} listings come from <span style="font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--je-muted-gray);">— country-wide (${reason})</span>`;
+  } else {
+    originTitle.textContent = `Where viewers of ${currentCountry.name} listings come from`;
+  }
+
+  const entries = [...trafficSource].sort((a,b) => b.share_pct - a.share_pct);
   const max = entries.length ? entries[0].share_pct : 1;
 
   document.getElementById('origin-list').innerHTML = entries.map((d, i) => {
