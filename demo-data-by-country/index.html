@@ -598,13 +598,13 @@ footer {
 @media print {
   @page {
     size: A4 portrait;
-    margin: 14mm 14mm 14mm 14mm;
+    margin: 12mm 12mm 12mm 12mm;
   }
 
   html, body {
     background: #fff !important;
     color: #000;
-    font-size: 11pt;
+    font-size: 10.5pt;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
@@ -626,90 +626,154 @@ footer {
     display: none !important;
   }
 
-  /* Show print-only chrome */
+  /* Print-only branded header */
   .print-only { display: block !important; }
+  .print-header {
+    padding-bottom: 10px !important;
+    margin-bottom: 16px !important;
+    border-bottom: 1.5px solid #006C75 !important;
+  }
+  .print-brand {
+    font-family: var(--font-serif);
+    font-size: 24pt !important;
+    line-height: 1 !important;
+    margin-bottom: 6px !important;
+    color: #000 !important;
+  }
+  .print-meta {
+    font-size: 9pt !important;
+    letter-spacing: 1.2px !important;
+    color: #606060 !important;
+  }
 
-  /* Tighten selected-header */
+  /* Country header */
   .selected-header {
-    margin-bottom: 16px;
+    margin-bottom: 14px !important;
     padding-bottom: 0;
     border-bottom: none;
+    gap: 12px !important;
   }
   .selected-header .country-name {
-    font-size: 22pt;
+    font-size: 26pt !important;
+    line-height: 1 !important;
   }
   .selected-header .scope-tag {
-    font-size: 9pt;
-    padding: 3px 8px;
+    font-size: 9pt !important;
+    padding: 4px 10px !important;
+    border-color: #999 !important;
+    color: #333 !important;
+  }
+  .selected-header .scope-tag.region {
+    border-color: #006C75 !important;
+    color: #006C75 !important;
   }
 
-  /* Stat cards: more compact */
+  /* Stat cards */
   .stat-grid {
     grid-template-columns: repeat(4, 1fr) !important;
     gap: 8px !important;
-    margin-bottom: 16px !important;
+    margin-bottom: 14px !important;
   }
   .stat {
-    padding: 12px !important;
-    box-shadow: 0 0 0 1px #d0d0d0 !important;
+    padding: 10px 12px !important;
+    border: 1px solid #d0d0d0 !important;
+    box-shadow: none !important;
+    border-radius: 3px !important;
   }
-  .stat-value { font-size: 18pt !important; }
-  .stat-label { font-size: 8pt !important; margin-bottom: 4px !important; }
-  .yoy-badge { font-size: 9pt !important; margin-top: 4px !important; }
+  .stat-value { font-size: 17pt !important; }
+  .stat-label { font-size: 7.5pt !important; margin-bottom: 4px !important; letter-spacing: 1px !important; }
+  .yoy-badge { font-size: 8.5pt !important; margin-top: 4px !important; font-weight: 600 !important; }
 
-  /* Two-column row: keep side-by-side */
+  /* Two-column row */
   .row {
     grid-template-columns: 1fr 1.3fr !important;
-    gap: 16px !important;
-    margin-bottom: 16px !important;
-    page-break-inside: avoid;
-  }
-  .panel {
-    padding: 14px !important;
-    box-shadow: 0 0 0 1px #d0d0d0 !important;
+    gap: 12px !important;
+    margin-bottom: 14px !important;
     page-break-inside: avoid;
     break-inside: avoid;
   }
-  h3 { font-size: 9pt !important; margin-bottom: 8px !important; }
+  .panel {
+    padding: 12px 14px !important;
+    border: 1px solid #d0d0d0 !important;
+    box-shadow: none !important;
+    border-radius: 3px !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  h3 {
+    font-size: 8.5pt !important;
+    margin-bottom: 8px !important;
+    letter-spacing: 1px !important;
+    color: #555 !important;
+  }
+  /* "— region-specific" hint in origin title */
+  h3 span { display: none !important; }
 
-  /* Tier cards: compact */
-  .tier { padding: 10px !important; }
-  .tier-headline { font-size: 28pt !important; }
-  .tier-stats { font-size: 9pt !important; }
-  .tier-name { font-size: 8pt !important; }
-  .tier-headline-label { font-size: 8pt !important; margin: 4px 0 6px !important; }
+  /* Tier cards — force colors even with Background Graphics off */
+  .tier-grid { gap: 8px !important; margin-bottom: 10px !important; }
+  .tier { padding: 10px !important; border-radius: 3px !important; }
+  .tier.freemium { background: #f4f4f4 !important; border: 1px solid #d0d0d0 !important; }
+  .tier.elite { background: #e8f1f2 !important; border: 1.5px solid #006C75 !important; }
+  .tier.elite-plus { background: #f5f0e3 !important; border: 1.5px solid #b9a16f !important; }
+  .tier-name { font-size: 7.5pt !important; letter-spacing: 1px !important; margin-bottom: 6px !important; }
+  .tier.freemium .tier-name { color: #606060 !important; }
+  .tier.elite .tier-name { color: #006C75 !important; }
+  .tier.elite-plus .tier-name { color: #8a7747 !important; }
+  .tier-headline { font-size: 24pt !important; line-height: 1 !important; margin-top: 2px !important; }
+  .tier.freemium .tier-headline { color: #606060 !important; }
+  .tier.elite .tier-headline { color: #006C75 !important; }
+  .tier.elite-plus .tier-headline { color: #8a7747 !important; }
+  .tier-headline-label { font-size: 7.5pt !important; margin: 4px 0 6px !important; line-height: 1.3 !important; }
+  .tier-stats { font-size: 8.5pt !important; gap: 4px !important; padding-top: 8px !important; margin-top: 6px !important; }
 
-  /* Origin list: tighter */
-  .origin-row { padding: 4px 0 !important; font-size: 9pt !important; }
-  .origin-rank { font-size: 8pt !important; }
-  .origin-val { font-size: 9pt !important; }
+  /* Origin list */
+  .origin-row { padding: 3px 0 !important; font-size: 8.5pt !important; grid-template-columns: 22px 1fr 50px !important; gap: 8px !important; }
+  .origin-rank { font-size: 7.5pt !important; }
+  .origin-val { font-size: 8pt !important; }
+  .origin-bar { height: 4px !important; }
+  .origin-bar-fill { background: #006C75 !important; }
 
-  /* Regions table */
-  #regions-panel { page-break-before: auto; }
-  .regions-table { font-size: 9pt !important; }
-  .regions-table th { font-size: 8pt !important; padding: 6px 8px !important; }
-  .regions-table td { padding: 6px 8px !important; }
+  /* Subscription footnote */
+  #tier-footnote { font-size: 7.5pt !important; color: #606060 !important; margin-top: 8px !important; }
+
+  /* Regions panel: keep header with table */
+  #regions-panel {
+    page-break-inside: auto;
+    margin-bottom: 14px !important;
+  }
+  #regions-panel h3 {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+  /* Hide the "click any row to focus" hint in print */
+  #regions-panel h3 span { display: none !important; }
+
+  .regions-table { font-size: 8.5pt !important; }
+  .regions-table th {
+    font-size: 7.5pt !important;
+    padding: 5px 8px !important;
+    border-bottom: 1px solid #999 !important;
+    color: #333 !important;
+    letter-spacing: 1px !important;
+  }
+  .regions-table td { padding: 5px 8px !important; }
+  /* Force header row to stay with first data rows */
+  .regions-table thead { display: table-header-group; }
+  .regions-table tr { page-break-inside: avoid; break-inside: avoid; }
   .regions-table tr.active { background: transparent !important; }
   .regions-table tr.active td:first-child { box-shadow: none !important; }
   .regions-table tr.clickable { cursor: default !important; }
 
-  /* Notes: smaller and at end */
+  /* Notes block at the end */
   .notes {
-    font-size: 8pt !important;
-    padding: 10px 12px !important;
-    margin-top: 16px !important;
+    font-size: 7.5pt !important;
+    padding: 8px 12px !important;
+    margin-top: 12px !important;
     background: #f7f7f7 !important;
     page-break-inside: avoid;
+    border-radius: 3px !important;
   }
-  .notes strong { font-size: 8pt !important; margin-bottom: 4px !important; }
-
-  /* Color preservation for tier accents */
-  .tier.elite { background: rgba(0, 108, 117, 0.06) !important; border-color: #006C75 !important; }
-  .tier.elite-plus { background: rgba(185, 161, 111, 0.10) !important; border-color: #b9a16f !important; }
-  .tier.elite .tier-headline { color: #006C75 !important; }
-  .tier.elite-plus .tier-headline { color: #b9a16f !important; }
-
-  .origin-bar-fill { background: #006C75 !important; }
+  .notes strong { font-size: 7.5pt !important; margin-bottom: 4px !important; }
 }
 </style>
 </head>
