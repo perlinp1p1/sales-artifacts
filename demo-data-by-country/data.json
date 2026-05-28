@@ -11,7 +11,7 @@
       "Multiplier = tier's inquiries_per_listing / freemium's inquiries_per_listing",
       "multiplier_reliable = false when any tier has <20 qualifying listings (small sample warning)",
       "Tiny regions where any tier had <20 listings are excluded entirely",
-      "Viewer-origin (traffic_split_by_viewer_country) carried over from previous Mixpanel pull — not refreshed this cycle"
+      "Viewer-origin split is region-specific when ≥5,000 region page views available; falls back to country-wide otherwise"
     ]
   },
   "countries": [
@@ -118,7 +118,50 @@
             }
           },
           "elite_vs_freemium_inquiries_per_listing_multiplier": 3.59,
-          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 2.78
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 2.78,
+          "traffic_split_by_viewer_country": [
+            {
+              "country": "Spain",
+              "share_pct": 23.7
+            },
+            {
+              "country": "United States",
+              "share_pct": 18.1
+            },
+            {
+              "country": "United Kingdom",
+              "share_pct": 10.4
+            },
+            {
+              "country": "Germany",
+              "share_pct": 9.3
+            },
+            {
+              "country": "France",
+              "share_pct": 5.2
+            },
+            {
+              "country": "Netherlands",
+              "share_pct": 3.4
+            },
+            {
+              "country": "Sweden",
+              "share_pct": 2.7
+            },
+            {
+              "country": "Belgium",
+              "share_pct": 2.3
+            },
+            {
+              "country": "Canada",
+              "share_pct": 2.1
+            },
+            {
+              "country": "Poland",
+              "share_pct": 2.1
+            }
+          ],
+          "total_pv": 185145
         },
         {
           "name": "Balearic Islands",
@@ -149,7 +192,50 @@
             }
           },
           "elite_vs_freemium_inquiries_per_listing_multiplier": 2.12,
-          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 3.37
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 3.37,
+          "traffic_split_by_viewer_country": [
+            {
+              "country": "Spain",
+              "share_pct": 28.0
+            },
+            {
+              "country": "Germany",
+              "share_pct": 16.2
+            },
+            {
+              "country": "United States",
+              "share_pct": 12.4
+            },
+            {
+              "country": "United Kingdom",
+              "share_pct": 11.7
+            },
+            {
+              "country": "France",
+              "share_pct": 4.2
+            },
+            {
+              "country": "Netherlands",
+              "share_pct": 3.5
+            },
+            {
+              "country": "Switzerland",
+              "share_pct": 3.2
+            },
+            {
+              "country": "Sweden",
+              "share_pct": 2.4
+            },
+            {
+              "country": "Italy",
+              "share_pct": 2.1
+            },
+            {
+              "country": "Belgium",
+              "share_pct": 2.0
+            }
+          ],
+          "total_pv": 138988
         },
         {
           "name": "Valencian Community (incl. Costa Blanca)",
@@ -180,7 +266,50 @@
             }
           },
           "elite_vs_freemium_inquiries_per_listing_multiplier": 2.96,
-          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 3.56
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 3.56,
+          "traffic_split_by_viewer_country": [
+            {
+              "country": "Spain",
+              "share_pct": 38.6
+            },
+            {
+              "country": "United States",
+              "share_pct": 16.1
+            },
+            {
+              "country": "United Kingdom",
+              "share_pct": 8.9
+            },
+            {
+              "country": "Germany",
+              "share_pct": 6.6
+            },
+            {
+              "country": "Netherlands",
+              "share_pct": 4.6
+            },
+            {
+              "country": "France",
+              "share_pct": 2.9
+            },
+            {
+              "country": "Belgium",
+              "share_pct": 2.6
+            },
+            {
+              "country": "Switzerland",
+              "share_pct": 1.9
+            },
+            {
+              "country": "Canada",
+              "share_pct": 1.8
+            },
+            {
+              "country": "Italy",
+              "share_pct": 1.7
+            }
+          ],
+          "total_pv": 59209
         },
         {
           "name": "Catalonia (incl. Costa Brava, Barcelona)",
@@ -211,7 +340,50 @@
             }
           },
           "elite_vs_freemium_inquiries_per_listing_multiplier": 1.62,
-          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 2.27
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 2.27,
+          "traffic_split_by_viewer_country": [
+            {
+              "country": "Spain",
+              "share_pct": 42.6
+            },
+            {
+              "country": "United States",
+              "share_pct": 17.6
+            },
+            {
+              "country": "Germany",
+              "share_pct": 8.9
+            },
+            {
+              "country": "United Kingdom",
+              "share_pct": 5.5
+            },
+            {
+              "country": "France",
+              "share_pct": 4.2
+            },
+            {
+              "country": "Netherlands",
+              "share_pct": 2.5
+            },
+            {
+              "country": "Switzerland",
+              "share_pct": 2.0
+            },
+            {
+              "country": "Belgium",
+              "share_pct": 1.7
+            },
+            {
+              "country": "Canada",
+              "share_pct": 1.4
+            },
+            {
+              "country": "Italy",
+              "share_pct": 1.1
+            }
+          ],
+          "total_pv": 74943
         },
         {
           "name": "Canary Islands",
@@ -242,7 +414,50 @@
             }
           },
           "elite_vs_freemium_inquiries_per_listing_multiplier": 1.14,
-          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 1.53
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 1.53,
+          "traffic_split_by_viewer_country": [
+            {
+              "country": "Spain",
+              "share_pct": 28.5
+            },
+            {
+              "country": "United Kingdom",
+              "share_pct": 12.3
+            },
+            {
+              "country": "United States",
+              "share_pct": 12.0
+            },
+            {
+              "country": "Germany",
+              "share_pct": 11.9
+            },
+            {
+              "country": "Italy",
+              "share_pct": 4.8
+            },
+            {
+              "country": "France",
+              "share_pct": 3.3
+            },
+            {
+              "country": "Poland",
+              "share_pct": 2.6
+            },
+            {
+              "country": "Belgium",
+              "share_pct": 2.5
+            },
+            {
+              "country": "Netherlands",
+              "share_pct": 2.2
+            },
+            {
+              "country": "Slovakia",
+              "share_pct": 2.0
+            }
+          ],
+          "total_pv": 14206
         },
         {
           "name": "Madrid",
@@ -273,7 +488,50 @@
             }
           },
           "elite_vs_freemium_inquiries_per_listing_multiplier": 1.22,
-          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 3.63
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 3.63,
+          "traffic_split_by_viewer_country": [
+            {
+              "country": "Spain",
+              "share_pct": 46.6
+            },
+            {
+              "country": "United States",
+              "share_pct": 15.7
+            },
+            {
+              "country": "United Kingdom",
+              "share_pct": 4.6
+            },
+            {
+              "country": "Germany",
+              "share_pct": 4.0
+            },
+            {
+              "country": "Mexico",
+              "share_pct": 3.2
+            },
+            {
+              "country": "France",
+              "share_pct": 2.8
+            },
+            {
+              "country": "Netherlands",
+              "share_pct": 1.5
+            },
+            {
+              "country": "Canada",
+              "share_pct": 1.5
+            },
+            {
+              "country": "South Africa",
+              "share_pct": 1.4
+            },
+            {
+              "country": "Italy",
+              "share_pct": 1.4
+            }
+          ],
+          "total_pv": 43069
         }
       ]
     },
@@ -380,7 +638,50 @@
             }
           },
           "elite_vs_freemium_inquiries_per_listing_multiplier": 3.2,
-          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 3.8
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 3.8,
+          "traffic_split_by_viewer_country": [
+            {
+              "country": "Italy",
+              "share_pct": 28.1
+            },
+            {
+              "country": "United States",
+              "share_pct": 27.7
+            },
+            {
+              "country": "Germany",
+              "share_pct": 7.2
+            },
+            {
+              "country": "United Kingdom",
+              "share_pct": 5.8
+            },
+            {
+              "country": "Switzerland",
+              "share_pct": 3.2
+            },
+            {
+              "country": "France",
+              "share_pct": 2.8
+            },
+            {
+              "country": "Spain",
+              "share_pct": 2.7
+            },
+            {
+              "country": "Netherlands",
+              "share_pct": 2.2
+            },
+            {
+              "country": "Canada",
+              "share_pct": 2.1
+            },
+            {
+              "country": "Brazil",
+              "share_pct": 1.7
+            }
+          ],
+          "total_pv": 210258
         },
         {
           "name": "Lombardy",
@@ -411,7 +712,50 @@
             }
           },
           "elite_vs_freemium_inquiries_per_listing_multiplier": 3.78,
-          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 5.85
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 5.85,
+          "traffic_split_by_viewer_country": [
+            {
+              "country": "United States",
+              "share_pct": 27.6
+            },
+            {
+              "country": "Italy",
+              "share_pct": 24.8
+            },
+            {
+              "country": "Germany",
+              "share_pct": 9.1
+            },
+            {
+              "country": "United Kingdom",
+              "share_pct": 6.1
+            },
+            {
+              "country": "Switzerland",
+              "share_pct": 3.3
+            },
+            {
+              "country": "France",
+              "share_pct": 3.2
+            },
+            {
+              "country": "Spain",
+              "share_pct": 2.5
+            },
+            {
+              "country": "Netherlands",
+              "share_pct": 2.2
+            },
+            {
+              "country": "Poland",
+              "share_pct": 1.8
+            },
+            {
+              "country": "Canada",
+              "share_pct": 1.7
+            }
+          ],
+          "total_pv": 133913
         },
         {
           "name": "Sardinia",
@@ -442,7 +786,50 @@
             }
           },
           "elite_vs_freemium_inquiries_per_listing_multiplier": 2.48,
-          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 4.38
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 4.38,
+          "traffic_split_by_viewer_country": [
+            {
+              "country": "Italy",
+              "share_pct": 23.3
+            },
+            {
+              "country": "United States",
+              "share_pct": 18.6
+            },
+            {
+              "country": "Germany",
+              "share_pct": 13.8
+            },
+            {
+              "country": "United Kingdom",
+              "share_pct": 7.1
+            },
+            {
+              "country": "Switzerland",
+              "share_pct": 4.9
+            },
+            {
+              "country": "France",
+              "share_pct": 4.5
+            },
+            {
+              "country": "Spain",
+              "share_pct": 2.6
+            },
+            {
+              "country": "Netherlands",
+              "share_pct": 2.5
+            },
+            {
+              "country": "Austria",
+              "share_pct": 2.2
+            },
+            {
+              "country": "Canada",
+              "share_pct": 2.1
+            }
+          ],
+          "total_pv": 49540
         },
         {
           "name": "Sicily",
@@ -473,7 +860,50 @@
             }
           },
           "elite_vs_freemium_inquiries_per_listing_multiplier": 2.32,
-          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 1.93
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 1.93,
+          "traffic_split_by_viewer_country": [
+            {
+              "country": "United States",
+              "share_pct": 27.3
+            },
+            {
+              "country": "Italy",
+              "share_pct": 20.5
+            },
+            {
+              "country": "Germany",
+              "share_pct": 8.5
+            },
+            {
+              "country": "United Kingdom",
+              "share_pct": 6.6
+            },
+            {
+              "country": "France",
+              "share_pct": 5.5
+            },
+            {
+              "country": "Switzerland",
+              "share_pct": 3.8
+            },
+            {
+              "country": "Canada",
+              "share_pct": 2.2
+            },
+            {
+              "country": "Spain",
+              "share_pct": 2.0
+            },
+            {
+              "country": "HU",
+              "share_pct": 2.0
+            },
+            {
+              "country": "Netherlands",
+              "share_pct": 1.9
+            }
+          ],
+          "total_pv": 32628
         },
         {
           "name": "Veneto",
@@ -504,7 +934,50 @@
             }
           },
           "elite_vs_freemium_inquiries_per_listing_multiplier": 6.03,
-          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 7.14
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 7.14,
+          "traffic_split_by_viewer_country": [
+            {
+              "country": "Italy",
+              "share_pct": 36.9
+            },
+            {
+              "country": "United States",
+              "share_pct": 17.8
+            },
+            {
+              "country": "Germany",
+              "share_pct": 11.3
+            },
+            {
+              "country": "United Kingdom",
+              "share_pct": 6.1
+            },
+            {
+              "country": "France",
+              "share_pct": 2.9
+            },
+            {
+              "country": "Austria",
+              "share_pct": 2.9
+            },
+            {
+              "country": "Spain",
+              "share_pct": 2.5
+            },
+            {
+              "country": "Switzerland",
+              "share_pct": 2.4
+            },
+            {
+              "country": "Australia",
+              "share_pct": 2.1
+            },
+            {
+              "country": "Netherlands",
+              "share_pct": 1.6
+            }
+          ],
+          "total_pv": 33192
         },
         {
           "name": "Piedmont",
@@ -535,7 +1008,50 @@
             }
           },
           "elite_vs_freemium_inquiries_per_listing_multiplier": 3.27,
-          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 2.25
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 2.25,
+          "traffic_split_by_viewer_country": [
+            {
+              "country": "United States",
+              "share_pct": 26.4
+            },
+            {
+              "country": "Italy",
+              "share_pct": 23.5
+            },
+            {
+              "country": "Germany",
+              "share_pct": 8.8
+            },
+            {
+              "country": "United Kingdom",
+              "share_pct": 5.5
+            },
+            {
+              "country": "Switzerland",
+              "share_pct": 5.5
+            },
+            {
+              "country": "France",
+              "share_pct": 3.6
+            },
+            {
+              "country": "Spain",
+              "share_pct": 3.1
+            },
+            {
+              "country": "Netherlands",
+              "share_pct": 2.8
+            },
+            {
+              "country": "Canada",
+              "share_pct": 2.2
+            },
+            {
+              "country": "Australia",
+              "share_pct": 1.7
+            }
+          ],
+          "total_pv": 41450
         },
         {
           "name": "Apulia",
@@ -566,7 +1082,50 @@
             }
           },
           "elite_vs_freemium_inquiries_per_listing_multiplier": 3.27,
-          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 1.65
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 1.65,
+          "traffic_split_by_viewer_country": [
+            {
+              "country": "Italy",
+              "share_pct": 25.8
+            },
+            {
+              "country": "United States",
+              "share_pct": 20.0
+            },
+            {
+              "country": "Germany",
+              "share_pct": 8.7
+            },
+            {
+              "country": "United Kingdom",
+              "share_pct": 8.3
+            },
+            {
+              "country": "Switzerland",
+              "share_pct": 5.5
+            },
+            {
+              "country": "France",
+              "share_pct": 4.3
+            },
+            {
+              "country": "Netherlands",
+              "share_pct": 3.1
+            },
+            {
+              "country": "Canada",
+              "share_pct": 2.8
+            },
+            {
+              "country": "Austria",
+              "share_pct": 2.5
+            },
+            {
+              "country": "Belgium",
+              "share_pct": 2.5
+            }
+          ],
+          "total_pv": 26820
         },
         {
           "name": "Umbria",
@@ -597,7 +1156,50 @@
             }
           },
           "elite_vs_freemium_inquiries_per_listing_multiplier": 4.32,
-          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 3.89
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 3.89,
+          "traffic_split_by_viewer_country": [
+            {
+              "country": "United States",
+              "share_pct": 28.0
+            },
+            {
+              "country": "Italy",
+              "share_pct": 21.6
+            },
+            {
+              "country": "United Kingdom",
+              "share_pct": 7.4
+            },
+            {
+              "country": "Germany",
+              "share_pct": 7.0
+            },
+            {
+              "country": "Netherlands",
+              "share_pct": 3.0
+            },
+            {
+              "country": "Canada",
+              "share_pct": 2.6
+            },
+            {
+              "country": "France",
+              "share_pct": 2.5
+            },
+            {
+              "country": "Spain",
+              "share_pct": 2.5
+            },
+            {
+              "country": "Switzerland",
+              "share_pct": 2.3
+            },
+            {
+              "country": "South Africa",
+              "share_pct": 2.0
+            }
+          ],
+          "total_pv": 28547
         },
         {
           "name": "Campania",
@@ -628,7 +1230,50 @@
             }
           },
           "elite_vs_freemium_inquiries_per_listing_multiplier": 5.27,
-          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 4.63
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 4.63,
+          "traffic_split_by_viewer_country": [
+            {
+              "country": "United States",
+              "share_pct": 32.3
+            },
+            {
+              "country": "Italy",
+              "share_pct": 20.2
+            },
+            {
+              "country": "United Kingdom",
+              "share_pct": 9.3
+            },
+            {
+              "country": "Germany",
+              "share_pct": 6.8
+            },
+            {
+              "country": "Spain",
+              "share_pct": 2.9
+            },
+            {
+              "country": "France",
+              "share_pct": 2.9
+            },
+            {
+              "country": "Switzerland",
+              "share_pct": 2.8
+            },
+            {
+              "country": "Canada",
+              "share_pct": 2.7
+            },
+            {
+              "country": "Netherlands",
+              "share_pct": 2.0
+            },
+            {
+              "country": "Australia",
+              "share_pct": 1.8
+            }
+          ],
+          "total_pv": 22258
         }
       ]
     },
@@ -735,7 +1380,50 @@
             }
           },
           "elite_vs_freemium_inquiries_per_listing_multiplier": 1.56,
-          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 3.79
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 3.79,
+          "traffic_split_by_viewer_country": [
+            {
+              "country": "Portugal",
+              "share_pct": 38.1
+            },
+            {
+              "country": "United States",
+              "share_pct": 14.8
+            },
+            {
+              "country": "United Kingdom",
+              "share_pct": 10.5
+            },
+            {
+              "country": "Germany",
+              "share_pct": 6.8
+            },
+            {
+              "country": "France",
+              "share_pct": 3.9
+            },
+            {
+              "country": "Netherlands",
+              "share_pct": 3.8
+            },
+            {
+              "country": "Spain",
+              "share_pct": 3.0
+            },
+            {
+              "country": "Ireland",
+              "share_pct": 2.2
+            },
+            {
+              "country": "Switzerland",
+              "share_pct": 2.1
+            },
+            {
+              "country": "Canada",
+              "share_pct": 2.0
+            }
+          ],
+          "total_pv": 88968
         },
         {
           "name": "Lisbon",
@@ -766,7 +1454,50 @@
             }
           },
           "elite_vs_freemium_inquiries_per_listing_multiplier": 1.86,
-          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 2.06
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 2.06,
+          "traffic_split_by_viewer_country": [
+            {
+              "country": "Portugal",
+              "share_pct": 57.7
+            },
+            {
+              "country": "United States",
+              "share_pct": 14.6
+            },
+            {
+              "country": "United Kingdom",
+              "share_pct": 4.8
+            },
+            {
+              "country": "Germany",
+              "share_pct": 3.8
+            },
+            {
+              "country": "France",
+              "share_pct": 2.8
+            },
+            {
+              "country": "Spain",
+              "share_pct": 2.7
+            },
+            {
+              "country": "Netherlands",
+              "share_pct": 1.4
+            },
+            {
+              "country": "Brazil",
+              "share_pct": 1.3
+            },
+            {
+              "country": "Switzerland",
+              "share_pct": 1.0
+            },
+            {
+              "country": "Canada",
+              "share_pct": 1.0
+            }
+          ],
+          "total_pv": 84572
         },
         {
           "name": "Porto",
@@ -797,7 +1528,50 @@
             }
           },
           "elite_vs_freemium_inquiries_per_listing_multiplier": 1.72,
-          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 1.79
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 1.79,
+          "traffic_split_by_viewer_country": [
+            {
+              "country": "Portugal",
+              "share_pct": 58.9
+            },
+            {
+              "country": "United States",
+              "share_pct": 17.6
+            },
+            {
+              "country": "United Kingdom",
+              "share_pct": 3.8
+            },
+            {
+              "country": "Germany",
+              "share_pct": 2.7
+            },
+            {
+              "country": "Spain",
+              "share_pct": 2.1
+            },
+            {
+              "country": "Singapore",
+              "share_pct": 2.0
+            },
+            {
+              "country": "China",
+              "share_pct": 1.9
+            },
+            {
+              "country": "France",
+              "share_pct": 1.5
+            },
+            {
+              "country": "Canada",
+              "share_pct": 1.5
+            },
+            {
+              "country": "Netherlands",
+              "share_pct": 1.1
+            }
+          ],
+          "total_pv": 21111
         },
         {
           "name": "Setubal",
@@ -828,7 +1602,50 @@
             }
           },
           "elite_vs_freemium_inquiries_per_listing_multiplier": 1.67,
-          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 4.19
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 4.19,
+          "traffic_split_by_viewer_country": [
+            {
+              "country": "Portugal",
+              "share_pct": 50.7
+            },
+            {
+              "country": "United States",
+              "share_pct": 17.2
+            },
+            {
+              "country": "Germany",
+              "share_pct": 5.8
+            },
+            {
+              "country": "United Kingdom",
+              "share_pct": 5.5
+            },
+            {
+              "country": "France",
+              "share_pct": 3.7
+            },
+            {
+              "country": "Spain",
+              "share_pct": 1.9
+            },
+            {
+              "country": "Switzerland",
+              "share_pct": 1.8
+            },
+            {
+              "country": "Netherlands",
+              "share_pct": 1.8
+            },
+            {
+              "country": "Singapore",
+              "share_pct": 1.5
+            },
+            {
+              "country": "China",
+              "share_pct": 1.4
+            }
+          ],
+          "total_pv": 17597
         },
         {
           "name": "Madeira",
@@ -859,7 +1676,50 @@
             }
           },
           "elite_vs_freemium_inquiries_per_listing_multiplier": 5.0,
-          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 5.24
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 5.24,
+          "traffic_split_by_viewer_country": [
+            {
+              "country": "Portugal",
+              "share_pct": 34.3
+            },
+            {
+              "country": "United States",
+              "share_pct": 21.7
+            },
+            {
+              "country": "Germany",
+              "share_pct": 11.8
+            },
+            {
+              "country": "United Kingdom",
+              "share_pct": 5.6
+            },
+            {
+              "country": "France",
+              "share_pct": 2.7
+            },
+            {
+              "country": "Poland",
+              "share_pct": 2.3
+            },
+            {
+              "country": "Netherlands",
+              "share_pct": 2.1
+            },
+            {
+              "country": "Switzerland",
+              "share_pct": 1.8
+            },
+            {
+              "country": "Austria",
+              "share_pct": 1.8
+            },
+            {
+              "country": "Sweden",
+              "share_pct": 1.6
+            }
+          ],
+          "total_pv": 17661
         }
       ]
     },
@@ -966,7 +1826,50 @@
             }
           },
           "elite_vs_freemium_inquiries_per_listing_multiplier": 5.57,
-          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 11.5
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 11.5,
+          "traffic_split_by_viewer_country": [
+            {
+              "country": "United States",
+              "share_pct": 45.0
+            },
+            {
+              "country": "Germany",
+              "share_pct": 6.8
+            },
+            {
+              "country": "United Kingdom",
+              "share_pct": 6.3
+            },
+            {
+              "country": "France",
+              "share_pct": 5.3
+            },
+            {
+              "country": "Spain",
+              "share_pct": 4.7
+            },
+            {
+              "country": "Canada",
+              "share_pct": 3.0
+            },
+            {
+              "country": "Colombia",
+              "share_pct": 2.4
+            },
+            {
+              "country": "South Africa",
+              "share_pct": 2.3
+            },
+            {
+              "country": "Mexico",
+              "share_pct": 2.2
+            },
+            {
+              "country": "NG",
+              "share_pct": 1.8
+            }
+          ],
+          "total_pv": 171171
         },
         {
           "name": "California",
@@ -997,7 +1900,50 @@
             }
           },
           "elite_vs_freemium_inquiries_per_listing_multiplier": 3.74,
-          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 16.32
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 16.32,
+          "traffic_split_by_viewer_country": [
+            {
+              "country": "United States",
+              "share_pct": 33.7
+            },
+            {
+              "country": "Germany",
+              "share_pct": 12.6
+            },
+            {
+              "country": "France",
+              "share_pct": 8.1
+            },
+            {
+              "country": "United Kingdom",
+              "share_pct": 6.7
+            },
+            {
+              "country": "Italy",
+              "share_pct": 4.0
+            },
+            {
+              "country": "Spain",
+              "share_pct": 4.0
+            },
+            {
+              "country": "Mexico",
+              "share_pct": 3.9
+            },
+            {
+              "country": "South Africa",
+              "share_pct": 3.1
+            },
+            {
+              "country": "Canada",
+              "share_pct": 2.9
+            },
+            {
+              "country": "Brazil",
+              "share_pct": 1.8
+            }
+          ],
+          "total_pv": 202564
         },
         {
           "name": "New York",
@@ -1028,7 +1974,50 @@
             }
           },
           "elite_vs_freemium_inquiries_per_listing_multiplier": 4.96,
-          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 8.29
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 8.29,
+          "traffic_split_by_viewer_country": [
+            {
+              "country": "United States",
+              "share_pct": 39.7
+            },
+            {
+              "country": "Germany",
+              "share_pct": 10.1
+            },
+            {
+              "country": "France",
+              "share_pct": 6.4
+            },
+            {
+              "country": "United Kingdom",
+              "share_pct": 5.6
+            },
+            {
+              "country": "Spain",
+              "share_pct": 4.5
+            },
+            {
+              "country": "Italy",
+              "share_pct": 3.1
+            },
+            {
+              "country": "Canada",
+              "share_pct": 2.7
+            },
+            {
+              "country": "Mexico",
+              "share_pct": 2.3
+            },
+            {
+              "country": "South Africa",
+              "share_pct": 2.3
+            },
+            {
+              "country": "Argentina",
+              "share_pct": 2.2
+            }
+          ],
+          "total_pv": 111098
         },
         {
           "name": "Texas",
@@ -1059,7 +2048,50 @@
             }
           },
           "elite_vs_freemium_inquiries_per_listing_multiplier": 8.32,
-          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 25.79
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 25.79,
+          "traffic_split_by_viewer_country": [
+            {
+              "country": "United States",
+              "share_pct": 54.9
+            },
+            {
+              "country": "Germany",
+              "share_pct": 8.6
+            },
+            {
+              "country": "United Kingdom",
+              "share_pct": 5.0
+            },
+            {
+              "country": "Mexico",
+              "share_pct": 4.4
+            },
+            {
+              "country": "Canada",
+              "share_pct": 2.8
+            },
+            {
+              "country": "France",
+              "share_pct": 2.6
+            },
+            {
+              "country": "South Africa",
+              "share_pct": 2.3
+            },
+            {
+              "country": "China",
+              "share_pct": 2.3
+            },
+            {
+              "country": "Spain",
+              "share_pct": 2.1
+            },
+            {
+              "country": "Italy",
+              "share_pct": 1.3
+            }
+          ],
+          "total_pv": 86355
         },
         {
           "name": "Colorado",
@@ -1090,7 +2122,50 @@
             }
           },
           "elite_vs_freemium_inquiries_per_listing_multiplier": 3.7,
-          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 13.68
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 13.68,
+          "traffic_split_by_viewer_country": [
+            {
+              "country": "United States",
+              "share_pct": 53.3
+            },
+            {
+              "country": "Germany",
+              "share_pct": 7.5
+            },
+            {
+              "country": "Mexico",
+              "share_pct": 4.8
+            },
+            {
+              "country": "United Kingdom",
+              "share_pct": 3.9
+            },
+            {
+              "country": "France",
+              "share_pct": 3.2
+            },
+            {
+              "country": "Spain",
+              "share_pct": 2.7
+            },
+            {
+              "country": "Canada",
+              "share_pct": 2.4
+            },
+            {
+              "country": "China",
+              "share_pct": 2.3
+            },
+            {
+              "country": "South Africa",
+              "share_pct": 2.0
+            },
+            {
+              "country": "Finland",
+              "share_pct": 1.4
+            }
+          ],
+          "total_pv": 26720
         },
         {
           "name": "Hawaii",
@@ -1121,7 +2196,50 @@
             }
           },
           "elite_vs_freemium_inquiries_per_listing_multiplier": 13.33,
-          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 9.16
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 9.16,
+          "traffic_split_by_viewer_country": [
+            {
+              "country": "United States",
+              "share_pct": 53.6
+            },
+            {
+              "country": "Germany",
+              "share_pct": 8.9
+            },
+            {
+              "country": "Canada",
+              "share_pct": 5.7
+            },
+            {
+              "country": "France",
+              "share_pct": 4.6
+            },
+            {
+              "country": "United Kingdom",
+              "share_pct": 4.2
+            },
+            {
+              "country": "Spain",
+              "share_pct": 3.5
+            },
+            {
+              "country": "Italy",
+              "share_pct": 1.9
+            },
+            {
+              "country": "Austria",
+              "share_pct": 1.6
+            },
+            {
+              "country": "Australia",
+              "share_pct": 1.3
+            },
+            {
+              "country": "South Africa",
+              "share_pct": 1.2
+            }
+          ],
+          "total_pv": 18527
         },
         {
           "name": "Georgia",
@@ -1152,7 +2270,50 @@
             }
           },
           "elite_vs_freemium_inquiries_per_listing_multiplier": 2.76,
-          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 3.14
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 3.14,
+          "traffic_split_by_viewer_country": [
+            {
+              "country": "United States",
+              "share_pct": 70.8
+            },
+            {
+              "country": "United Kingdom",
+              "share_pct": 4.1
+            },
+            {
+              "country": "Germany",
+              "share_pct": 3.6
+            },
+            {
+              "country": "China",
+              "share_pct": 3.4
+            },
+            {
+              "country": "South Africa",
+              "share_pct": 2.0
+            },
+            {
+              "country": "Canada",
+              "share_pct": 1.7
+            },
+            {
+              "country": "France",
+              "share_pct": 1.6
+            },
+            {
+              "country": "Mexico",
+              "share_pct": 1.2
+            },
+            {
+              "country": "Spain",
+              "share_pct": 1.2
+            },
+            {
+              "country": "Singapore",
+              "share_pct": 1.2
+            }
+          ],
+          "total_pv": 32297
         },
         {
           "name": "North Carolina",
@@ -1183,7 +2344,50 @@
             }
           },
           "elite_vs_freemium_inquiries_per_listing_multiplier": 8.4,
-          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 15.99
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 15.99,
+          "traffic_split_by_viewer_country": [
+            {
+              "country": "United States",
+              "share_pct": 70.0
+            },
+            {
+              "country": "Germany",
+              "share_pct": 4.5
+            },
+            {
+              "country": "United Kingdom",
+              "share_pct": 3.6
+            },
+            {
+              "country": "China",
+              "share_pct": 2.5
+            },
+            {
+              "country": "Spain",
+              "share_pct": 2.2
+            },
+            {
+              "country": "France",
+              "share_pct": 1.8
+            },
+            {
+              "country": "Canada",
+              "share_pct": 1.6
+            },
+            {
+              "country": "Finland",
+              "share_pct": 1.1
+            },
+            {
+              "country": "Singapore",
+              "share_pct": 1.1
+            },
+            {
+              "country": "Mexico",
+              "share_pct": 1.1
+            }
+          ],
+          "total_pv": 23007
         },
         {
           "name": "Washington",
@@ -1214,7 +2418,50 @@
             }
           },
           "elite_vs_freemium_inquiries_per_listing_multiplier": 2.36,
-          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 7.88
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 7.88,
+          "traffic_split_by_viewer_country": [
+            {
+              "country": "United States",
+              "share_pct": 53.1
+            },
+            {
+              "country": "Germany",
+              "share_pct": 8.0
+            },
+            {
+              "country": "Canada",
+              "share_pct": 3.5
+            },
+            {
+              "country": "United Kingdom",
+              "share_pct": 3.4
+            },
+            {
+              "country": "France",
+              "share_pct": 3.1
+            },
+            {
+              "country": "Spain",
+              "share_pct": 3.0
+            },
+            {
+              "country": "Mexico",
+              "share_pct": 2.9
+            },
+            {
+              "country": "China",
+              "share_pct": 2.8
+            },
+            {
+              "country": "Brazil",
+              "share_pct": 2.4
+            },
+            {
+              "country": "Italy",
+              "share_pct": 1.6
+            }
+          ],
+          "total_pv": 12290
         }
       ]
     },
@@ -1321,7 +2568,50 @@
             }
           },
           "elite_vs_freemium_inquiries_per_listing_multiplier": 2.13,
-          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 3.39
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 3.39,
+          "traffic_split_by_viewer_country": [
+            {
+              "country": "United States",
+              "share_pct": 20.7
+            },
+            {
+              "country": "Germany",
+              "share_pct": 9.0
+            },
+            {
+              "country": "United Kingdom",
+              "share_pct": 8.8
+            },
+            {
+              "country": "South Africa",
+              "share_pct": 7.3
+            },
+            {
+              "country": "India",
+              "share_pct": 6.1
+            },
+            {
+              "country": "France",
+              "share_pct": 5.6
+            },
+            {
+              "country": "United Arab Emirates",
+              "share_pct": 4.7
+            },
+            {
+              "country": "Spain",
+              "share_pct": 3.6
+            },
+            {
+              "country": "Italy",
+              "share_pct": 3.5
+            },
+            {
+              "country": "Netherlands",
+              "share_pct": 3.4
+            }
+          ],
+          "total_pv": 71820
         }
       ]
     },
@@ -1428,7 +2718,50 @@
             }
           },
           "elite_vs_freemium_inquiries_per_listing_multiplier": 2.53,
-          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 2.79
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 2.79,
+          "traffic_split_by_viewer_country": [
+            {
+              "country": "United States",
+              "share_pct": 21.6
+            },
+            {
+              "country": "France",
+              "share_pct": 16.0
+            },
+            {
+              "country": "Germany",
+              "share_pct": 12.6
+            },
+            {
+              "country": "United Kingdom",
+              "share_pct": 8.8
+            },
+            {
+              "country": "Netherlands",
+              "share_pct": 3.6
+            },
+            {
+              "country": "Sweden",
+              "share_pct": 3.4
+            },
+            {
+              "country": "Switzerland",
+              "share_pct": 3.1
+            },
+            {
+              "country": "Italy",
+              "share_pct": 3.1
+            },
+            {
+              "country": "Canada",
+              "share_pct": 2.7
+            },
+            {
+              "country": "Spain",
+              "share_pct": 2.7
+            }
+          ],
+          "total_pv": 215710
         },
         {
           "name": "Île-de-France (Paris)",
@@ -1459,7 +2792,50 @@
             }
           },
           "elite_vs_freemium_inquiries_per_listing_multiplier": 3.77,
-          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 8.32
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 8.32,
+          "traffic_split_by_viewer_country": [
+            {
+              "country": "France",
+              "share_pct": 33.0
+            },
+            {
+              "country": "United States",
+              "share_pct": 26.5
+            },
+            {
+              "country": "Germany",
+              "share_pct": 5.8
+            },
+            {
+              "country": "United Kingdom",
+              "share_pct": 4.5
+            },
+            {
+              "country": "Canada",
+              "share_pct": 3.5
+            },
+            {
+              "country": "Spain",
+              "share_pct": 2.6
+            },
+            {
+              "country": "Italy",
+              "share_pct": 2.3
+            },
+            {
+              "country": "Australia",
+              "share_pct": 1.9
+            },
+            {
+              "country": "Mexico",
+              "share_pct": 1.8
+            },
+            {
+              "country": "Netherlands",
+              "share_pct": 1.6
+            }
+          ],
+          "total_pv": 123859
         },
         {
           "name": "Nouvelle-Aquitaine",
@@ -1490,7 +2866,50 @@
             }
           },
           "elite_vs_freemium_inquiries_per_listing_multiplier": 1.52,
-          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 12.37
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 12.37,
+          "traffic_split_by_viewer_country": [
+            {
+              "country": "United States",
+              "share_pct": 28.9
+            },
+            {
+              "country": "France",
+              "share_pct": 17.3
+            },
+            {
+              "country": "United Kingdom",
+              "share_pct": 9.8
+            },
+            {
+              "country": "Germany",
+              "share_pct": 9.1
+            },
+            {
+              "country": "Spain",
+              "share_pct": 6.6
+            },
+            {
+              "country": "Netherlands",
+              "share_pct": 3.4
+            },
+            {
+              "country": "Switzerland",
+              "share_pct": 2.6
+            },
+            {
+              "country": "Canada",
+              "share_pct": 2.5
+            },
+            {
+              "country": "Italy",
+              "share_pct": 2.1
+            },
+            {
+              "country": "Denmark",
+              "share_pct": 1.8
+            }
+          ],
+          "total_pv": 47696
         },
         {
           "name": "Occitanie",
@@ -1521,7 +2940,50 @@
             }
           },
           "elite_vs_freemium_inquiries_per_listing_multiplier": 2.52,
-          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 19.44
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 19.44,
+          "traffic_split_by_viewer_country": [
+            {
+              "country": "United States",
+              "share_pct": 31.1
+            },
+            {
+              "country": "France",
+              "share_pct": 15.5
+            },
+            {
+              "country": "Germany",
+              "share_pct": 9.7
+            },
+            {
+              "country": "United Kingdom",
+              "share_pct": 8.4
+            },
+            {
+              "country": "Spain",
+              "share_pct": 4.5
+            },
+            {
+              "country": "Canada",
+              "share_pct": 4.5
+            },
+            {
+              "country": "Switzerland",
+              "share_pct": 3.0
+            },
+            {
+              "country": "Netherlands",
+              "share_pct": 2.3
+            },
+            {
+              "country": "Australia",
+              "share_pct": 2.0
+            },
+            {
+              "country": "Belgium",
+              "share_pct": 1.9
+            }
+          ],
+          "total_pv": 41691
         },
         {
           "name": "Auvergne-Rhône-Alpes",
@@ -1552,7 +3014,50 @@
             }
           },
           "elite_vs_freemium_inquiries_per_listing_multiplier": 3.82,
-          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 4.15
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 4.15,
+          "traffic_split_by_viewer_country": [
+            {
+              "country": "United States",
+              "share_pct": 26.9
+            },
+            {
+              "country": "France",
+              "share_pct": 15.8
+            },
+            {
+              "country": "United Kingdom",
+              "share_pct": 9.1
+            },
+            {
+              "country": "Germany",
+              "share_pct": 8.6
+            },
+            {
+              "country": "Italy",
+              "share_pct": 3.6
+            },
+            {
+              "country": "Spain",
+              "share_pct": 3.5
+            },
+            {
+              "country": "Switzerland",
+              "share_pct": 3.5
+            },
+            {
+              "country": "Netherlands",
+              "share_pct": 3.4
+            },
+            {
+              "country": "Australia",
+              "share_pct": 2.9
+            },
+            {
+              "country": "Canada",
+              "share_pct": 2.6
+            }
+          ],
+          "total_pv": 40818
         }
       ]
     },
@@ -1659,7 +3164,50 @@
             }
           },
           "elite_vs_freemium_inquiries_per_listing_multiplier": 1.51,
-          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 2.13
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 2.13,
+          "traffic_split_by_viewer_country": [
+            {
+              "country": "Greece",
+              "share_pct": 40.8
+            },
+            {
+              "country": "United States",
+              "share_pct": 21.4
+            },
+            {
+              "country": "United Kingdom",
+              "share_pct": 6.5
+            },
+            {
+              "country": "Germany",
+              "share_pct": 5.4
+            },
+            {
+              "country": "France",
+              "share_pct": 2.9
+            },
+            {
+              "country": "Australia",
+              "share_pct": 2.2
+            },
+            {
+              "country": "Canada",
+              "share_pct": 2.1
+            },
+            {
+              "country": "Singapore",
+              "share_pct": 2.1
+            },
+            {
+              "country": "China",
+              "share_pct": 1.8
+            },
+            {
+              "country": "Switzerland",
+              "share_pct": 1.3
+            }
+          ],
+          "total_pv": 38647
         },
         {
           "name": "Peloponnese & Ionian Islands",
@@ -1690,7 +3238,50 @@
             }
           },
           "elite_vs_freemium_inquiries_per_listing_multiplier": 0.95,
-          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 3.22
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 3.22,
+          "traffic_split_by_viewer_country": [
+            {
+              "country": "United States",
+              "share_pct": 23.3
+            },
+            {
+              "country": "Greece",
+              "share_pct": 12.7
+            },
+            {
+              "country": "United Kingdom",
+              "share_pct": 12.3
+            },
+            {
+              "country": "Germany",
+              "share_pct": 10.9
+            },
+            {
+              "country": "France",
+              "share_pct": 4.0
+            },
+            {
+              "country": "Italy",
+              "share_pct": 3.4
+            },
+            {
+              "country": "Switzerland",
+              "share_pct": 3.1
+            },
+            {
+              "country": "Netherlands",
+              "share_pct": 2.7
+            },
+            {
+              "country": "Israel",
+              "share_pct": 2.5
+            },
+            {
+              "country": "Australia",
+              "share_pct": 2.4
+            }
+          ],
+          "total_pv": 36720
         },
         {
           "name": "Crete",
@@ -1721,7 +3312,9 @@
             }
           },
           "elite_vs_freemium_inquiries_per_listing_multiplier": 3.67,
-          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 3.7
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 3.7,
+          "traffic_split_by_viewer_country": [],
+          "total_pv": 0
         },
         {
           "name": "Thessaly & Central Greece",
@@ -1752,7 +3345,50 @@
             }
           },
           "elite_vs_freemium_inquiries_per_listing_multiplier": 1.43,
-          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 2.78
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 2.78,
+          "traffic_split_by_viewer_country": [
+            {
+              "country": "United States",
+              "share_pct": 18.0
+            },
+            {
+              "country": "Greece",
+              "share_pct": 14.1
+            },
+            {
+              "country": "Germany",
+              "share_pct": 11.0
+            },
+            {
+              "country": "United Kingdom",
+              "share_pct": 10.9
+            },
+            {
+              "country": "France",
+              "share_pct": 5.7
+            },
+            {
+              "country": "Italy",
+              "share_pct": 4.2
+            },
+            {
+              "country": "Israel",
+              "share_pct": 3.5
+            },
+            {
+              "country": "Austria",
+              "share_pct": 2.9
+            },
+            {
+              "country": "Switzerland",
+              "share_pct": 2.7
+            },
+            {
+              "country": "Netherlands",
+              "share_pct": 2.4
+            }
+          ],
+          "total_pv": 3960
         },
         {
           "name": "Aegean Islands",
@@ -1783,7 +3419,9 @@
             }
           },
           "elite_vs_freemium_inquiries_per_listing_multiplier": 1.12,
-          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 1.75
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 1.75,
+          "traffic_split_by_viewer_country": [],
+          "total_pv": 0
         }
       ]
     },
@@ -1964,7 +3602,50 @@
             }
           },
           "elite_vs_freemium_inquiries_per_listing_multiplier": 1.62,
-          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 3.04
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 3.04,
+          "traffic_split_by_viewer_country": [
+            {
+              "country": "Switzerland",
+              "share_pct": 19.6
+            },
+            {
+              "country": "Germany",
+              "share_pct": 14.0
+            },
+            {
+              "country": "United States",
+              "share_pct": 13.5
+            },
+            {
+              "country": "France",
+              "share_pct": 11.0
+            },
+            {
+              "country": "United Kingdom",
+              "share_pct": 6.2
+            },
+            {
+              "country": "Spain",
+              "share_pct": 3.1
+            },
+            {
+              "country": "Poland",
+              "share_pct": 2.4
+            },
+            {
+              "country": "India",
+              "share_pct": 2.3
+            },
+            {
+              "country": "Italy",
+              "share_pct": 2.1
+            },
+            {
+              "country": "Netherlands",
+              "share_pct": 2.0
+            }
+          ],
+          "total_pv": 31231
         },
         {
           "name": "Ticino",
@@ -1995,7 +3676,50 @@
             }
           },
           "elite_vs_freemium_inquiries_per_listing_multiplier": 2.39,
-          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 2.19
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 2.19,
+          "traffic_split_by_viewer_country": [
+            {
+              "country": "Switzerland",
+              "share_pct": 17.5
+            },
+            {
+              "country": "Germany",
+              "share_pct": 16.9
+            },
+            {
+              "country": "United States",
+              "share_pct": 13.2
+            },
+            {
+              "country": "Italy",
+              "share_pct": 7.4
+            },
+            {
+              "country": "United Kingdom",
+              "share_pct": 6.9
+            },
+            {
+              "country": "Spain",
+              "share_pct": 3.9
+            },
+            {
+              "country": "Poland",
+              "share_pct": 3.6
+            },
+            {
+              "country": "France",
+              "share_pct": 3.4
+            },
+            {
+              "country": "Netherlands",
+              "share_pct": 3.3
+            },
+            {
+              "country": "India",
+              "share_pct": 2.3
+            }
+          ],
+          "total_pv": 28716
         },
         {
           "name": "Valais",
@@ -2026,7 +3750,50 @@
             }
           },
           "elite_vs_freemium_inquiries_per_listing_multiplier": 1.69,
-          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 2.34
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 2.34,
+          "traffic_split_by_viewer_country": [
+            {
+              "country": "United States",
+              "share_pct": 17.8
+            },
+            {
+              "country": "Switzerland",
+              "share_pct": 16.6
+            },
+            {
+              "country": "Germany",
+              "share_pct": 11.1
+            },
+            {
+              "country": "United Kingdom",
+              "share_pct": 8.4
+            },
+            {
+              "country": "France",
+              "share_pct": 5.9
+            },
+            {
+              "country": "Netherlands",
+              "share_pct": 4.0
+            },
+            {
+              "country": "Spain",
+              "share_pct": 3.6
+            },
+            {
+              "country": "Italy",
+              "share_pct": 2.9
+            },
+            {
+              "country": "Belgium",
+              "share_pct": 2.8
+            },
+            {
+              "country": "Poland",
+              "share_pct": 2.5
+            }
+          ],
+          "total_pv": 11053
         },
         {
           "name": "Geneva",
@@ -2057,7 +3824,50 @@
             }
           },
           "elite_vs_freemium_inquiries_per_listing_multiplier": 1.3,
-          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 5.16
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 5.16,
+          "traffic_split_by_viewer_country": [
+            {
+              "country": "Switzerland",
+              "share_pct": 23.9
+            },
+            {
+              "country": "France",
+              "share_pct": 20.7
+            },
+            {
+              "country": "Germany",
+              "share_pct": 12.0
+            },
+            {
+              "country": "United States",
+              "share_pct": 12.0
+            },
+            {
+              "country": "Spain",
+              "share_pct": 6.5
+            },
+            {
+              "country": "Argentina",
+              "share_pct": 3.3
+            },
+            {
+              "country": "Netherlands",
+              "share_pct": 3.3
+            },
+            {
+              "country": "United Kingdom",
+              "share_pct": 2.2
+            },
+            {
+              "country": "Australia",
+              "share_pct": 1.1
+            },
+            {
+              "country": "Belgium",
+              "share_pct": 1.1
+            }
+          ],
+          "total_pv": 92
         }
       ]
     },
@@ -2312,7 +4122,50 @@
             }
           },
           "elite_vs_freemium_inquiries_per_listing_multiplier": 1.69,
-          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 10.08
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 10.08,
+          "traffic_split_by_viewer_country": [
+            {
+              "country": "United Kingdom",
+              "share_pct": 44.4
+            },
+            {
+              "country": "United States",
+              "share_pct": 19.4
+            },
+            {
+              "country": "Germany",
+              "share_pct": 6.0
+            },
+            {
+              "country": "France",
+              "share_pct": 2.9
+            },
+            {
+              "country": "Spain",
+              "share_pct": 2.8
+            },
+            {
+              "country": "Canada",
+              "share_pct": 2.4
+            },
+            {
+              "country": "Italy",
+              "share_pct": 2.3
+            },
+            {
+              "country": "South Africa",
+              "share_pct": 1.9
+            },
+            {
+              "country": "Australia",
+              "share_pct": 1.6
+            },
+            {
+              "country": "India",
+              "share_pct": 1.4
+            }
+          ],
+          "total_pv": 274648
         }
       ]
     },
