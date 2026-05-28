@@ -79,6 +79,65 @@ html, body {
   white-space: nowrap;
 }
 
+/* Header actions (period badge + PDF button) */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.pdf-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: var(--je-white);
+  border: 1px solid var(--je-border);
+  border-radius: 30px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--je-black);
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  transition: all 180ms ease;
+}
+.pdf-btn:hover:not(:disabled) {
+  background: var(--je-black);
+  color: var(--je-white);
+  border-color: var(--je-black);
+}
+.pdf-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.pdf-btn svg { flex-shrink: 0; }
+
+/* Print-only branded header (hidden on screen, visible in PDF) */
+.print-only { display: none; }
+.print-header {
+  padding-bottom: 16px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--je-divider);
+}
+.print-brand {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  letter-spacing: -0.01em;
+  color: var(--je-black);
+  margin-bottom: 4px;
+}
+.print-meta {
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--je-light-gray);
+}
+.print-meta-sep {
+  margin: 0 8px;
+  color: var(--je-muted-gray);
+}
+
 /* Controls */
 .controls {
   display: grid;
@@ -268,6 +327,19 @@ h3 {
   font-size: 32px;
   line-height: 1;
   color: var(--je-black);
+}
+.yoy-badge {
+  margin-top: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.3px;
+  cursor: help;
+}
+.yoy-badge.yoy-thin {
+  color: var(--je-muted-gray);
+  font-weight: 400;
+  font-style: italic;
 }
 
 @media (max-width: 900px) { .stat-grid { grid-template-columns: repeat(2, 1fr); } }
@@ -518,6 +590,127 @@ footer {
 }
 
 .hidden { display: none !important; }
+
+/* ============================================================
+   Print / PDF styles
+   Goal: a clean one- or two-page client-friendly handout
+   ============================================================ */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 14mm 14mm 14mm 14mm;
+  }
+
+  html, body {
+    background: #fff !important;
+    color: #000;
+    font-size: 11pt;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .page {
+    padding: 0 !important;
+    max-width: none;
+  }
+
+  /* Hide screen-only chrome */
+  .no-print,
+  .header,
+  .controls,
+  .suggest,
+  #empty,
+  #error,
+  footer,
+  #small-sample-warn {
+    display: none !important;
+  }
+
+  /* Show print-only chrome */
+  .print-only { display: block !important; }
+
+  /* Tighten selected-header */
+  .selected-header {
+    margin-bottom: 16px;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+  .selected-header .country-name {
+    font-size: 22pt;
+  }
+  .selected-header .scope-tag {
+    font-size: 9pt;
+    padding: 3px 8px;
+  }
+
+  /* Stat cards: more compact */
+  .stat-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 8px !important;
+    margin-bottom: 16px !important;
+  }
+  .stat {
+    padding: 12px !important;
+    box-shadow: 0 0 0 1px #d0d0d0 !important;
+  }
+  .stat-value { font-size: 18pt !important; }
+  .stat-label { font-size: 8pt !important; margin-bottom: 4px !important; }
+  .yoy-badge { font-size: 9pt !important; margin-top: 4px !important; }
+
+  /* Two-column row: keep side-by-side */
+  .row {
+    grid-template-columns: 1fr 1.3fr !important;
+    gap: 16px !important;
+    margin-bottom: 16px !important;
+    page-break-inside: avoid;
+  }
+  .panel {
+    padding: 14px !important;
+    box-shadow: 0 0 0 1px #d0d0d0 !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  h3 { font-size: 9pt !important; margin-bottom: 8px !important; }
+
+  /* Tier cards: compact */
+  .tier { padding: 10px !important; }
+  .tier-headline { font-size: 28pt !important; }
+  .tier-stats { font-size: 9pt !important; }
+  .tier-name { font-size: 8pt !important; }
+  .tier-headline-label { font-size: 8pt !important; margin: 4px 0 6px !important; }
+
+  /* Origin list: tighter */
+  .origin-row { padding: 4px 0 !important; font-size: 9pt !important; }
+  .origin-rank { font-size: 8pt !important; }
+  .origin-val { font-size: 9pt !important; }
+
+  /* Regions table */
+  #regions-panel { page-break-before: auto; }
+  .regions-table { font-size: 9pt !important; }
+  .regions-table th { font-size: 8pt !important; padding: 6px 8px !important; }
+  .regions-table td { padding: 6px 8px !important; }
+  .regions-table tr.active { background: transparent !important; }
+  .regions-table tr.active td:first-child { box-shadow: none !important; }
+  .regions-table tr.clickable { cursor: default !important; }
+
+  /* Notes: smaller and at end */
+  .notes {
+    font-size: 8pt !important;
+    padding: 10px 12px !important;
+    margin-top: 16px !important;
+    background: #f7f7f7 !important;
+    page-break-inside: avoid;
+  }
+  .notes strong { font-size: 8pt !important; margin-bottom: 4px !important; }
+
+  /* Color preservation for tier accents */
+  .tier.elite { background: rgba(0, 108, 117, 0.06) !important; border-color: #006C75 !important; }
+  .tier.elite-plus { background: rgba(185, 161, 111, 0.10) !important; border-color: #b9a16f !important; }
+  .tier.elite .tier-headline { color: #006C75 !important; }
+  .tier.elite-plus .tier-headline { color: #b9a16f !important; }
+
+  .origin-bar-fill { background: #006C75 !important; }
+}
 </style>
 </head>
 <body>
@@ -528,7 +721,17 @@ footer {
       <h1>Demo Data</h1>
       <p class="subtitle">Country-level metrics for use during demo calls.</p>
     </div>
-    <div class="period-badge" id="period-badge">Loading…</div>
+    <div class="header-actions">
+      <button class="pdf-btn no-print" id="pdf-btn" aria-label="Download as PDF" disabled>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        <span>Download PDF</span>
+      </button>
+      <div class="period-badge" id="period-badge">Loading…</div>
+    </div>
   </div>
 
   <div class="controls">
@@ -548,6 +751,16 @@ footer {
   </div>
 
   <div id="content" class="hidden">
+    <!-- Print-only header: shows only in PDF output -->
+    <div class="print-only print-header">
+      <div class="print-brand">JamesEdition</div>
+      <div class="print-meta">
+        <span id="print-scope"></span>
+        <span class="print-meta-sep">·</span>
+        <span id="print-period"></span>
+      </div>
+    </div>
+
     <div class="selected-header">
       <span class="country-name" id="selected-country-name"></span>
       <span class="scope-tag" id="scope-tag">Country-wide</span>
@@ -662,6 +875,17 @@ function initUI() {
   });
 
   document.getElementById('region-select').addEventListener('change', e => selectRegion(e.target.value));
+
+  // PDF button
+  document.getElementById('pdf-btn').addEventListener('click', () => {
+    if (!currentCountry) return;
+    // Set a clean document title so the saved PDF has a sensible filename
+    const prev = document.title;
+    const scope = currentRegion ? `${currentCountry.name} — ${currentRegion.name.split(' (')[0]}` : currentCountry.name;
+    document.title = `JamesEdition — Demo Data — ${scope} — ${DATA.metadata.period}`;
+    window.print();
+    setTimeout(() => { document.title = prev; }, 500);
+  });
 
   // Deep link: ?country=Spain&region=Andalusia
   const params = new URLSearchParams(location.search);
@@ -783,6 +1007,7 @@ function deselectAll() {
   document.getElementById('empty').classList.remove('hidden');
   document.getElementById('region-select').disabled = true;
   document.getElementById('region-select').innerHTML = '<option value="">Whole country</option>';
+  document.getElementById('pdf-btn').disabled = true;
   updateURL();
 }
 
@@ -855,10 +1080,17 @@ function render() {
   if (!currentCountry) return;
   document.getElementById('empty').classList.add('hidden');
   document.getElementById('content').classList.remove('hidden');
+  document.getElementById('pdf-btn').disabled = false;
 
   const isRegion = !!currentRegion;
   const scope = isRegion ? currentRegion : currentCountry;
   const flag = FLAGS[currentCountry.name] || '';
+
+  // Populate print-only header (only visible in PDF)
+  document.getElementById('print-scope').textContent = isRegion
+    ? `${currentCountry.name} — ${currentRegion.name}`
+    : currentCountry.name;
+  document.getElementById('print-period').textContent = DATA.metadata.period;
 
   // Header
   document.getElementById('selected-country-name').textContent = `${flag} ${currentCountry.name}`;
@@ -899,16 +1131,37 @@ function render() {
 
   const stats = [
     { label: 'Page views', value: fmt(scope.page_views) },
-    { label: 'Inquiries', value: fmt(scope.inquiries) },
+    {
+      label: 'Inquiries',
+      value: fmt(scope.inquiries),
+      yoy: scope.inquiries_yoy_pct,
+      yoyBaseline: scope.inquiries_yoy_baseline,
+      yoyReliable: scope.inquiries_yoy_reliable
+    },
     { label: 'Active listings', value: activeListings != null ? fmt(activeListings) : '—' },
     { label: 'Conversion (inq / pv)', value: fmtPct(conversion) }
   ];
-  document.getElementById('stat-grid').innerHTML = stats.map(s => `
-    <div class="stat">
-      <div class="stat-label">${s.label}</div>
-      <div class="stat-value">${s.value}</div>
-    </div>
-  `).join('');
+  document.getElementById('stat-grid').innerHTML = stats.map(s => {
+    let yoyBadge = '';
+    if (s.yoy != null && s.yoyReliable) {
+      const up = s.yoy >= 0;
+      const sign = up ? '+' : '';
+      const color = up ? 'var(--je-teal-deep)' : '#C44';
+      const arrow = up ? '↑' : '↓';
+      yoyBadge = `<div class="yoy-badge" style="color: ${color};" title="vs Feb–Apr 2025: ${fmt(s.yoyBaseline)} inquiries">
+        ${arrow} ${sign}${s.yoy}% YoY
+      </div>`;
+    } else if (s.yoy === null && s.label === 'Inquiries' && s.yoyBaseline != null) {
+      yoyBadge = `<div class="yoy-badge yoy-thin" title="2025 baseline too small for reliable comparison (${s.yoyBaseline} inquiries)">small 2025 baseline</div>`;
+    }
+    return `
+      <div class="stat">
+        <div class="stat-label">${s.label}</div>
+        <div class="stat-value">${s.value}</div>
+        ${yoyBadge}
+      </div>
+    `;
+  }).join('');
 
   // Origins — prefer region-level data when available and PVs are sufficient
   const MIN_REGION_PV = 5000;
@@ -1099,6 +1352,7 @@ function renderRegionsTable() {
       <th>Region / state</th>
       <th class="num">Page views</th>
       <th class="num">Inquiries</th>
+      <th class="num">YoY</th>
       <th class="num">Conv. rate</th>
       <th class="num">Elite + plus share (pv)</th>
     </tr></thead>
@@ -1116,11 +1370,21 @@ function renderRegionsTable() {
             elitShare = ((s.elite.page_views + s.elite_plus.page_views) / total) * 100;
           }
         }
+        // YoY
+        let yoyCell = '<span style="color: var(--je-muted-gray)">—</span>';
+        if (r.inquiries_yoy_pct != null && r.inquiries_yoy_reliable) {
+          const up = r.inquiries_yoy_pct >= 0;
+          const color = up ? 'var(--je-teal-deep)' : '#C44';
+          const sign = up ? '+' : '';
+          const arrow = up ? '↑' : '↓';
+          yoyCell = `<span style="color: ${color}; font-weight: 600;" title="vs Feb–Apr 2025: ${fmt(r.inquiries_yoy_baseline)} inquiries">${arrow} ${sign}${r.inquiries_yoy_pct}%</span>`;
+        }
         return `
           <tr class="clickable ${active ? 'active' : ''}" data-key="${key.replace(/"/g,'&quot;')}">
             <td>${r.name}</td>
             <td class="num">${fmt(r.page_views)}</td>
             <td class="num">${fmt(r.inquiries)}</td>
+            <td class="num">${yoyCell}</td>
             <td class="num">${fmtPct(conv)}</td>
             <td class="num">${elitShare != null ? elitShare.toFixed(1) + '%' : '—'}</td>
           </tr>
