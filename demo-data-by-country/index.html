@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demo Data — JamesEdition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Prata&display=swap" rel="stylesheet">
+<style>
+:root {
+  --je-teal-deep: #006C75;
+  --je-teal-deep-hover: #19818A;
+  --je-gold-dark: #b9a16f;
+  --je-gold-light: #dfd5c0;
+  --je-black: #151515;
+  --je-mid-gray: #606060;
+  --je-light-gray: #878787;
+  --je-muted-gray: #ADADAD;
+  --je-border: #E0E0E0;
+  --je-divider: #ececec;
+  --je-off-white: #F5F5F5;
+  --je-near-white: #F7F7F7;
+  --je-white: #FFFFFF;
+  --font-sans: 'Inter', Arial, sans-serif;
+  --font-serif: 'Prata', 'Heldane', serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0; padding: 0;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--je-black);
+  background: var(--je-white);
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 48px 5vw 96px;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-bottom: 1px solid var(--je-divider);
+  padding-bottom: 24px;
+  margin-bottom: 32px;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.header h1 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin: 0 0 6px;
+}
+.header .subtitle {
+  color: var(--je-mid-gray);
+  font-size: 14px;
+  margin: 0;
+}
+.period-badge {
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--je-light-gray);
+  padding: 6px 12px;
+  border: 1px solid var(--je-divider);
+  border-radius: 30px;
+  white-space: nowrap;
+}
+
+/* Controls */
+.controls {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+}
+.control-group label {
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--je-light-gray);
+  font-weight: 500;
+}
+.search-input,
+.region-select {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  padding: 12px 14px;
+  border: 1px solid var(--je-border);
+  border-radius: 4px;
+  background: var(--je-white);
+  color: var(--je-black);
+  transition: border-color 200ms ease;
+  width: 100%;
+}
+.search-input:focus,
+.region-select:focus {
+  outline: none;
+  border-color: var(--je-mid-gray);
+}
+.search-input { padding-left: 38px; padding-right: 38px; }
+.search-icon {
+  position: absolute;
+  left: 13px;
+  bottom: 13px;
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+  color: var(--je-muted-gray);
+}
+.clear-btn {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  width: 22px;
+  height: 22px;
+  border: none;
+  background: var(--je-divider);
+  color: var(--je-mid-gray);
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 14px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  line-height: 1;
+}
+.clear-btn.visible { display: flex; }
+.clear-btn:hover { background: var(--je-muted-gray); color: var(--je-white); }
+
+/* Autocomplete dropdown */
+.suggest {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: var(--je-white);
+  border: 1px solid var(--je-border);
+  border-radius: 4px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  max-height: 360px;
+  overflow-y: auto;
+  display: none;
+}
+.suggest.open { display: block; }
+.suggest-item {
+  padding: 10px 14px;
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid var(--je-divider);
+}
+.suggest-item:last-child { border-bottom: none; }
+.suggest-item:hover,
+.suggest-item.active { background: var(--je-near-white); }
+.suggest-item .flag-name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.suggest-item .pv {
+  font-size: 12px;
+  color: var(--je-light-gray);
+  font-variant-numeric: tabular-nums;
+}
+.suggest-empty {
+  padding: 16px 14px;
+  font-size: 14px;
+  color: var(--je-light-gray);
+}
+
+@media (max-width: 767px) {
+  .controls { grid-template-columns: 1fr; }
+}
+
+/* Section headings */
+h2 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1.2;
+  margin: 0 0 16px;
+}
+h3 {
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--je-light-gray);
+  margin: 0 0 16px;
+}
+
+/* Selected country header */
+.selected-header {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+.selected-header .country-name {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+.selected-header .scope-tag {
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--je-light-gray);
+  padding: 4px 10px;
+  border: 1px solid var(--je-divider);
+  border-radius: 30px;
+}
+.selected-header .scope-tag.region {
+  border-color: var(--je-teal-deep);
+  color: var(--je-teal-deep);
+}
+
+/* Stat cards */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 40px;
+}
+.stat {
+  padding: 20px;
+  background: var(--je-white);
+  box-shadow: 0 0 0 1px var(--je-divider);
+  border-radius: 4px;
+}
+.stat-label {
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--je-light-gray);
+  margin-bottom: 8px;
+}
+.stat-value {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 1;
+  color: var(--je-black);
+}
+
+@media (max-width: 900px) { .stat-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .stat-grid { grid-template-columns: 1fr; } }
+
+/* Two-column layout */
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 32px;
+  margin-bottom: 40px;
+}
+@media (max-width: 1100px) { .row { grid-template-columns: 1fr; } }
+
+.panel {
+  padding: 24px;
+  background: var(--je-white);
+  box-shadow: 0 0 0 1px var(--je-divider);
+  border-radius: 4px;
+}
+
+/* Origin bars */
+.origin-list { list-style: none; padding: 0; margin: 0; }
+.origin-row {
+  display: grid;
+  grid-template-columns: 28px 1fr 70px;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  font-size: 14px;
+}
+.origin-row + .origin-row { border-top: 1px solid var(--je-divider); }
+.origin-rank {
+  font-size: 11px;
+  color: var(--je-light-gray);
+  font-variant-numeric: tabular-nums;
+}
+.origin-bar-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.origin-name { font-weight: 500; min-width: 110px; }
+.origin-bar {
+  flex: 1;
+  height: 6px;
+  background: var(--je-divider);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.origin-bar-fill {
+  height: 100%;
+  background: var(--je-teal-deep);
+  border-radius: 3px;
+}
+.origin-val {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  color: var(--je-mid-gray);
+  font-size: 13px;
+}
+
+/* Tier cards (3 columns) */
+.tier-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+@media (max-width: 600px) { .tier-grid { grid-template-columns: 1fr; } }
+
+.tier {
+  padding: 16px;
+  border-radius: 4px;
+  border: 1px solid var(--je-divider);
+  background: var(--je-white);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: relative;
+}
+.tier.freemium { background: var(--je-near-white); }
+.tier.elite {
+  border-color: var(--je-teal-deep);
+  background: rgba(0, 108, 117, 0.04);
+}
+.tier.elite-plus {
+  border-color: var(--je-gold-dark);
+  background: rgba(185, 161, 111, 0.08);
+}
+.tier-name {
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--je-light-gray);
+  margin-bottom: 8px;
+}
+.tier.elite .tier-name { color: var(--je-teal-deep); }
+.tier.elite-plus .tier-name { color: var(--je-gold-dark); }
+
+.tier-headline {
+  font-family: var(--font-serif);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--je-black);
+  font-variant-numeric: tabular-nums;
+}
+.tier-headline-label {
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--je-light-gray);
+  margin-top: 6px;
+  margin-bottom: 8px;
+}
+.tier-multiplier {
+  display: inline-block;
+  margin-top: 4px;
+  margin-bottom: 8px;
+  padding: 3px 8px;
+  background: var(--je-teal-deep);
+  color: var(--je-white);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  border-radius: 30px;
+  font-variant-numeric: tabular-nums;
+  align-self: flex-start;
+}
+.tier.elite-plus .tier-multiplier {
+  background: var(--je-gold-dark);
+}
+
+.tier-stats {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--je-divider);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12px;
+}
+.tier-stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.tier-stat-label { color: var(--je-mid-gray); }
+.tier-stat-value {
+  font-variant-numeric: tabular-nums;
+  color: var(--je-black);
+  font-weight: 500;
+}
+
+.region-only-note {
+  font-size: 12px;
+  color: var(--je-light-gray);
+  font-style: italic;
+  padding-top: 12px;
+  border-top: 1px solid var(--je-divider);
+  margin-top: 16px;
+}
+
+/* Regions table */
+.regions-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.regions-table th {
+  text-align: left;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--je-light-gray);
+  font-weight: 500;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--je-divider);
+}
+.regions-table th.num,
+.regions-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
+.regions-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--je-divider);
+}
+.regions-table tr:last-child td { border-bottom: none; }
+.regions-table tr.clickable { cursor: pointer; transition: background 150ms ease; }
+.regions-table tr.clickable:hover { background: var(--je-near-white); }
+.regions-table tr.active { background: var(--je-near-white); }
+.regions-table tr.active td:first-child { box-shadow: inset 3px 0 0 var(--je-teal-deep); }
+
+/* Empty / error */
+.empty {
+  text-align: center;
+  padding: 80px 20px;
+  color: var(--je-light-gray);
+  font-size: 14px;
+}
+.error {
+  padding: 20px;
+  border: 1px solid var(--je-border);
+  background: var(--je-near-white);
+  color: var(--je-mid-gray);
+  border-radius: 4px;
+}
+
+/* Notes */
+.notes {
+  margin-top: 32px;
+  padding: 16px 20px;
+  background: var(--je-near-white);
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--je-mid-gray);
+  line-height: 1.6;
+}
+.notes strong {
+  color: var(--je-black);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 6px;
+}
+
+/* Footer */
+footer {
+  margin-top: 64px;
+  padding-top: 24px;
+  border-top: 1px solid var(--je-divider);
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--je-light-gray);
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.hidden { display: none !important; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div>
+      <h1>Demo Data</h1>
+      <p class="subtitle">Country-level metrics for use during demo calls.</p>
+    </div>
+    <div class="period-badge" id="period-badge">Loading…</div>
+  </div>
+
+  <div class="controls">
+    <div class="control-group">
+      <label for="country-search">Country</label>
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>
+      </svg>
+      <input type="text" id="country-search" class="search-input" placeholder="Type to search…" autocomplete="off" spellcheck="false">
+      <button class="clear-btn" id="clear-btn" aria-label="Clear">×</button>
+      <div class="suggest" id="suggest"></div>
+    </div>
+    <div class="control-group">
+      <label for="region-select">Region / state (optional)</label>
+      <select id="region-select" class="region-select" disabled><option value="">Whole country</option></select>
+    </div>
+  </div>
+
+  <div id="content" class="hidden">
+    <div class="selected-header">
+      <span class="country-name" id="selected-country-name"></span>
+      <span class="scope-tag" id="scope-tag">Country-wide</span>
+    </div>
+
+    <div class="stat-grid" id="stat-grid"></div>
+
+    <div class="row">
+      <div class="panel">
+        <h3 id="origin-title">Where viewers come from</h3>
+        <ul class="origin-list" id="origin-list"></ul>
+      </div>
+      <div class="panel">
+        <h3 id="sub-title">Subscription tier performance</h3>
+        <div class="tier-grid" id="tier-grid"></div>
+        <div id="tier-footnote" style="font-size: 12px; color: var(--je-light-gray);"></div>
+      </div>
+    </div>
+
+    <div id="regions-panel" class="panel hidden" style="margin-bottom: 40px;">
+      <h3>Regions &amp; states <span style="color: var(--je-muted-gray); font-weight: 400; text-transform: none; letter-spacing: 0;">— click any row to focus</span></h3>
+      <table class="regions-table" id="regions-table"></table>
+    </div>
+
+    <div class="notes" id="notes-block"></div>
+  </div>
+
+  <div id="empty" class="empty">Start typing a country name above.</div>
+  <div id="error" class="error hidden"></div>
+
+  <footer>
+    <span id="footer-meta">JamesEdition · Internal</span>
+    <span>Source: Mixpanel · Real estate only</span>
+  </footer>
+</div>
+
+<script>
+// ============================================================
+// Single source of truth — overwrite data.json each month.
+// ============================================================
+const DATA_URL = './data.json';
+
+const FLAGS = {
+  'Spain':'🇪🇸','Italy':'🇮🇹','Portugal':'🇵🇹','United States':'🇺🇸','UAE':'🇦🇪',
+  'France':'🇫🇷','Greece':'🇬🇷','Germany':'🇩🇪','Switzerland':'🇨🇭','Austria':'🇦🇹',
+  'New Zealand':'🇳🇿','United Kingdom':'🇬🇧','Mexico':'🇲🇽','Netherlands':'🇳🇱',
+  'Canada':'🇨🇦','Ireland':'🇮🇪','Costa Rica':'🇨🇷','South Africa':'🇿🇦',
+  'Croatia':'🇭🇷','Australia':'🇦🇺','Sweden':'🇸🇪','Belgium':'🇧🇪','Brazil':'🇧🇷',
+  'China':'🇨🇳','Russia':'🇷🇺','Norway':'🇳🇴','Denmark':'🇩🇰','Poland':'🇵🇱',
+  'Turkey':'🇹🇷','Japan':'🇯🇵','India':'🇮🇳'
+};
+
+let DATA = null;
+let SORTED_COUNTRIES = [];
+let currentCountry = null;
+let currentRegion = null;
+let activeSuggestIdx = -1;
+
+const fmt = n => (n == null ? '—' : n.toLocaleString('en-US'));
+const fmtPct = n => (n == null ? '—' : n.toFixed(2) + '%');
+const fmtRatio = n => (n == null ? '—' : n.toFixed(2) + '×');
+const fmtPvPerListing = n => (n == null ? '—' : n.toFixed(1));
+const fmtInqPerListing = n => (n == null ? '—' : n.toFixed(3));
+
+// Compute inq-per-pv % for a tier subscription block (when per-listing not present)
+function tierConversionPct(tier) {
+  if (!tier || !tier.page_views) return null;
+  return (tier.inquiries / tier.page_views) * 100;
+}
+
+// ---------- Load ----------
+async function loadData() {
+  try {
+    const res = await fetch(DATA_URL);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    DATA = await res.json();
+    initUI();
+  } catch (e) {
+    document.getElementById('empty').classList.add('hidden');
+    const err = document.getElementById('error');
+    err.classList.remove('hidden');
+    err.textContent = `Could not load data: ${e.message}. Check that data.json is reachable.`;
+  }
+}
+
+function initUI() {
+  document.getElementById('period-badge').textContent = DATA.metadata.period;
+  document.getElementById('footer-meta').textContent =
+    `JamesEdition · Internal · ${DATA.metadata.period}`;
+
+  SORTED_COUNTRIES = [...DATA.countries].sort((a,b) => b.page_views - a.page_views);
+  document.getElementById('country-search').placeholder =
+    `Type to search ${DATA.countries.length} countries…`;
+
+  const input = document.getElementById('country-search');
+  const clear = document.getElementById('clear-btn');
+  input.addEventListener('input', onSearchInput);
+  input.addEventListener('focus', () => {
+    if (input.value.trim() === '' && !currentCountry) showAllSuggestions();
+    else if (input.value.trim() !== '') onSearchInput();
+  });
+  input.addEventListener('keydown', onSearchKey);
+  clear.addEventListener('click', () => {
+    input.value = '';
+    clear.classList.remove('visible');
+    deselectAll();
+    input.focus();
+    showAllSuggestions();
+  });
+  document.addEventListener('click', e => {
+    if (!e.target.closest('.control-group')) hideSuggest();
+  });
+
+  document.getElementById('region-select').addEventListener('change', e => selectRegion(e.target.value));
+
+  // Deep link: ?country=Spain&region=Andalusia
+  const params = new URLSearchParams(location.search);
+  const c = params.get('country');
+  const r = params.get('region');
+  if (c) {
+    const match = DATA.countries.find(x => x.name.toLowerCase() === c.toLowerCase());
+    if (match) {
+      input.value = match.name;
+      clear.classList.add('visible');
+      selectCountry(match);
+      if (r) {
+        const rs = document.getElementById('region-select');
+        const opts = [...rs.options].slice(1);
+        const found = opts.find(o => o.value.toLowerCase() === r.toLowerCase()) ||
+                      opts.find(o => o.textContent.toLowerCase().includes(r.toLowerCase()));
+        if (found) { rs.value = found.value; selectRegion(found.value); }
+      }
+    }
+  }
+}
+
+// ---------- Search / suggest ----------
+function onSearchInput() {
+  const input = document.getElementById('country-search');
+  const q = input.value.trim().toLowerCase();
+  document.getElementById('clear-btn').classList.toggle('visible', q.length > 0);
+  if (q === '') { showAllSuggestions(); return; }
+  const prefix = SORTED_COUNTRIES.filter(c => c.name.toLowerCase().startsWith(q));
+  const rest = SORTED_COUNTRIES.filter(c => !c.name.toLowerCase().startsWith(q) && c.name.toLowerCase().includes(q));
+  renderSuggestions([...prefix, ...rest]);
+}
+
+function showAllSuggestions() {
+  renderSuggestions(SORTED_COUNTRIES);
+}
+
+function renderSuggestions(list) {
+  const box = document.getElementById('suggest');
+  if (!list.length) {
+    box.innerHTML = '<div class="suggest-empty">No matching country.</div>';
+    box.classList.add('open');
+    activeSuggestIdx = -1;
+    return;
+  }
+  box.innerHTML = list.map((c, i) => `
+    <div class="suggest-item" data-name="${c.name.replace(/"/g,'&quot;')}" data-idx="${i}">
+      <span class="flag-name">${FLAGS[c.name] || ''} ${c.name}</span>
+      <span class="pv">${fmt(c.page_views)} pv</span>
+    </div>
+  `).join('');
+  box.classList.add('open');
+  activeSuggestIdx = -1;
+
+  box.querySelectorAll('.suggest-item').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      box.querySelectorAll('.suggest-item').forEach(x => x.classList.remove('active'));
+      el.classList.add('active');
+      activeSuggestIdx = parseInt(el.getAttribute('data-idx'), 10);
+    });
+    el.addEventListener('mousedown', e => {
+      e.preventDefault();
+      pickCountryByName(el.getAttribute('data-name'));
+    });
+  });
+}
+
+function hideSuggest() {
+  document.getElementById('suggest').classList.remove('open');
+  activeSuggestIdx = -1;
+}
+
+function onSearchKey(e) {
+  const box = document.getElementById('suggest');
+  const items = [...box.querySelectorAll('.suggest-item')];
+  if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    if (!box.classList.contains('open')) { showAllSuggestions(); return; }
+    activeSuggestIdx = Math.min(activeSuggestIdx + 1, items.length - 1);
+    updateActiveItem(items);
+  } else if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    activeSuggestIdx = Math.max(activeSuggestIdx - 1, 0);
+    updateActiveItem(items);
+  } else if (e.key === 'Enter') {
+    e.preventDefault();
+    if (activeSuggestIdx >= 0 && items[activeSuggestIdx]) {
+      pickCountryByName(items[activeSuggestIdx].getAttribute('data-name'));
+    } else if (items.length > 0) {
+      pickCountryByName(items[0].getAttribute('data-name'));
+    }
+  } else if (e.key === 'Escape') {
+    hideSuggest();
+  }
+}
+
+function updateActiveItem(items) {
+  items.forEach(x => x.classList.remove('active'));
+  if (activeSuggestIdx >= 0 && items[activeSuggestIdx]) {
+    items[activeSuggestIdx].classList.add('active');
+    items[activeSuggestIdx].scrollIntoView({ block: 'nearest' });
+  }
+}
+
+function pickCountryByName(name) {
+  const c = DATA.countries.find(x => x.name === name);
+  if (!c) return;
+  document.getElementById('country-search').value = c.name;
+  document.getElementById('clear-btn').classList.add('visible');
+  hideSuggest();
+  selectCountry(c);
+}
+
+// ---------- Selection ----------
+function deselectAll() {
+  currentCountry = null;
+  currentRegion = null;
+  document.getElementById('content').classList.add('hidden');
+  document.getElementById('empty').classList.remove('hidden');
+  document.getElementById('region-select').disabled = true;
+  document.getElementById('region-select').innerHTML = '<option value="">Whole country</option>';
+  updateURL();
+}
+
+function selectCountry(country) {
+  currentCountry = country;
+  currentRegion = null;
+
+  const rs = document.getElementById('region-select');
+  rs.innerHTML = '<option value="">Whole country</option>';
+  if (country.regions && country.regions.length) {
+    country.regions
+      .slice()
+      .sort((a,b) => b.page_views - a.page_views)
+      .forEach(r => {
+        const opt = document.createElement('option');
+        opt.value = r.mixpanel_key || r.name;
+        opt.textContent = r.name;
+        rs.appendChild(opt);
+      });
+    rs.disabled = false;
+  } else {
+    rs.disabled = true;
+  }
+
+  render();
+  updateURL();
+}
+
+function selectRegion(key) {
+  if (!key) currentRegion = null;
+  else currentRegion = currentCountry.regions.find(r => (r.mixpanel_key || r.name) === key);
+  render();
+  updateURL();
+}
+
+function updateURL() {
+  const params = new URLSearchParams();
+  if (currentCountry) params.set('country', currentCountry.name);
+  if (currentRegion) params.set('region', currentRegion.mixpanel_key || currentRegion.name);
+  const qs = params.toString();
+  history.replaceState(null, '', qs ? `?${qs}` : location.pathname);
+}
+
+// ---------- Aggregations ----------
+function sumActiveListings(sub) {
+  if (!sub) return null;
+  const tiers = ['freemium', 'elite', 'elite_plus'];
+  let total = 0;
+  let anyHas = false;
+  for (const t of tiers) {
+    if (sub[t] && sub[t].active_listings != null) {
+      total += sub[t].active_listings;
+      anyHas = true;
+    }
+  }
+  return anyHas ? total : null;
+}
+
+function scopeConversionPct(scope) {
+  // For region: inquiry_to_pv_rate_pct not present, compute from totals
+  if (scope.inquiry_to_pv_rate_pct != null) return scope.inquiry_to_pv_rate_pct;
+  if (scope.page_views && scope.inquiries != null) {
+    return (scope.inquiries / scope.page_views) * 100;
+  }
+  return null;
+}
+
+// ---------- Render ----------
+function render() {
+  if (!currentCountry) return;
+  document.getElementById('empty').classList.add('hidden');
+  document.getElementById('content').classList.remove('hidden');
+
+  const isRegion = !!currentRegion;
+  const scope = isRegion ? currentRegion : currentCountry;
+  const flag = FLAGS[currentCountry.name] || '';
+
+  // Header
+  document.getElementById('selected-country-name').textContent = `${flag} ${currentCountry.name}`;
+  const tag = document.getElementById('scope-tag');
+  if (isRegion) {
+    tag.textContent = currentRegion.name;
+    tag.classList.add('region');
+  } else {
+    tag.textContent = 'Country-wide';
+    tag.classList.remove('region');
+  }
+
+  // Stat cards (4): page views, inquiries, active listings, conversion %
+  const sub = scope.subscription_comparison;
+  const activeListings = sumActiveListings(sub);
+  const conversion = scopeConversionPct(scope);
+
+  const stats = [
+    { label: 'Page views', value: fmt(scope.page_views) },
+    { label: 'Inquiries', value: fmt(scope.inquiries) },
+    { label: 'Active listings', value: activeListings != null ? fmt(activeListings) : '—' },
+    { label: 'Conversion (inq / pv)', value: fmtPct(conversion) }
+  ];
+  document.getElementById('stat-grid').innerHTML = stats.map(s => `
+    <div class="stat">
+      <div class="stat-label">${s.label}</div>
+      <div class="stat-value">${s.value}</div>
+    </div>
+  `).join('');
+
+  // Origins (country-level only — v2 is now an array)
+  const originTitle = document.getElementById('origin-title');
+  originTitle.textContent = isRegion
+    ? `Where viewers of ${currentCountry.name} listings come from (country-wide)`
+    : `Where viewers of ${currentCountry.name} listings come from`;
+
+  const traffic = currentCountry.traffic_split_by_viewer_country || [];
+  const entries = [...traffic].sort((a,b) => b.share_pct - a.share_pct);
+  const max = entries.length ? entries[0].share_pct : 1;
+
+  document.getElementById('origin-list').innerHTML = entries.map((d, i) => {
+    const f = FLAGS[d.country] || '';
+    const w = (d.share_pct / max) * 100;
+    return `
+      <li class="origin-row">
+        <span class="origin-rank">${String(i+1).padStart(2,'0')}</span>
+        <div class="origin-bar-wrap">
+          <span class="origin-name">${f} ${d.country}</span>
+          <span class="origin-bar"><span class="origin-bar-fill" style="width: ${w}%"></span></span>
+        </div>
+        <span class="origin-val">${d.share_pct.toFixed(1)}%</span>
+      </li>
+    `;
+  }).join('');
+
+  // ---- Subscription panel (3 tiers side by side) ----
+  renderSubPanel(scope, isRegion);
+
+  // Regions table
+  renderRegionsTable();
+
+  // Notes
+  const notesEl = document.getElementById('notes-block');
+  if (DATA.metadata.notes && DATA.metadata.notes.length) {
+    notesEl.classList.remove('hidden');
+    notesEl.innerHTML =
+      `<strong>About this data</strong>` +
+      DATA.metadata.notes.map(n => `· ${n}`).join('<br>');
+  } else {
+    notesEl.classList.add('hidden');
+  }
+}
+
+function renderSubPanel(scope, isRegion) {
+  const sub = scope.subscription_comparison;
+  const titleEl = document.getElementById('sub-title');
+  const footEl = document.getElementById('tier-footnote');
+
+  if (!sub) {
+    document.getElementById('tier-grid').innerHTML = '<div class="tier-stat-label">No subscription data.</div>';
+    footEl.innerHTML = '';
+    return;
+  }
+
+  titleEl.textContent = isRegion
+    ? `Subscription tier performance — ${currentRegion.name}`
+    : 'Subscription tier performance';
+
+  // Country-level: per-listing metrics available
+  // Region-level: only PV and inquiries
+  const hasPerListing = sub.freemium && sub.freemium.pv_per_listing != null;
+
+  // Country-level multipliers (only available at country level)
+  const mEl = isRegion ? null : currentCountry.elite_vs_freemium_inquiries_per_listing_multiplier;
+  const mEp = isRegion ? null : currentCountry.elite_plus_vs_freemium_inquiries_per_listing_multiplier;
+
+  const tiers = [
+    {
+      key: 'freemium',
+      cls: 'freemium',
+      label: 'Freemium',
+      data: sub.freemium,
+      multiplier: null,
+      multiplierLabel: 'baseline'
+    },
+    {
+      key: 'elite',
+      cls: 'elite',
+      label: 'Elite',
+      data: sub.elite,
+      multiplier: mEl,
+      multiplierLabel: 'inq/listing vs freemium'
+    },
+    {
+      key: 'elite_plus',
+      cls: 'elite-plus',
+      label: 'Elite Plus',
+      data: sub.elite_plus,
+      multiplier: mEp,
+      multiplierLabel: 'inq/listing vs freemium'
+    }
+  ];
+
+  document.getElementById('tier-grid').innerHTML = tiers.map(t => {
+    const d = t.data || {};
+
+    // Headline metric: inquiries/listing for country, share of inquiries for region
+    let headline, headlineLabel;
+    if (hasPerListing && d.inquiries_per_listing != null) {
+      headline = fmtInqPerListing(d.inquiries_per_listing);
+      headlineLabel = 'inquiries per listing';
+    } else {
+      // Region: use inquiries count as headline
+      headline = fmt(d.inquiries);
+      headlineLabel = 'inquiries';
+    }
+
+    let multiplierBadge = '';
+    if (t.multiplier != null) {
+      multiplierBadge = `<span class="tier-multiplier">${fmtRatio(t.multiplier)} ${t.multiplierLabel}</span>`;
+    } else if (t.key === 'freemium' && !isRegion) {
+      multiplierBadge = `<span class="tier-multiplier" style="background: var(--je-muted-gray);">baseline</span>`;
+    }
+
+    // Detail stats below headline
+    const detailRows = [];
+    detailRows.push(`<div class="tier-stat"><span class="tier-stat-label">Page views</span><span class="tier-stat-value">${fmt(d.page_views)}</span></div>`);
+    if (hasPerListing) {
+      detailRows.push(`<div class="tier-stat"><span class="tier-stat-label">Inquiries</span><span class="tier-stat-value">${fmt(d.inquiries)}</span></div>`);
+      if (d.active_listings != null) {
+        detailRows.push(`<div class="tier-stat"><span class="tier-stat-label">Active listings</span><span class="tier-stat-value">${fmt(d.active_listings)}</span></div>`);
+      }
+      if (d.pv_per_listing != null) {
+        detailRows.push(`<div class="tier-stat"><span class="tier-stat-label">PV / listing</span><span class="tier-stat-value">${fmtPvPerListing(d.pv_per_listing)}</span></div>`);
+      }
+    }
+
+    return `
+      <div class="tier ${t.cls}">
+        <div class="tier-name">${t.label}</div>
+        <div class="tier-headline">${headline}</div>
+        <div class="tier-headline-label">${headlineLabel}</div>
+        ${multiplierBadge}
+        <div class="tier-stats">${detailRows.join('')}</div>
+      </div>
+    `;
+  }).join('');
+
+  if (isRegion) {
+    footEl.innerHTML = `<em>Per-listing rates are country-level only. See the country view for inquiries-per-listing multipliers.</em>`;
+  } else {
+    footEl.innerHTML = `Multipliers show how many × more inquiries per listing Elite / Elite Plus get vs. Freemium.`;
+  }
+}
+
+function renderRegionsTable() {
+  const regionsPanel = document.getElementById('regions-panel');
+  if (!currentCountry.regions || !currentCountry.regions.length) {
+    regionsPanel.classList.add('hidden');
+    return;
+  }
+  regionsPanel.classList.remove('hidden');
+
+  const rows = [...currentCountry.regions].sort((a,b) => b.page_views - a.page_views);
+  const activeKey = currentRegion ? (currentRegion.mixpanel_key || currentRegion.name) : null;
+
+  document.getElementById('regions-table').innerHTML = `
+    <thead><tr>
+      <th>Region / state</th>
+      <th class="num">Page views</th>
+      <th class="num">Inquiries</th>
+      <th class="num">Conv. rate</th>
+      <th class="num">Elite + plus share (pv)</th>
+    </tr></thead>
+    <tbody>
+      ${rows.map(r => {
+        const key = r.mixpanel_key || r.name;
+        const active = key === activeKey;
+        const conv = scopeConversionPct(r);
+        // Share of PV from Elite + Elite Plus (vs total)
+        let elitShare = null;
+        const s = r.subscription_comparison;
+        if (s && s.freemium && s.elite && s.elite_plus) {
+          const total = (s.freemium.page_views || 0) + (s.elite.page_views || 0) + (s.elite_plus.page_views || 0);
+          if (total > 0) {
+            elitShare = ((s.elite.page_views + s.elite_plus.page_views) / total) * 100;
+          }
+        }
+        return `
+          <tr class="clickable ${active ? 'active' : ''}" data-key="${key.replace(/"/g,'&quot;')}">
+            <td>${r.name}</td>
+            <td class="num">${fmt(r.page_views)}</td>
+            <td class="num">${fmt(r.inquiries)}</td>
+            <td class="num">${fmtPct(conv)}</td>
+            <td class="num">${elitShare != null ? elitShare.toFixed(1) + '%' : '—'}</td>
+          </tr>
+        `;
+      }).join('')}
+    </tbody>
+  `;
+  document.querySelectorAll('.regions-table tr.clickable').forEach(tr => {
+    tr.addEventListener('click', () => {
+      const key = tr.getAttribute('data-key');
+      const isAlreadyActive = currentRegion && (currentRegion.mixpanel_key || currentRegion.name) === key;
+      document.getElementById('region-select').value = isAlreadyActive ? '' : key;
+      selectRegion(isAlreadyActive ? '' : key);
+    });
+  });
+}
+
+loadData();
+</script>
+</body>
+</html>
