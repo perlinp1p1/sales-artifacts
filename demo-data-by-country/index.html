@@ -371,19 +371,25 @@ h3 {
 
 .tier-headline {
   font-family: var(--font-serif);
-  font-size: 28px;
+  font-size: 48px;
   font-weight: 400;
   line-height: 1;
   color: var(--je-black);
   font-variant-numeric: tabular-nums;
+  margin-top: 4px;
 }
+.tier.freemium .tier-headline { color: var(--je-light-gray); }
+.tier.elite .tier-headline { color: var(--je-teal-deep); }
+.tier.elite-plus .tier-headline { color: var(--je-gold-dark); }
+
 .tier-headline-label {
   font-size: 11px;
   letter-spacing: 1px;
   text-transform: uppercase;
   color: var(--je-light-gray);
-  margin-top: 6px;
+  margin-top: 8px;
   margin-bottom: 8px;
+  line-height: 1.3;
 }
 .tier-multiplier {
   display: inline-block;
@@ -865,6 +871,27 @@ function render() {
     tag.classList.remove('region');
   }
 
+  // Small-sample warning — applies when multiplier_reliable === false on the current scope
+  const scopeReliable = isRegion
+    ? (currentRegion.multiplier_reliable !== false)  // region only included if reliable in our pipeline
+    : (currentCountry.multiplier_reliable !== false);
+  let warnEl = document.getElementById('small-sample-warn');
+  if (!warnEl) {
+    warnEl = document.createElement('span');
+    warnEl.id = 'small-sample-warn';
+    warnEl.className = 'scope-tag';
+    warnEl.style.borderColor = 'var(--je-warning, #E79E32)';
+    warnEl.style.color = 'var(--je-warning, #E79E32)';
+    document.querySelector('.selected-header').appendChild(warnEl);
+  }
+  if (!scopeReliable) {
+    warnEl.textContent = '⚠ Small sample';
+    warnEl.title = 'One or more subscription tiers have fewer than 20 qualifying listings. Multipliers may be unreliable.';
+    warnEl.style.display = '';
+  } else {
+    warnEl.style.display = 'none';
+  }
+
   // Stat cards (4): page views, inquiries, active listings, conversion %
   const sub = scope.subscription_comparison;
   const activeListings = sumActiveListings(sub);
@@ -945,9 +972,13 @@ function renderSubPanel(scope, isRegion) {
   // Region-level: only PV and inquiries
   const hasPerListing = sub.freemium && sub.freemium.pv_per_listing != null;
 
-  // Country-level multipliers (only available at country level)
-  const mEl = isRegion ? null : currentCountry.elite_vs_freemium_inquiries_per_listing_multiplier;
-  const mEp = isRegion ? null : currentCountry.elite_plus_vs_freemium_inquiries_per_listing_multiplier;
+  // Multipliers: prefer scope-level (region) when available, fall back to country-level
+  const mEl = isRegion
+    ? (currentRegion.elite_vs_freemium_inquiries_per_listing_multiplier ?? null)
+    : currentCountry.elite_vs_freemium_inquiries_per_listing_multiplier;
+  const mEp = isRegion
+    ? (currentRegion.elite_plus_vs_freemium_inquiries_per_listing_multiplier ?? null)
+    : currentCountry.elite_plus_vs_freemium_inquiries_per_listing_multiplier;
 
   const tiers = [
     {
@@ -979,26 +1010,29 @@ function renderSubPanel(scope, isRegion) {
   document.getElementById('tier-grid').innerHTML = tiers.map(t => {
     const d = t.data || {};
 
-    // Headline metric: inquiries/listing for country, share of inquiries for region
+    // Headline: multiplier for elite/elite_plus, "baseline" for freemium
+    // (Falls back to inq/listing if multiplier not available — e.g. region without per-listing data)
     let headline, headlineLabel;
-    if (hasPerListing && d.inquiries_per_listing != null) {
+    if (t.key === 'freemium') {
+      headline = '1×';
+      headlineLabel = 'baseline';
+    } else if (t.multiplier != null) {
+      headline = fmtRatio(t.multiplier);
+      headlineLabel = 'more inquiries per listing<br>vs. Freemium';
+    } else if (hasPerListing && d.inquiries_per_listing != null) {
+      // Fallback: show inq/listing directly when no multiplier available
       headline = fmtInqPerListing(d.inquiries_per_listing);
       headlineLabel = 'inquiries per listing';
     } else {
-      // Region: use inquiries count as headline
       headline = fmt(d.inquiries);
       headlineLabel = 'inquiries';
     }
 
-    let multiplierBadge = '';
-    if (t.multiplier != null) {
-      multiplierBadge = `<span class="tier-multiplier">${fmtRatio(t.multiplier)} ${t.multiplierLabel}</span>`;
-    } else if (t.key === 'freemium' && !isRegion) {
-      multiplierBadge = `<span class="tier-multiplier" style="background: var(--je-muted-gray);">baseline</span>`;
-    }
-
     // Detail stats below headline
     const detailRows = [];
+    if (hasPerListing && d.inquiries_per_listing != null) {
+      detailRows.push(`<div class="tier-stat"><span class="tier-stat-label">Inq / listing</span><span class="tier-stat-value">${fmtInqPerListing(d.inquiries_per_listing)}</span></div>`);
+    }
     detailRows.push(`<div class="tier-stat"><span class="tier-stat-label">Page views</span><span class="tier-stat-value">${fmt(d.page_views)}</span></div>`);
     if (hasPerListing) {
       detailRows.push(`<div class="tier-stat"><span class="tier-stat-label">Inquiries</span><span class="tier-stat-value">${fmt(d.inquiries)}</span></div>`);
@@ -1015,16 +1049,20 @@ function renderSubPanel(scope, isRegion) {
         <div class="tier-name">${t.label}</div>
         <div class="tier-headline">${headline}</div>
         <div class="tier-headline-label">${headlineLabel}</div>
-        ${multiplierBadge}
         <div class="tier-stats">${detailRows.join('')}</div>
       </div>
     `;
   }).join('');
 
   if (isRegion) {
-    footEl.innerHTML = `<em>Per-listing rates are country-level only. See the country view for inquiries-per-listing multipliers.</em>`;
+    const hasRegionMult = !!(currentRegion.elite_vs_freemium_inquiries_per_listing_multiplier || currentRegion.elite_plus_vs_freemium_inquiries_per_listing_multiplier);
+    if (!hasRegionMult) {
+      footEl.innerHTML = `<em>Per-listing multipliers are country-level only for this region. Switch to whole country for the multiplier.</em>`;
+    } else {
+      footEl.innerHTML = `Multipliers compare inquiries per listing to Freemium in the same region.`;
+    }
   } else {
-    footEl.innerHTML = `Multipliers show how many × more inquiries per listing Elite / Elite Plus get vs. Freemium.`;
+    footEl.innerHTML = `Multipliers compare inquiries per listing to Freemium.`;
   }
 }
 
