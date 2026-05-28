@@ -598,7 +598,7 @@ footer {
 @media print {
   @page {
     size: A4 portrait;
-    margin: 12mm 12mm 12mm 12mm;
+    margin: 14mm 12mm 14mm 12mm;
   }
 
   html, body {
@@ -609,8 +609,9 @@ footer {
     print-color-adjust: exact;
   }
 
+  /* Force inner padding even if user sets "None" margins in Chrome dialog */
   .page {
-    padding: 0 !important;
+    padding: 8mm 6mm !important;
     max-width: none;
   }
 
@@ -753,12 +754,9 @@ footer {
   .tier.elite .tier-headline { color: #006C75 !important; }
   .tier.elite-plus .tier-headline { color: #8a7747 !important; }
 
-  /* Tier label under headline — keep on max 2 lines */
+  /* Tier label under headline — HIDE in print (tier name + big multiplier speaks for itself) */
   .tier-headline-label {
-    font-size: 7.5pt !important;
-    margin: 4px 0 8px !important;
-    line-height: 1.25 !important;
-    letter-spacing: 0.5px !important;
+    display: none !important;
   }
 
   /* Tier detail stats: 2 cols for readable layout */
@@ -806,7 +804,7 @@ footer {
     break-after: avoid;
   }
 
-  .regions-table { font-size: 8.5pt !important; width: 100%; }
+  .regions-table { font-size: 8.5pt !important; width: 100%; table-layout: auto; }
   .regions-table th {
     font-size: 7.5pt !important;
     padding: 5px 8px !important;
@@ -816,15 +814,26 @@ footer {
     white-space: nowrap;
   }
   .regions-table td {
-    padding: 5px 8px !important;
+    padding: 6px 8px !important;
     border-bottom: 1px solid #eee !important;
+    vertical-align: middle !important;
   }
-  /* YoY column needs more space */
+  /* First column (region name) — allow wrap but tighter */
+  .regions-table td:first-child {
+    line-height: 1.25 !important;
+    padding-right: 12px !important;
+  }
+  /* YoY column needs more space AND must not wrap */
   .regions-table th:nth-child(4),
   .regions-table td:nth-child(4) {
     padding-left: 16px !important;
     padding-right: 12px !important;
-    min-width: 60px !important;
+    min-width: 70px !important;
+    white-space: nowrap !important;
+  }
+  .regions-table td:nth-child(4) > span {
+    white-space: nowrap !important;
+    display: inline-block !important;
   }
   .regions-table thead { display: table-header-group; }
   .regions-table tr { page-break-inside: avoid; break-inside: avoid; }
