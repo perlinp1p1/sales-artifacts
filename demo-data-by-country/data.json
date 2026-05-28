@@ -1,26 +1,25 @@
 {
   "metadata": {
-    "period": "April 2026",
-    "data_source": "Mixpanel",
+    "period": "Feb–Apr 2026 (trailing 3 months)",
+    "data_source": "BigQuery datasets.tableau_listing_data",
     "category": "Real estate only",
+    "methodology": "Active listings = unique listings with at least 3 page views in the window. Multipliers shown when all 3 subscription tiers have at least 20 such listings.",
     "notes": [
-      "Page views = listing detail page views on jamesedition.com",
-      "Inquiries = contact form submissions delivered to offices",
-      "active_listings = unique listings that received at least 1 page view in April (proxy for total inventory)",
-      "pv_per_listing = page views / active_listings",
-      "inquiries_per_listing = inquiries / active_listings (comparable to Tableau 'Leads per Listing')",
-      "Traffic split = which countries are viewing listings in this market (top 10, by PV share %)",
-      "Subscription tiers: freemium (free), elite (paid tier 1), elite_plus (paid tier 2, highest)",
-      "Multipliers show how many x more inquiries per listing elite/elite_plus get vs freemium",
-      "Region-level data includes PV and inquiry splits but not per-listing rates (country level only)"
+      "Page views and inquiries are summed across the trailing 3 complete months",
+      "Active listings counted only if they received ≥3 page views (filters dead inventory)",
+      "inquiries_per_listing = inquiries / active_listings",
+      "Multiplier = tier's inquiries_per_listing / freemium's inquiries_per_listing",
+      "multiplier_reliable = false when any tier has <20 qualifying listings (small sample warning)",
+      "Tiny regions where any tier had <20 listings are excluded entirely",
+      "Viewer-origin (traffic_split_by_viewer_country) carried over from previous Mixpanel pull — not refreshed this cycle"
     ]
   },
   "countries": [
     {
       "name": "Spain",
-      "page_views": 598597,
-      "inquiries": 3507,
-      "inquiry_to_pv_rate_pct": 0.59,
+      "page_views": 1596612,
+      "inquiries": 5997,
+      "inquiry_to_pv_rate_pct": 0.38,
       "traffic_split_by_viewer_country": [
         {
           "country": "Spain",
@@ -65,157 +64,224 @@
       ],
       "subscription_comparison": {
         "freemium": {
-          "page_views": 217448,
-          "inquiries": 1430,
-          "active_listings": 42856,
-          "pv_per_listing": 5.07,
-          "inquiries_per_listing": 0.0334
+          "page_views": 576820,
+          "inquiries": 2311,
+          "active_listings": 43301,
+          "pv_per_listing": 13.32,
+          "inquiries_per_listing": 0.0534
         },
         "elite": {
-          "page_views": 139388,
-          "inquiries": 747,
-          "active_listings": 10908,
-          "pv_per_listing": 12.78,
-          "inquiries_per_listing": 0.0685
+          "page_views": 443136,
+          "inquiries": 1611,
+          "active_listings": 12762,
+          "pv_per_listing": 34.72,
+          "inquiries_per_listing": 0.1262
         },
         "elite_plus": {
-          "page_views": 202781,
-          "inquiries": 1119,
-          "active_listings": 11555,
-          "pv_per_listing": 17.55,
-          "inquiries_per_listing": 0.0968
+          "page_views": 576656,
+          "inquiries": 2075,
+          "active_listings": 13497,
+          "pv_per_listing": 42.72,
+          "inquiries_per_listing": 0.1537
         }
       },
-      "elite_vs_freemium_inquiries_per_listing_multiplier": 2.1,
-      "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 2.9,
+      "elite_vs_freemium_inquiries_per_listing_multiplier": 2.36,
+      "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 2.88,
+      "multiplier_reliable": true,
       "regions": [
         {
           "name": "Andalusia (incl. Costa del Sol, Marbella, Malaga)",
           "mixpanel_key": "Andalusia",
-          "page_views": 204894,
-          "inquiries": 1188,
+          "page_views": 571263,
+          "inquiries": 2173,
           "subscription_comparison": {
             "freemium": {
-              "page_views": 55207,
-              "inquiries": 361
+              "page_views": 148715,
+              "inquiries": 620,
+              "active_listings": 12022,
+              "pv_per_listing": 12.37,
+              "inquiries_per_listing": 0.0516
             },
             "elite": {
-              "page_views": 31024,
-              "inquiries": 173
+              "page_views": 105146,
+              "inquiries": 408,
+              "active_listings": 2199,
+              "pv_per_listing": 47.82,
+              "inquiries_per_listing": 0.1855
             },
             "elite_plus": {
-              "page_views": 109424,
-              "inquiries": 576
+              "page_views": 317402,
+              "inquiries": 1145,
+              "active_listings": 7981,
+              "pv_per_listing": 39.77,
+              "inquiries_per_listing": 0.1435
             }
-          }
+          },
+          "elite_vs_freemium_inquiries_per_listing_multiplier": 3.59,
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 2.78
         },
         {
           "name": "Balearic Islands",
           "mixpanel_key": "Balearic Islands",
-          "page_views": 146374,
-          "inquiries": 1029,
+          "page_views": 372486,
+          "inquiries": 1545,
           "subscription_comparison": {
             "freemium": {
-              "page_views": 58919,
-              "inquiries": 515
+              "page_views": 146059,
+              "inquiries": 679,
+              "active_listings": 9926,
+              "pv_per_listing": 14.71,
+              "inquiries_per_listing": 0.0684
             },
             "elite": {
-              "page_views": 40429,
-              "inquiries": 254
+              "page_views": 122789,
+              "inquiries": 488,
+              "active_listings": 3370,
+              "pv_per_listing": 36.44,
+              "inquiries_per_listing": 0.1448
             },
             "elite_plus": {
-              "page_views": 37653,
-              "inquiries": 218
+              "page_views": 103638,
+              "inquiries": 378,
+              "active_listings": 1639,
+              "pv_per_listing": 63.23,
+              "inquiries_per_listing": 0.2306
             }
-          }
+          },
+          "elite_vs_freemium_inquiries_per_listing_multiplier": 2.12,
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 3.37
         },
         {
           "name": "Valencian Community (incl. Costa Blanca)",
           "mixpanel_key": "Valencian Community",
-          "page_views": 63423,
-          "inquiries": 352,
+          "page_views": 168046,
+          "inquiries": 637,
           "subscription_comparison": {
             "freemium": {
-              "page_views": 30938,
-              "inquiries": 154
+              "page_views": 77912,
+              "inquiries": 285,
+              "active_listings": 8056,
+              "pv_per_listing": 9.67,
+              "inquiries_per_listing": 0.0354
             },
             "elite": {
-              "page_views": 11601,
-              "inquiries": 68
+              "page_views": 33382,
+              "inquiries": 127,
+              "active_listings": 1211,
+              "pv_per_listing": 27.57,
+              "inquiries_per_listing": 0.1049
             },
             "elite_plus": {
-              "page_views": 19006,
-              "inquiries": 124
+              "page_views": 56752,
+              "inquiries": 225,
+              "active_listings": 1785,
+              "pv_per_listing": 31.79,
+              "inquiries_per_listing": 0.1261
             }
-          }
+          },
+          "elite_vs_freemium_inquiries_per_listing_multiplier": 2.96,
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 3.56
         },
         {
           "name": "Catalonia (incl. Costa Brava, Barcelona)",
           "mixpanel_key": "Catalonia",
-          "page_views": 81226,
-          "inquiries": 448,
+          "page_views": 227722,
+          "inquiries": 771,
           "subscription_comparison": {
             "freemium": {
-              "page_views": 29229,
-              "inquiries": 198
+              "page_views": 83694,
+              "inquiries": 329,
+              "active_listings": 5854,
+              "pv_per_listing": 14.3,
+              "inquiries_per_listing": 0.0562
             },
             "elite": {
-              "page_views": 27975,
-              "inquiries": 122
+              "page_views": 96606,
+              "inquiries": 292,
+              "active_listings": 3214,
+              "pv_per_listing": 30.06,
+              "inquiries_per_listing": 0.0909
             },
             "elite_plus": {
-              "page_views": 16225,
-              "inquiries": 89
+              "page_views": 47422,
+              "inquiries": 150,
+              "active_listings": 1174,
+              "pv_per_listing": 40.39,
+              "inquiries_per_listing": 0.1278
             }
-          }
+          },
+          "elite_vs_freemium_inquiries_per_listing_multiplier": 1.62,
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 2.27
         },
         {
           "name": "Canary Islands",
           "mixpanel_key": "Canary Islands",
-          "page_views": 0,
-          "inquiries": 56,
+          "page_views": 44292,
+          "inquiries": 101,
           "subscription_comparison": {
             "freemium": {
-              "page_views": 9470,
-              "inquiries": 39
+              "page_views": 29563,
+              "inquiries": 77,
+              "active_listings": 1760,
+              "pv_per_listing": 16.8,
+              "inquiries_per_listing": 0.0437
             },
             "elite": {
-              "page_views": 0,
-              "inquiries": 7
+              "page_views": 8129,
+              "inquiries": 12,
+              "active_listings": 242,
+              "pv_per_listing": 33.59,
+              "inquiries_per_listing": 0.0496
             },
             "elite_plus": {
-              "page_views": 0,
-              "inquiries": 6
+              "page_views": 6600,
+              "inquiries": 12,
+              "active_listings": 179,
+              "pv_per_listing": 36.87,
+              "inquiries_per_listing": 0.067
             }
-          }
+          },
+          "elite_vs_freemium_inquiries_per_listing_multiplier": 1.14,
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 1.53
         },
         {
           "name": "Madrid",
           "mixpanel_key": "Community of Madrid",
-          "page_views": 47577,
-          "inquiries": 234,
+          "page_views": 113165,
+          "inquiries": 434,
           "subscription_comparison": {
             "freemium": {
-              "page_views": 11175,
-              "inquiries": 65
+              "page_views": 31577,
+              "inquiries": 154,
+              "active_listings": 2569,
+              "pv_per_listing": 12.29,
+              "inquiries_per_listing": 0.0599
             },
             "elite": {
-              "page_views": 14761,
-              "inquiries": 57
+              "page_views": 43173,
+              "inquiries": 151,
+              "active_listings": 2073,
+              "pv_per_listing": 20.83,
+              "inquiries_per_listing": 0.0728
             },
             "elite_plus": {
-              "page_views": 15312,
-              "inquiries": 88
+              "page_views": 38415,
+              "inquiries": 129,
+              "active_listings": 593,
+              "pv_per_listing": 64.78,
+              "inquiries_per_listing": 0.2175
             }
-          }
+          },
+          "elite_vs_freemium_inquiries_per_listing_multiplier": 1.22,
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 3.63
         }
       ]
     },
     {
       "name": "Italy",
-      "page_views": 798040,
-      "inquiries": 5948,
-      "inquiry_to_pv_rate_pct": 0.75,
+      "page_views": 2216416,
+      "inquiries": 10500,
+      "inquiry_to_pv_rate_pct": 0.47,
       "traffic_split_by_viewer_country": [
         {
           "country": "Italy",
@@ -260,217 +326,317 @@
       ],
       "subscription_comparison": {
         "freemium": {
-          "page_views": 228680,
-          "inquiries": 1715,
-          "active_listings": 25722,
-          "pv_per_listing": 8.89,
-          "inquiries_per_listing": 0.0667
+          "page_views": 665355,
+          "inquiries": 3532,
+          "active_listings": 31339,
+          "pv_per_listing": 21.23,
+          "inquiries_per_listing": 0.1127
         },
         "elite": {
-          "page_views": 250868,
-          "inquiries": 1995,
-          "active_listings": 7692,
-          "pv_per_listing": 32.61,
-          "inquiries_per_listing": 0.2594
+          "page_views": 751073,
+          "inquiries": 3505,
+          "active_listings": 8665,
+          "pv_per_listing": 86.68,
+          "inquiries_per_listing": 0.4045
         },
         "elite_plus": {
-          "page_views": 282460,
-          "inquiries": 1923,
-          "active_listings": 6477,
-          "pv_per_listing": 43.61,
-          "inquiries_per_listing": 0.2969
+          "page_views": 799988,
+          "inquiries": 3463,
+          "active_listings": 7924,
+          "pv_per_listing": 100.96,
+          "inquiries_per_listing": 0.437
         }
       },
-      "elite_vs_freemium_inquiries_per_listing_multiplier": 3.9,
-      "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 4.5,
+      "elite_vs_freemium_inquiries_per_listing_multiplier": 3.59,
+      "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 3.88,
+      "multiplier_reliable": true,
       "regions": [
         {
           "name": "Tuscany",
           "mixpanel_key": "Tuscany",
-          "page_views": 228390,
-          "inquiries": 1403,
+          "page_views": 617830,
+          "inquiries": 2494,
           "subscription_comparison": {
             "freemium": {
-              "page_views": 61875,
-              "inquiries": 389
+              "page_views": 173315,
+              "inquiries": 802,
+              "active_listings": 10934,
+              "pv_per_listing": 15.85,
+              "inquiries_per_listing": 0.0733
             },
             "elite": {
-              "page_views": 54572,
-              "inquiries": 387
+              "page_views": 148121,
+              "inquiries": 616,
+              "active_listings": 2627,
+              "pv_per_listing": 56.38,
+              "inquiries_per_listing": 0.2345
             },
             "elite_plus": {
-              "page_views": 103780,
-              "inquiries": 569
+              "page_views": 296394,
+              "inquiries": 1076,
+              "active_listings": 3866,
+              "pv_per_listing": 76.67,
+              "inquiries_per_listing": 0.2783
             }
-          }
+          },
+          "elite_vs_freemium_inquiries_per_listing_multiplier": 3.2,
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 3.8
         },
         {
           "name": "Lombardy",
           "mixpanel_key": "Lombardy",
-          "page_views": 147727,
-          "inquiries": 1300,
+          "page_views": 426380,
+          "inquiries": 2117,
           "subscription_comparison": {
             "freemium": {
-              "page_views": 30241,
-              "inquiries": 331
+              "page_views": 92275,
+              "inquiries": 545,
+              "active_listings": 4803,
+              "pv_per_listing": 19.21,
+              "inquiries_per_listing": 0.1135
             },
             "elite": {
-              "page_views": 45115,
-              "inquiries": 456
+              "page_views": 137767,
+              "inquiries": 737,
+              "active_listings": 1718,
+              "pv_per_listing": 80.19,
+              "inquiries_per_listing": 0.429
             },
             "elite_plus": {
-              "page_views": 69054,
-              "inquiries": 467
+              "page_views": 196338,
+              "inquiries": 835,
+              "active_listings": 1257,
+              "pv_per_listing": 156.2,
+              "inquiries_per_listing": 0.6643
             }
-          }
+          },
+          "elite_vs_freemium_inquiries_per_listing_multiplier": 3.78,
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 5.85
         },
         {
           "name": "Sardinia",
           "mixpanel_key": "Sardinia",
-          "page_views": 54433,
-          "inquiries": 540,
+          "page_views": 145469,
+          "inquiries": 830,
           "subscription_comparison": {
             "freemium": {
-              "page_views": 12115,
-              "inquiries": 95
+              "page_views": 36419,
+              "inquiries": 226,
+              "active_listings": 1061,
+              "pv_per_listing": 34.33,
+              "inquiries_per_listing": 0.213
             },
             "elite": {
-              "page_views": 14714,
-              "inquiries": 94
+              "page_views": 42488,
+              "inquiries": 182,
+              "active_listings": 344,
+              "pv_per_listing": 123.51,
+              "inquiries_per_listing": 0.5291
             },
             "elite_plus": {
-              "page_views": 23948,
-              "inquiries": 301
+              "page_views": 66562,
+              "inquiries": 422,
+              "active_listings": 452,
+              "pv_per_listing": 147.26,
+              "inquiries_per_listing": 0.9336
             }
-          }
+          },
+          "elite_vs_freemium_inquiries_per_listing_multiplier": 2.48,
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 4.38
         },
         {
           "name": "Sicily",
           "mixpanel_key": "Sicily",
-          "page_views": 35275,
-          "inquiries": 221,
+          "page_views": 95401,
+          "inquiries": 442,
           "subscription_comparison": {
             "freemium": {
-              "page_views": 13211,
-              "inquiries": 97
+              "page_views": 37651,
+              "inquiries": 216,
+              "active_listings": 1236,
+              "pv_per_listing": 30.46,
+              "inquiries_per_listing": 0.1748
             },
             "elite": {
-              "page_views": 15174,
-              "inquiries": 82
+              "page_views": 41166,
+              "inquiries": 153,
+              "active_listings": 377,
+              "pv_per_listing": 109.19,
+              "inquiries_per_listing": 0.4058
             },
             "elite_plus": {
-              "page_views": 6386,
-              "inquiries": 38
+              "page_views": 16584,
+              "inquiries": 73,
+              "active_listings": 216,
+              "pv_per_listing": 76.78,
+              "inquiries_per_listing": 0.338
             }
-          }
+          },
+          "elite_vs_freemium_inquiries_per_listing_multiplier": 2.32,
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 1.93
         },
         {
           "name": "Veneto",
           "mixpanel_key": "Veneto",
-          "page_views": 35397,
-          "inquiries": 217,
+          "page_views": 92302,
+          "inquiries": 403,
           "subscription_comparison": {
             "freemium": {
-              "page_views": 12910,
-              "inquiries": 71
+              "page_views": 40395,
+              "inquiries": 157,
+              "active_listings": 3040,
+              "pv_per_listing": 13.29,
+              "inquiries_per_listing": 0.0516
             },
             "elite": {
-              "page_views": 11332,
-              "inquiries": 77
+              "page_views": 34178,
+              "inquiries": 151,
+              "active_listings": 485,
+              "pv_per_listing": 70.47,
+              "inquiries_per_listing": 0.3113
             },
             "elite_plus": {
-              "page_views": 7148,
-              "inquiries": 47
+              "page_views": 17729,
+              "inquiries": 95,
+              "active_listings": 258,
+              "pv_per_listing": 68.72,
+              "inquiries_per_listing": 0.3682
             }
-          }
+          },
+          "elite_vs_freemium_inquiries_per_listing_multiplier": 6.03,
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 7.14
         },
         {
           "name": "Piedmont",
           "mixpanel_key": "Piedmont",
-          "page_views": 45305,
-          "inquiries": 328,
+          "page_views": 132893,
+          "inquiries": 567,
           "subscription_comparison": {
             "freemium": {
-              "page_views": 9801,
-              "inquiries": 94
+              "page_views": 29790,
+              "inquiries": 153,
+              "active_listings": 883,
+              "pv_per_listing": 33.74,
+              "inquiries_per_listing": 0.1733
             },
             "elite": {
-              "page_views": 18280,
-              "inquiries": 138
+              "page_views": 64658,
+              "inquiries": 277,
+              "active_listings": 489,
+              "pv_per_listing": 132.22,
+              "inquiries_per_listing": 0.5665
             },
             "elite_plus": {
-              "page_views": 14645,
-              "inquiries": 79
+              "page_views": 38445,
+              "inquiries": 137,
+              "active_listings": 352,
+              "pv_per_listing": 109.22,
+              "inquiries_per_listing": 0.3892
             }
-          }
+          },
+          "elite_vs_freemium_inquiries_per_listing_multiplier": 3.27,
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 2.25
         },
         {
           "name": "Apulia",
           "mixpanel_key": "Apulia",
-          "page_views": 28553,
-          "inquiries": 275,
+          "page_views": 82510,
+          "inquiries": 554,
           "subscription_comparison": {
             "freemium": {
-              "page_views": 16027,
-              "inquiries": 135
+              "page_views": 46515,
+              "inquiries": 317,
+              "active_listings": 1283,
+              "pv_per_listing": 36.25,
+              "inquiries_per_listing": 0.2471
             },
             "elite": {
-              "page_views": 8868,
-              "inquiries": 114
+              "page_views": 29206,
+              "inquiries": 189,
+              "active_listings": 234,
+              "pv_per_listing": 124.81,
+              "inquiries_per_listing": 0.8077
             },
             "elite_plus": {
-              "page_views": 0,
-              "inquiries": 17
+              "page_views": 6789,
+              "inquiries": 48,
+              "active_listings": 118,
+              "pv_per_listing": 57.53,
+              "inquiries_per_listing": 0.4068
             }
-          }
+          },
+          "elite_vs_freemium_inquiries_per_listing_multiplier": 3.27,
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 1.65
         },
         {
           "name": "Umbria",
           "mixpanel_key": "Umbria",
-          "page_views": 31065,
-          "inquiries": 192,
+          "page_views": 90918,
+          "inquiries": 371,
           "subscription_comparison": {
             "freemium": {
-              "page_views": 0,
-              "inquiries": 12
+              "page_views": 12806,
+              "inquiries": 52,
+              "active_listings": 508,
+              "pv_per_listing": 25.21,
+              "inquiries_per_listing": 0.1024
             },
             "elite": {
-              "page_views": 15464,
-              "inquiries": 102
+              "page_views": 51183,
+              "inquiries": 221,
+              "active_listings": 500,
+              "pv_per_listing": 102.37,
+              "inquiries_per_listing": 0.442
             },
             "elite_plus": {
-              "page_views": 8975,
-              "inquiries": 61
+              "page_views": 26929,
+              "inquiries": 98,
+              "active_listings": 246,
+              "pv_per_listing": 109.47,
+              "inquiries_per_listing": 0.3984
             }
-          }
+          },
+          "elite_vs_freemium_inquiries_per_listing_multiplier": 4.32,
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 3.89
         },
         {
           "name": "Campania",
           "mixpanel_key": "Campania",
-          "page_views": 24293,
-          "inquiries": 179,
+          "page_views": 58337,
+          "inquiries": 274,
           "subscription_comparison": {
             "freemium": {
-              "page_views": 0,
-              "inquiries": 32
+              "page_views": 17478,
+              "inquiries": 77,
+              "active_listings": 539,
+              "pv_per_listing": 32.43,
+              "inquiries_per_listing": 0.1429
             },
             "elite": {
-              "page_views": 12647,
-              "inquiries": 102
+              "page_views": 32533,
+              "inquiries": 158,
+              "active_listings": 210,
+              "pv_per_listing": 154.92,
+              "inquiries_per_listing": 0.7524
             },
             "elite_plus": {
-              "page_views": 0,
-              "inquiries": 28
+              "page_views": 8326,
+              "inquiries": 39,
+              "active_listings": 59,
+              "pv_per_listing": 141.12,
+              "inquiries_per_listing": 0.661
             }
-          }
+          },
+          "elite_vs_freemium_inquiries_per_listing_multiplier": 5.27,
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 4.63
         }
       ]
     },
     {
       "name": "Portugal",
-      "page_views": 278189,
-      "inquiries": 2322,
-      "inquiry_to_pv_rate_pct": 0.83,
+      "page_views": 698771,
+      "inquiries": 3491,
+      "inquiry_to_pv_rate_pct": 0.5,
       "traffic_split_by_viewer_country": [
         {
           "country": "Portugal",
@@ -515,137 +681,193 @@
       ],
       "subscription_comparison": {
         "freemium": {
-          "page_views": 147067,
-          "inquiries": 1240,
-          "active_listings": 32535,
-          "pv_per_listing": 4.52,
-          "inquiries_per_listing": 0.0381
+          "page_views": 405319,
+          "inquiries": 2005,
+          "active_listings": 31718,
+          "pv_per_listing": 12.78,
+          "inquiries_per_listing": 0.0632
         },
         "elite": {
-          "page_views": 44078,
-          "inquiries": 347,
-          "active_listings": 4753,
-          "pv_per_listing": 9.27,
-          "inquiries_per_listing": 0.073
+          "page_views": 144693,
+          "inquiries": 751,
+          "active_listings": 6299,
+          "pv_per_listing": 22.97,
+          "inquiries_per_listing": 0.1192
         },
         "elite_plus": {
-          "page_views": 55368,
-          "inquiries": 495,
-          "active_listings": 3248,
-          "pv_per_listing": 17.05,
-          "inquiries_per_listing": 0.1524
+          "page_views": 148759,
+          "inquiries": 735,
+          "active_listings": 3690,
+          "pv_per_listing": 40.31,
+          "inquiries_per_listing": 0.1992
         }
       },
-      "elite_vs_freemium_inquiries_per_listing_multiplier": 1.9,
-      "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 4.0,
+      "elite_vs_freemium_inquiries_per_listing_multiplier": 1.89,
+      "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 3.15,
+      "multiplier_reliable": true,
       "regions": [
         {
           "name": "Algarve",
           "mixpanel_key": "Algarve",
-          "page_views": 93960,
-          "inquiries": 758,
+          "page_views": 232760,
+          "inquiries": 1044,
           "subscription_comparison": {
             "freemium": {
-              "page_views": 41667,
-              "inquiries": 356
+              "page_views": 110834,
+              "inquiries": 526,
+              "active_listings": 8316,
+              "pv_per_listing": 13.33,
+              "inquiries_per_listing": 0.0633
             },
             "elite": {
-              "page_views": 19128,
-              "inquiries": 144
+              "page_views": 57589,
+              "inquiries": 257,
+              "active_listings": 2604,
+              "pv_per_listing": 22.12,
+              "inquiries_per_listing": 0.0987
             },
             "elite_plus": {
-              "page_views": 28462,
-              "inquiries": 230
+              "page_views": 64337,
+              "inquiries": 261,
+              "active_listings": 1088,
+              "pv_per_listing": 59.13,
+              "inquiries_per_listing": 0.2399
             }
-          }
+          },
+          "elite_vs_freemium_inquiries_per_listing_multiplier": 1.56,
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 3.79
         },
         {
           "name": "Lisbon",
           "mixpanel_key": "Lisbon",
-          "page_views": 88954,
-          "inquiries": 844,
+          "page_views": 210090,
+          "inquiries": 1476,
           "subscription_comparison": {
             "freemium": {
-              "page_views": 44321,
-              "inquiries": 453
+              "page_views": 111694,
+              "inquiries": 826,
+              "active_listings": 9127,
+              "pv_per_listing": 12.24,
+              "inquiries_per_listing": 0.0905
             },
             "elite": {
-              "page_views": 15332,
-              "inquiries": 124
+              "page_views": 51708,
+              "inquiries": 347,
+              "active_listings": 2058,
+              "pv_per_listing": 25.13,
+              "inquiries_per_listing": 0.1686
             },
             "elite_plus": {
-              "page_views": 16610,
-              "inquiries": 169
+              "page_views": 46688,
+              "inquiries": 303,
+              "active_listings": 1622,
+              "pv_per_listing": 28.78,
+              "inquiries_per_listing": 0.1868
             }
-          }
+          },
+          "elite_vs_freemium_inquiries_per_listing_multiplier": 1.86,
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 2.06
         },
         {
           "name": "Porto",
           "mixpanel_key": "Porto District",
-          "page_views": 21648,
-          "inquiries": 177,
+          "page_views": 49132,
+          "inquiries": 208,
           "subscription_comparison": {
             "freemium": {
-              "page_views": 14574,
-              "inquiries": 117
+              "page_views": 35361,
+              "inquiries": 149,
+              "active_listings": 4141,
+              "pv_per_listing": 8.54,
+              "inquiries_per_listing": 0.036
             },
             "elite": {
-              "page_views": 0,
-              "inquiries": 27
+              "page_views": 10280,
+              "inquiries": 41,
+              "active_listings": 662,
+              "pv_per_listing": 15.53,
+              "inquiries_per_listing": 0.0619
             },
             "elite_plus": {
-              "page_views": 0,
-              "inquiries": 13
+              "page_views": 3491,
+              "inquiries": 18,
+              "active_listings": 279,
+              "pv_per_listing": 12.51,
+              "inquiries_per_listing": 0.0645
             }
-          }
+          },
+          "elite_vs_freemium_inquiries_per_listing_multiplier": 1.72,
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 1.79
         },
         {
           "name": "Setubal",
           "mixpanel_key": "Setubal",
-          "page_views": 0,
-          "inquiries": 221,
+          "page_views": 49954,
+          "inquiries": 241,
           "subscription_comparison": {
             "freemium": {
-              "page_views": 11166,
-              "inquiries": 95
+              "page_views": 31924,
+              "inquiries": 145,
+              "active_listings": 2853,
+              "pv_per_listing": 11.19,
+              "inquiries_per_listing": 0.0508
             },
             "elite": {
-              "page_views": 0,
-              "inquiries": 28
+              "page_views": 8500,
+              "inquiries": 40,
+              "active_listings": 472,
+              "pv_per_listing": 18.01,
+              "inquiries_per_listing": 0.0847
             },
             "elite_plus": {
-              "page_views": 0,
-              "inquiries": 48
+              "page_views": 9530,
+              "inquiries": 56,
+              "active_listings": 263,
+              "pv_per_listing": 36.24,
+              "inquiries_per_listing": 0.2129
             }
-          }
+          },
+          "elite_vs_freemium_inquiries_per_listing_multiplier": 1.67,
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 4.19
         },
         {
           "name": "Madeira",
           "mixpanel_key": "Madeira",
-          "page_views": 0,
-          "inquiries": 80,
+          "page_views": 57596,
+          "inquiries": 177,
           "subscription_comparison": {
             "freemium": {
-              "page_views": 9260,
-              "inquiries": 38
+              "page_views": 39416,
+              "inquiries": 103,
+              "active_listings": 1962,
+              "pv_per_listing": 20.09,
+              "inquiries_per_listing": 0.0525
             },
             "elite": {
-              "page_views": 0,
-              "inquiries": 6
+              "page_views": 1942,
+              "inquiries": 16,
+              "active_listings": 61,
+              "pv_per_listing": 31.84,
+              "inquiries_per_listing": 0.2623
             },
             "elite_plus": {
-              "page_views": 0,
-              "inquiries": 21
+              "page_views": 16238,
+              "inquiries": 58,
+              "active_listings": 211,
+              "pv_per_listing": 76.96,
+              "inquiries_per_listing": 0.2749
             }
-          }
+          },
+          "elite_vs_freemium_inquiries_per_listing_multiplier": 5.0,
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 5.24
         }
       ]
     },
     {
       "name": "United States",
-      "page_views": 1055231,
-      "inquiries": 3764,
-      "inquiry_to_pv_rate_pct": 0.36,
+      "page_views": 1666644,
+      "inquiries": 3738,
+      "inquiry_to_pv_rate_pct": 0.22,
       "traffic_split_by_viewer_country": [
         {
           "country": "United States",
@@ -690,377 +912,317 @@
       ],
       "subscription_comparison": {
         "freemium": {
-          "page_views": 340458,
-          "inquiries": 1085,
-          "active_listings": 76247,
-          "pv_per_listing": 4.47,
-          "inquiries_per_listing": 0.0142
+          "page_views": 1006132,
+          "inquiries": 2018,
+          "active_listings": 71025,
+          "pv_per_listing": 14.17,
+          "inquiries_per_listing": 0.0284
         },
         "elite": {
-          "page_views": 158610,
-          "inquiries": 629,
-          "active_listings": 6856,
-          "pv_per_listing": 23.13,
-          "inquiries_per_listing": 0.0917
+          "page_views": 441830,
+          "inquiries": 1076,
+          "active_listings": 6834,
+          "pv_per_listing": 64.65,
+          "inquiries_per_listing": 0.1574
         },
         "elite_plus": {
-          "page_views": 72996,
-          "inquiries": 319,
-          "active_listings": 1400,
-          "pv_per_listing": 52.14,
-          "inquiries_per_listing": 0.2279
+          "page_views": 218682,
+          "inquiries": 644,
+          "active_listings": 1727,
+          "pv_per_listing": 126.63,
+          "inquiries_per_listing": 0.3729
         }
       },
-      "elite_vs_freemium_inquiries_per_listing_multiplier": 6.5,
-      "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 16.0,
+      "elite_vs_freemium_inquiries_per_listing_multiplier": 5.54,
+      "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 13.13,
+      "multiplier_reliable": true,
       "regions": [
         {
           "name": "Florida",
           "mixpanel_key": "Florida",
-          "page_views": 129243,
-          "inquiries": 668,
+          "page_views": 380381,
+          "inquiries": 934,
           "subscription_comparison": {
             "freemium": {
-              "page_views": 90968,
-              "inquiries": 288
+              "page_views": 261824,
+              "inquiries": 586,
+              "active_listings": 16453,
+              "pv_per_listing": 15.91,
+              "inquiries_per_listing": 0.0356
             },
             "elite": {
-              "page_views": 22065,
-              "inquiries": 87
+              "page_views": 77387,
+              "inquiries": 199,
+              "active_listings": 1004,
+              "pv_per_listing": 77.08,
+              "inquiries_per_listing": 0.1982
             },
             "elite_plus": {
-              "page_views": 16210,
-              "inquiries": 85
+              "page_views": 41170,
+              "inquiries": 149,
+              "active_listings": 364,
+              "pv_per_listing": 113.1,
+              "inquiries_per_listing": 0.4093
             }
-          }
+          },
+          "elite_vs_freemium_inquiries_per_listing_multiplier": 5.57,
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 11.5
         },
         {
           "name": "California",
           "mixpanel_key": "California",
-          "page_views": 132893,
-          "inquiries": 804,
+          "page_views": 420472,
+          "inquiries": 879,
           "subscription_comparison": {
             "freemium": {
-              "page_views": 92329,
-              "inquiries": 292
+              "page_views": 301591,
+              "inquiries": 557,
+              "active_listings": 12745,
+              "pv_per_listing": 23.66,
+              "inquiries_per_listing": 0.0437
             },
             "elite": {
-              "page_views": 23293,
-              "inquiries": 116
+              "page_views": 58890,
+              "inquiries": 138,
+              "active_listings": 845,
+              "pv_per_listing": 69.69,
+              "inquiries_per_listing": 0.1633
             },
             "elite_plus": {
-              "page_views": 17271,
-              "inquiries": 58
+              "page_views": 59991,
+              "inquiries": 184,
+              "active_listings": 258,
+              "pv_per_listing": 232.52,
+              "inquiries_per_listing": 0.7132
             }
-          }
+          },
+          "elite_vs_freemium_inquiries_per_listing_multiplier": 3.74,
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 16.32
         },
         {
           "name": "New York",
           "mixpanel_key": "New York",
-          "page_views": 103933,
-          "inquiries": 535,
+          "page_views": 313631,
+          "inquiries": 736,
           "subscription_comparison": {
             "freemium": {
-              "page_views": 27002,
-              "inquiries": 127
+              "page_views": 80041,
+              "inquiries": 172,
+              "active_listings": 4788,
+              "pv_per_listing": 16.72,
+              "inquiries_per_listing": 0.0359
             },
             "elite": {
-              "page_views": 70381,
-              "inquiries": 276
+              "page_views": 211004,
+              "inquiries": 517,
+              "active_listings": 2902,
+              "pv_per_listing": 72.71,
+              "inquiries_per_listing": 0.1782
             },
             "elite_plus": {
-              "page_views": 6550,
-              "inquiries": 18
+              "page_views": 22586,
+              "inquiries": 47,
+              "active_listings": 158,
+              "pv_per_listing": 142.95,
+              "inquiries_per_listing": 0.2975
             }
-          }
+          },
+          "elite_vs_freemium_inquiries_per_listing_multiplier": 4.96,
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 8.29
         },
         {
           "name": "Texas",
           "mixpanel_key": "Texas",
-          "page_views": 50005,
-          "inquiries": 324,
+          "page_views": 137331,
+          "inquiries": 309,
           "subscription_comparison": {
             "freemium": {
-              "page_views": 33150,
-              "inquiries": 108
+              "page_views": 93919,
+              "inquiries": 204,
+              "active_listings": 9763,
+              "pv_per_listing": 9.62,
+              "inquiries_per_listing": 0.0209
             },
             "elite": {
-              "page_views": 9317,
-              "inquiries": 37
+              "page_views": 18775,
+              "inquiries": 36,
+              "active_listings": 207,
+              "pv_per_listing": 90.7,
+              "inquiries_per_listing": 0.1739
             },
             "elite_plus": {
-              "page_views": 7538,
-              "inquiries": 35
+              "page_views": 24637,
+              "inquiries": 69,
+              "active_listings": 128,
+              "pv_per_listing": 192.48,
+              "inquiries_per_listing": 0.5391
             }
-          }
+          },
+          "elite_vs_freemium_inquiries_per_listing_multiplier": 8.32,
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 25.79
         },
         {
           "name": "Colorado",
           "mixpanel_key": "Colorado",
-          "page_views": 14601,
-          "inquiries": 100,
+          "page_views": 45489,
+          "inquiries": 59,
           "subscription_comparison": {
             "freemium": {
-              "page_views": 10117,
-              "inquiries": 23
+              "page_views": 29288,
+              "inquiries": 38,
+              "active_listings": 2487,
+              "pv_per_listing": 11.78,
+              "inquiries_per_listing": 0.0153
             },
             "elite": {
-              "page_views": 1311,
-              "inquiries": 0
+              "page_views": 3878,
+              "inquiries": 3,
+              "active_listings": 53,
+              "pv_per_listing": 73.17,
+              "inquiries_per_listing": 0.0566
             },
             "elite_plus": {
-              "page_views": 3173,
-              "inquiries": 16
+              "page_views": 12323,
+              "inquiries": 18,
+              "active_listings": 86,
+              "pv_per_listing": 143.29,
+              "inquiries_per_listing": 0.2093
             }
-          }
-        },
-        {
-          "name": "Idaho",
-          "mixpanel_key": "Idaho",
-          "page_views": 1632,
-          "inquiries": 13,
-          "subscription_comparison": {
-            "freemium": {
-              "page_views": 705,
-              "inquiries": 1
-            },
-            "elite": {
-              "page_views": 395,
-              "inquiries": 0
-            },
-            "elite_plus": {
-              "page_views": 532,
-              "inquiries": 6
-            }
-          }
-        },
-        {
-          "name": "Connecticut",
-          "mixpanel_key": "Connecticut",
-          "page_views": 8083,
-          "inquiries": 65,
-          "subscription_comparison": {
-            "freemium": {
-              "page_views": 3048,
-              "inquiries": 3
-            },
-            "elite": {
-              "page_views": 758,
-              "inquiries": 7
-            },
-            "elite_plus": {
-              "page_views": 4277,
-              "inquiries": 20
-            }
-          }
-        },
-        {
-          "name": "Massachusetts",
-          "mixpanel_key": "Massachusetts",
-          "page_views": 4838,
-          "inquiries": 35,
-          "subscription_comparison": {
-            "freemium": {
-              "page_views": 1797,
-              "inquiries": 7
-            },
-            "elite": {
-              "page_views": 2848,
-              "inquiries": 3
-            },
-            "elite_plus": {
-              "page_views": 193,
-              "inquiries": 0
-            }
-          }
+          },
+          "elite_vs_freemium_inquiries_per_listing_multiplier": 3.7,
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 13.68
         },
         {
           "name": "Hawaii",
           "mixpanel_key": "Hawaii",
-          "page_views": 5882,
-          "inquiries": 98,
+          "page_views": 12905,
+          "inquiries": 24,
           "subscription_comparison": {
             "freemium": {
-              "page_views": 1701,
-              "inquiries": 1
+              "page_views": 2117,
+              "inquiries": 2,
+              "active_listings": 210,
+              "pv_per_listing": 10.08,
+              "inquiries_per_listing": 0.0095
             },
             "elite": {
-              "page_views": 3801,
-              "inquiries": 20
+              "page_views": 8855,
+              "inquiries": 20,
+              "active_listings": 158,
+              "pv_per_listing": 56.04,
+              "inquiries_per_listing": 0.1266
             },
             "elite_plus": {
-              "page_views": 380,
-              "inquiries": 0
+              "page_views": 1933,
+              "inquiries": 2,
+              "active_listings": 23,
+              "pv_per_listing": 84.04,
+              "inquiries_per_listing": 0.087
             }
-          }
-        },
-        {
-          "name": "Montana",
-          "mixpanel_key": "Montana",
-          "page_views": 1573,
-          "inquiries": 72,
-          "subscription_comparison": {
-            "freemium": {
-              "page_views": 621,
-              "inquiries": 0
-            },
-            "elite": {
-              "page_views": 952,
-              "inquiries": 0
-            },
-            "elite_plus": {
-              "page_views": 0,
-              "inquiries": 0
-            }
-          }
-        },
-        {
-          "name": "Wyoming",
-          "mixpanel_key": "Wyoming",
-          "page_views": 2147,
-          "inquiries": 12,
-          "subscription_comparison": {
-            "freemium": {
-              "page_views": 327,
-              "inquiries": 0
-            },
-            "elite": {
-              "page_views": 1712,
-              "inquiries": 2
-            },
-            "elite_plus": {
-              "page_views": 108,
-              "inquiries": 2
-            }
-          }
-        },
-        {
-          "name": "Utah",
-          "mixpanel_key": "Utah",
-          "page_views": 6823,
-          "inquiries": 49,
-          "subscription_comparison": {
-            "freemium": {
-              "page_views": 6321,
-              "inquiries": 6
-            },
-            "elite": {
-              "page_views": 296,
-              "inquiries": 0
-            },
-            "elite_plus": {
-              "page_views": 206,
-              "inquiries": 0
-            }
-          }
-        },
-        {
-          "name": "Arizona",
-          "mixpanel_key": "Arizona",
-          "page_views": 4791,
-          "inquiries": 35,
-          "subscription_comparison": {
-            "freemium": {
-              "page_views": 1220,
-              "inquiries": 6
-            },
-            "elite": {
-              "page_views": 272,
-              "inquiries": 0
-            },
-            "elite_plus": {
-              "page_views": 3299,
-              "inquiries": 7
-            }
-          }
+          },
+          "elite_vs_freemium_inquiries_per_listing_multiplier": 13.33,
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 9.16
         },
         {
           "name": "Georgia",
           "mixpanel_key": "Georgia",
-          "page_views": 17939,
-          "inquiries": 109,
+          "page_views": 47866,
+          "inquiries": 126,
           "subscription_comparison": {
             "freemium": {
-              "page_views": 14635,
-              "inquiries": 40
+              "page_views": 40355,
+              "inquiries": 109,
+              "active_listings": 4449,
+              "pv_per_listing": 9.07,
+              "inquiries_per_listing": 0.0245
             },
             "elite": {
-              "page_views": 2996,
-              "inquiries": 5
+              "page_views": 6856,
+              "inquiries": 15,
+              "active_listings": 222,
+              "pv_per_listing": 30.88,
+              "inquiries_per_listing": 0.0676
             },
             "elite_plus": {
-              "page_views": 308,
-              "inquiries": 4
+              "page_views": 655,
+              "inquiries": 2,
+              "active_listings": 26,
+              "pv_per_listing": 25.19,
+              "inquiries_per_listing": 0.0769
             }
-          }
+          },
+          "elite_vs_freemium_inquiries_per_listing_multiplier": 2.76,
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 3.14
         },
         {
           "name": "North Carolina",
           "mixpanel_key": "North Carolina",
-          "page_views": 12462,
-          "inquiries": 92,
+          "page_views": 35063,
+          "inquiries": 76,
           "subscription_comparison": {
             "freemium": {
-              "page_views": 6332,
-              "inquiries": 24
+              "page_views": 16043,
+              "inquiries": 31,
+              "active_listings": 2282,
+              "pv_per_listing": 7.03,
+              "inquiries_per_listing": 0.0136
             },
             "elite": {
-              "page_views": 2975,
-              "inquiries": 14
+              "page_views": 7841,
+              "inquiries": 25,
+              "active_listings": 219,
+              "pv_per_listing": 35.8,
+              "inquiries_per_listing": 0.1142
             },
             "elite_plus": {
-              "page_views": 3155,
-              "inquiries": 9
+              "page_views": 11179,
+              "inquiries": 20,
+              "active_listings": 92,
+              "pv_per_listing": 121.51,
+              "inquiries_per_listing": 0.2174
             }
-          }
+          },
+          "elite_vs_freemium_inquiries_per_listing_multiplier": 8.4,
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 15.99
         },
         {
           "name": "Washington",
           "mixpanel_key": "Washington",
-          "page_views": 2715,
-          "inquiries": 35,
+          "page_views": 6588,
+          "inquiries": 15,
           "subscription_comparison": {
             "freemium": {
-              "page_views": 694,
-              "inquiries": 2
+              "page_views": 3166,
+              "inquiries": 5,
+              "active_listings": 493,
+              "pv_per_listing": 6.42,
+              "inquiries_per_listing": 0.0101
             },
             "elite": {
-              "page_views": 833,
-              "inquiries": 2
+              "page_views": 941,
+              "inquiries": 1,
+              "active_listings": 42,
+              "pv_per_listing": 22.4,
+              "inquiries_per_listing": 0.0238
             },
             "elite_plus": {
-              "page_views": 1188,
-              "inquiries": 5
+              "page_views": 2481,
+              "inquiries": 9,
+              "active_listings": 113,
+              "pv_per_listing": 21.96,
+              "inquiries_per_listing": 0.0796
             }
-          }
-        },
-        {
-          "name": "Nevada",
-          "mixpanel_key": "Nevada",
-          "page_views": 11363,
-          "inquiries": 53,
-          "subscription_comparison": {
-            "freemium": {
-              "page_views": 8090,
-              "inquiries": 24
-            },
-            "elite": {
-              "page_views": 1975,
-              "inquiries": 11
-            },
-            "elite_plus": {
-              "page_views": 1298,
-              "inquiries": 10
-            }
-          }
+          },
+          "elite_vs_freemium_inquiries_per_listing_multiplier": 2.36,
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 7.88
         }
       ]
     },
     {
       "name": "UAE",
-      "page_views": 96984,
-      "inquiries": 660,
-      "inquiry_to_pv_rate_pct": 0.68,
+      "page_views": 363438,
+      "inquiries": 1473,
+      "inquiry_to_pv_rate_pct": 0.41,
       "traffic_split_by_viewer_country": [
         {
           "country": "United States",
@@ -1105,57 +1267,69 @@
       ],
       "subscription_comparison": {
         "freemium": {
-          "page_views": 34598,
-          "inquiries": 232,
-          "active_listings": 5909,
-          "pv_per_listing": 5.86,
-          "inquiries_per_listing": 0.0393
+          "page_views": 115967,
+          "inquiries": 477,
+          "active_listings": 6475,
+          "pv_per_listing": 17.91,
+          "inquiries_per_listing": 0.0737
         },
         "elite": {
-          "page_views": 20379,
-          "inquiries": 149,
-          "active_listings": 2528,
-          "pv_per_listing": 8.06,
-          "inquiries_per_listing": 0.0589
+          "page_views": 85774,
+          "inquiries": 397,
+          "active_listings": 2764,
+          "pv_per_listing": 31.03,
+          "inquiries_per_listing": 0.1436
         },
         "elite_plus": {
-          "page_views": 39707,
-          "inquiries": 264,
-          "active_listings": 1776,
-          "pv_per_listing": 22.36,
-          "inquiries_per_listing": 0.1486
+          "page_views": 161697,
+          "inquiries": 599,
+          "active_listings": 2583,
+          "pv_per_listing": 62.6,
+          "inquiries_per_listing": 0.2319
         }
       },
-      "elite_vs_freemium_inquiries_per_listing_multiplier": 1.5,
-      "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 3.8,
+      "elite_vs_freemium_inquiries_per_listing_multiplier": 1.95,
+      "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 3.15,
+      "multiplier_reliable": true,
       "regions": [
         {
           "name": "Dubai",
           "mixpanel_key": "Dubai",
-          "page_views": 88902,
-          "inquiries": 599,
+          "page_views": 333070,
+          "inquiries": 1339,
           "subscription_comparison": {
             "freemium": {
-              "page_views": 31867,
-              "inquiries": 221
+              "page_views": 104048,
+              "inquiries": 413,
+              "active_listings": 5803,
+              "pv_per_listing": 17.93,
+              "inquiries_per_listing": 0.0712
             },
             "elite": {
-              "page_views": 18689,
-              "inquiries": 129
+              "page_views": 80034,
+              "inquiries": 368,
+              "active_listings": 2423,
+              "pv_per_listing": 33.03,
+              "inquiries_per_listing": 0.1519
             },
             "elite_plus": {
-              "page_views": 36220,
-              "inquiries": 234
+              "page_views": 148988,
+              "inquiries": 558,
+              "active_listings": 2310,
+              "pv_per_listing": 64.5,
+              "inquiries_per_listing": 0.2416
             }
-          }
+          },
+          "elite_vs_freemium_inquiries_per_listing_multiplier": 2.13,
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 3.39
         }
       ]
     },
     {
       "name": "France",
-      "page_views": 654618,
-      "inquiries": 4338,
-      "inquiry_to_pv_rate_pct": 0.66,
+      "page_views": 1582272,
+      "inquiries": 6680,
+      "inquiry_to_pv_rate_pct": 0.42,
       "traffic_split_by_viewer_country": [
         {
           "country": "United States",
@@ -1200,177 +1374,193 @@
       ],
       "subscription_comparison": {
         "freemium": {
-          "page_views": 320377,
-          "inquiries": 2507,
-          "active_listings": 64988,
-          "pv_per_listing": 4.93,
-          "inquiries_per_listing": 0.0386
+          "page_views": 913804,
+          "inquiries": 4222,
+          "active_listings": 68780,
+          "pv_per_listing": 13.29,
+          "inquiries_per_listing": 0.0614
         },
         "elite": {
-          "page_views": 225868,
-          "inquiries": 1233,
-          "active_listings": 8357,
-          "pv_per_listing": 27.03,
-          "inquiries_per_listing": 0.1475
+          "page_views": 540588,
+          "inquiries": 1967,
+          "active_listings": 9498,
+          "pv_per_listing": 56.92,
+          "inquiries_per_listing": 0.2071
         },
         "elite_plus": {
-          "page_views": 47568,
-          "inquiries": 251,
-          "active_listings": 1491,
-          "pv_per_listing": 31.9,
-          "inquiries_per_listing": 0.1683
+          "page_views": 127880,
+          "inquiries": 491,
+          "active_listings": 1693,
+          "pv_per_listing": 75.53,
+          "inquiries_per_listing": 0.29
         }
       },
-      "elite_vs_freemium_inquiries_per_listing_multiplier": 3.8,
-      "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 4.4,
+      "elite_vs_freemium_inquiries_per_listing_multiplier": 3.37,
+      "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 4.72,
+      "multiplier_reliable": true,
       "regions": [
         {
           "name": "Provence-Alpes-Côte d'Azur (French Riviera)",
           "mixpanel_key": "Provence-Alpes-Côte d'Azur",
-          "page_views": 240405,
-          "inquiries": 1846,
+          "page_views": 610686,
+          "inquiries": 2741,
           "subscription_comparison": {
             "freemium": {
-              "page_views": 120330,
-              "inquiries": 1133
+              "page_views": 325482,
+              "inquiries": 1716,
+              "active_listings": 23305,
+              "pv_per_listing": 13.97,
+              "inquiries_per_listing": 0.0736
             },
             "elite": {
-              "page_views": 82928,
-              "inquiries": 495
+              "page_views": 211679,
+              "inquiries": 747,
+              "active_listings": 4005,
+              "pv_per_listing": 52.85,
+              "inquiries_per_listing": 0.1865
             },
             "elite_plus": {
-              "page_views": 30212,
-              "inquiries": 175
+              "page_views": 73525,
+              "inquiries": 278,
+              "active_listings": 1353,
+              "pv_per_listing": 54.34,
+              "inquiries_per_listing": 0.2055
             }
-          }
+          },
+          "elite_vs_freemium_inquiries_per_listing_multiplier": 2.53,
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 2.79
         },
         {
           "name": "Île-de-France (Paris)",
           "mixpanel_key": "Île-de-France",
-          "page_views": 136916,
-          "inquiries": 672,
+          "page_views": 273263,
+          "inquiries": 957,
           "subscription_comparison": {
             "freemium": {
-              "page_views": 48248,
-              "inquiries": 325
+              "page_views": 133160,
+              "inquiries": 530,
+              "active_listings": 12076,
+              "pv_per_listing": 11.03,
+              "inquiries_per_listing": 0.0439
             },
             "elite": {
-              "page_views": 63213,
-              "inquiries": 247
+              "page_views": 134517,
+              "inquiries": 408,
+              "active_listings": 2463,
+              "pv_per_listing": 54.62,
+              "inquiries_per_listing": 0.1657
             },
             "elite_plus": {
-              "page_views": 0,
-              "inquiries": 7
+              "page_views": 5586,
+              "inquiries": 19,
+              "active_listings": 52,
+              "pv_per_listing": 107.42,
+              "inquiries_per_listing": 0.3654
             }
-          }
+          },
+          "elite_vs_freemium_inquiries_per_listing_multiplier": 3.77,
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 8.32
         },
         {
           "name": "Nouvelle-Aquitaine",
           "mixpanel_key": "Nouvelle-Aquitaine",
-          "page_views": 51413,
-          "inquiries": 428,
+          "page_views": 111758,
+          "inquiries": 528,
           "subscription_comparison": {
             "freemium": {
-              "page_views": 29148,
-              "inquiries": 262
+              "page_views": 88376,
+              "inquiries": 448,
+              "active_listings": 7275,
+              "pv_per_listing": 12.15,
+              "inquiries_per_listing": 0.0616
             },
             "elite": {
-              "page_views": 7506,
-              "inquiries": 50
+              "page_views": 18552,
+              "inquiries": 64,
+              "active_listings": 683,
+              "pv_per_listing": 27.16,
+              "inquiries_per_listing": 0.0937
             },
             "elite_plus": {
-              "page_views": 0,
-              "inquiries": 4
+              "page_views": 4830,
+              "inquiries": 16,
+              "active_listings": 21,
+              "pv_per_listing": 230.0,
+              "inquiries_per_listing": 0.7619
             }
-          }
+          },
+          "elite_vs_freemium_inquiries_per_listing_multiplier": 1.52,
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 12.37
         },
         {
           "name": "Occitanie",
           "mixpanel_key": "Occitanie",
-          "page_views": 44975,
-          "inquiries": 316,
+          "page_views": 109087,
+          "inquiries": 533,
           "subscription_comparison": {
             "freemium": {
-              "page_views": 28721,
-              "inquiries": 213
+              "page_views": 80800,
+              "inquiries": 405,
+              "active_listings": 6890,
+              "pv_per_listing": 11.73,
+              "inquiries_per_listing": 0.0588
             },
             "elite": {
-              "page_views": 10799,
-              "inquiries": 63
+              "page_views": 19012,
+              "inquiries": 88,
+              "active_listings": 595,
+              "pv_per_listing": 31.95,
+              "inquiries_per_listing": 0.1479
             },
             "elite_plus": {
-              "page_views": 0,
-              "inquiries": 11
+              "page_views": 9275,
+              "inquiries": 40,
+              "active_listings": 35,
+              "pv_per_listing": 265.0,
+              "inquiries_per_listing": 1.1429
             }
-          }
+          },
+          "elite_vs_freemium_inquiries_per_listing_multiplier": 2.52,
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 19.44
         },
         {
           "name": "Auvergne-Rhône-Alpes",
           "mixpanel_key": "Auvergne-Rhône-Alpes",
-          "page_views": 45237,
-          "inquiries": 205,
+          "page_views": 139157,
+          "inquiries": 570,
           "subscription_comparison": {
             "freemium": {
-              "page_views": 26013,
-              "inquiries": 113
+              "page_views": 85130,
+              "inquiries": 356,
+              "active_listings": 6403,
+              "pv_per_listing": 13.3,
+              "inquiries_per_listing": 0.0556
             },
             "elite": {
-              "page_views": 14638,
-              "inquiries": 67
+              "page_views": 46753,
+              "inquiries": 196,
+              "active_listings": 923,
+              "pv_per_listing": 50.65,
+              "inquiries_per_listing": 0.2124
             },
             "elite_plus": {
-              "page_views": 0,
-              "inquiries": 12
+              "page_views": 7274,
+              "inquiries": 18,
+              "active_listings": 78,
+              "pv_per_listing": 93.26,
+              "inquiries_per_listing": 0.2308
             }
-          }
-        },
-        {
-          "name": "Normandy",
-          "mixpanel_key": "Normandy",
-          "page_views": 22385,
-          "inquiries": 174,
-          "subscription_comparison": {
-            "freemium": {
-              "page_views": 14795,
-              "inquiries": 123
-            },
-            "elite": {
-              "page_views": 6051,
-              "inquiries": 39
-            },
-            "elite_plus": {
-              "page_views": 0,
-              "inquiries": 0
-            }
-          }
-        },
-        {
-          "name": "Brittany",
-          "mixpanel_key": "Brittany",
-          "page_views": 22102,
-          "inquiries": 156,
-          "subscription_comparison": {
-            "freemium": {
-              "page_views": 12406,
-              "inquiries": 94
-            },
-            "elite": {
-              "page_views": 8376,
-              "inquiries": 58
-            },
-            "elite_plus": {
-              "page_views": 0,
-              "inquiries": 0
-            }
-          }
+          },
+          "elite_vs_freemium_inquiries_per_listing_multiplier": 3.82,
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 4.15
         }
       ]
     },
     {
       "name": "Greece",
-      "page_views": 152182,
-      "inquiries": 1337,
-      "inquiry_to_pv_rate_pct": 0.88,
+      "page_views": 413015,
+      "inquiries": 2093,
+      "inquiry_to_pv_rate_pct": 0.51,
       "traffic_split_by_viewer_country": [
         {
           "country": "United States",
@@ -1415,137 +1605,193 @@
       ],
       "subscription_comparison": {
         "freemium": {
-          "page_views": 59729,
-          "inquiries": 582,
-          "active_listings": 13069,
-          "pv_per_listing": 4.57,
-          "inquiries_per_listing": 0.0445
+          "page_views": 160234,
+          "inquiries": 952,
+          "active_listings": 11505,
+          "pv_per_listing": 13.93,
+          "inquiries_per_listing": 0.0827
         },
         "elite": {
-          "page_views": 34886,
-          "inquiries": 327,
-          "active_listings": 3573,
-          "pv_per_listing": 9.76,
-          "inquiries_per_listing": 0.0915
+          "page_views": 95538,
+          "inquiries": 475,
+          "active_listings": 3987,
+          "pv_per_listing": 23.96,
+          "inquiries_per_listing": 0.1191
         },
         "elite_plus": {
-          "page_views": 50078,
-          "inquiries": 373,
-          "active_listings": 2612,
-          "pv_per_listing": 19.17,
-          "inquiries_per_listing": 0.1428
+          "page_views": 157243,
+          "inquiries": 666,
+          "active_listings": 2866,
+          "pv_per_listing": 54.86,
+          "inquiries_per_listing": 0.2324
         }
       },
-      "elite_vs_freemium_inquiries_per_listing_multiplier": 2.1,
-      "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 3.2,
+      "elite_vs_freemium_inquiries_per_listing_multiplier": 1.44,
+      "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 2.81,
+      "multiplier_reliable": true,
       "regions": [
         {
           "name": "Attica (Athens)",
           "mixpanel_key": "Attica",
-          "page_views": 41160,
-          "inquiries": 527,
+          "page_views": 100128,
+          "inquiries": 750,
           "subscription_comparison": {
             "freemium": {
-              "page_views": 18946,
-              "inquiries": 258
+              "page_views": 44426,
+              "inquiries": 402,
+              "active_listings": 5193,
+              "pv_per_listing": 8.55,
+              "inquiries_per_listing": 0.0774
             },
             "elite": {
-              "page_views": 12743,
-              "inquiries": 149
+              "page_views": 35065,
+              "inquiries": 210,
+              "active_listings": 1800,
+              "pv_per_listing": 19.48,
+              "inquiries_per_listing": 0.1167
             },
             "elite_plus": {
-              "page_views": 7507,
-              "inquiries": 96
+              "page_views": 20637,
+              "inquiries": 138,
+              "active_listings": 839,
+              "pv_per_listing": 24.6,
+              "inquiries_per_listing": 0.1645
             }
-          }
+          },
+          "elite_vs_freemium_inquiries_per_listing_multiplier": 1.51,
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 2.13
         },
         {
           "name": "Peloponnese & Ionian Islands",
           "mixpanel_key": "Peloponnese, Western Greece and the Ionian",
-          "page_views": 40945,
-          "inquiries": 319,
+          "page_views": 116835,
+          "inquiries": 536,
           "subscription_comparison": {
             "freemium": {
-              "page_views": 13810,
-              "inquiries": 117
+              "page_views": 36499,
+              "inquiries": 176,
+              "active_listings": 1658,
+              "pv_per_listing": 22.01,
+              "inquiries_per_listing": 0.1062
             },
             "elite": {
-              "page_views": 5348,
-              "inquiries": 48
+              "page_views": 13647,
+              "inquiries": 59,
+              "active_listings": 585,
+              "pv_per_listing": 23.33,
+              "inquiries_per_listing": 0.1009
             },
             "elite_plus": {
-              "page_views": 21169,
-              "inquiries": 151
+              "page_views": 66689,
+              "inquiries": 301,
+              "active_listings": 881,
+              "pv_per_listing": 75.7,
+              "inquiries_per_listing": 0.3417
             }
-          }
+          },
+          "elite_vs_freemium_inquiries_per_listing_multiplier": 0.95,
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 3.22
         },
         {
           "name": "Crete",
           "mixpanel_key": "Crete",
-          "page_views": 0,
-          "inquiries": 0,
+          "page_views": 61525,
+          "inquiries": 243,
           "subscription_comparison": {
             "freemium": {
-              "page_views": 0,
-              "inquiries": 0
+              "page_views": 16411,
+              "inquiries": 65,
+              "active_listings": 1038,
+              "pv_per_listing": 15.81,
+              "inquiries_per_listing": 0.0626
             },
             "elite": {
-              "page_views": 0,
-              "inquiries": 0
+              "page_views": 13454,
+              "inquiries": 73,
+              "active_listings": 318,
+              "pv_per_listing": 42.31,
+              "inquiries_per_listing": 0.2296
             },
             "elite_plus": {
-              "page_views": 0,
-              "inquiries": 0
+              "page_views": 31660,
+              "inquiries": 105,
+              "active_listings": 453,
+              "pv_per_listing": 69.89,
+              "inquiries_per_listing": 0.2318
             }
-          }
+          },
+          "elite_vs_freemium_inquiries_per_listing_multiplier": 3.67,
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 3.7
         },
         {
           "name": "Thessaly & Central Greece",
           "mixpanel_key": "Thessaly and Central Greece",
-          "page_views": 0,
+          "page_views": 9112,
           "inquiries": 33,
           "subscription_comparison": {
             "freemium": {
-              "page_views": 0,
-              "inquiries": 15
+              "page_views": 5285,
+              "inquiries": 21,
+              "active_listings": 338,
+              "pv_per_listing": 15.64,
+              "inquiries_per_listing": 0.0621
             },
             "elite": {
-              "page_views": 0,
-              "inquiries": 10
+              "page_views": 2237,
+              "inquiries": 7,
+              "active_listings": 79,
+              "pv_per_listing": 28.32,
+              "inquiries_per_listing": 0.0886
             },
             "elite_plus": {
-              "page_views": 0,
-              "inquiries": 8
+              "page_views": 1590,
+              "inquiries": 5,
+              "active_listings": 29,
+              "pv_per_listing": 54.83,
+              "inquiries_per_listing": 0.1724
             }
-          }
+          },
+          "elite_vs_freemium_inquiries_per_listing_multiplier": 1.43,
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 2.78
         },
         {
           "name": "Aegean Islands",
           "mixpanel_key": "Aegean Islands",
-          "page_views": 0,
-          "inquiries": 0,
+          "page_views": 83864,
+          "inquiries": 352,
           "subscription_comparison": {
             "freemium": {
-              "page_views": 0,
-              "inquiries": 0
+              "page_views": 34325,
+              "inquiries": 171,
+              "active_listings": 1794,
+              "pv_per_listing": 19.13,
+              "inquiries_per_listing": 0.0953
             },
             "elite": {
-              "page_views": 0,
-              "inquiries": 0
+              "page_views": 16913,
+              "inquiries": 78,
+              "active_listings": 730,
+              "pv_per_listing": 23.17,
+              "inquiries_per_listing": 0.1068
             },
             "elite_plus": {
-              "page_views": 0,
-              "inquiries": 0
+              "page_views": 32626,
+              "inquiries": 103,
+              "active_listings": 618,
+              "pv_per_listing": 52.79,
+              "inquiries_per_listing": 0.1667
             }
-          }
+          },
+          "elite_vs_freemium_inquiries_per_listing_multiplier": 1.12,
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 1.75
         }
       ]
     },
     {
       "name": "Germany",
-      "page_views": 92882,
-      "inquiries": 360,
-      "inquiry_to_pv_rate_pct": 0.39,
+      "page_views": 137654,
+      "inquiries": 387,
+      "inquiry_to_pv_rate_pct": 0.28,
       "traffic_split_by_viewer_country": [
         {
           "country": "Germany",
@@ -1590,35 +1836,36 @@
       ],
       "subscription_comparison": {
         "freemium": {
-          "page_views": 13895,
-          "inquiries": 49,
-          "active_listings": 217,
-          "pv_per_listing": 64.03,
-          "inquiries_per_listing": 0.2258
+          "page_views": 41431,
+          "inquiries": 145,
+          "active_listings": 277,
+          "pv_per_listing": 149.57,
+          "inquiries_per_listing": 0.5235
         },
         "elite": {
-          "page_views": 17043,
-          "inquiries": 70,
-          "active_listings": 141,
-          "pv_per_listing": 120.87,
-          "inquiries_per_listing": 0.4965
+          "page_views": 40980,
+          "inquiries": 114,
+          "active_listings": 183,
+          "pv_per_listing": 223.93,
+          "inquiries_per_listing": 0.623
         },
         "elite_plus": {
-          "page_views": 18988,
-          "inquiries": 77,
-          "active_listings": 258,
-          "pv_per_listing": 73.6,
-          "inquiries_per_listing": 0.2984
+          "page_views": 55243,
+          "inquiries": 128,
+          "active_listings": 455,
+          "pv_per_listing": 121.41,
+          "inquiries_per_listing": 0.2813
         }
       },
-      "elite_vs_freemium_inquiries_per_listing_multiplier": 2.2,
-      "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 1.3
+      "elite_vs_freemium_inquiries_per_listing_multiplier": 1.19,
+      "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 0.54,
+      "multiplier_reliable": true
     },
     {
       "name": "Switzerland",
-      "page_views": 183352,
-      "inquiries": 1593,
-      "inquiry_to_pv_rate_pct": 0.87,
+      "page_views": 398541,
+      "inquiries": 2066,
+      "inquiry_to_pv_rate_pct": 0.52,
       "traffic_split_by_viewer_country": [
         {
           "country": "Switzerland",
@@ -1663,137 +1910,162 @@
       ],
       "subscription_comparison": {
         "freemium": {
-          "page_views": 24067,
-          "inquiries": 253,
-          "active_listings": 1497,
-          "pv_per_listing": 16.08,
-          "inquiries_per_listing": 0.169
+          "page_views": 70806,
+          "inquiries": 497,
+          "active_listings": 1728,
+          "pv_per_listing": 40.98,
+          "inquiries_per_listing": 0.2876
         },
         "elite": {
-          "page_views": 43353,
-          "inquiries": 380,
-          "active_listings": 793,
-          "pv_per_listing": 54.67,
-          "inquiries_per_listing": 0.4792
+          "page_views": 133202,
+          "inquiries": 769,
+          "active_listings": 1147,
+          "pv_per_listing": 116.13,
+          "inquiries_per_listing": 0.6704
         },
         "elite_plus": {
-          "page_views": 70111,
-          "inquiries": 409,
-          "active_listings": 754,
-          "pv_per_listing": 92.99,
-          "inquiries_per_listing": 0.5424
+          "page_views": 194533,
+          "inquiries": 800,
+          "active_listings": 841,
+          "pv_per_listing": 231.31,
+          "inquiries_per_listing": 0.9512
         }
       },
-      "elite_vs_freemium_inquiries_per_listing_multiplier": 2.8,
-      "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 3.2,
+      "elite_vs_freemium_inquiries_per_listing_multiplier": 2.33,
+      "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 3.31,
+      "multiplier_reliable": true,
       "regions": [
         {
           "name": "Vaud",
           "mixpanel_key": "Vaud",
-          "page_views": 35717,
-          "inquiries": 300,
+          "page_views": 81382,
+          "inquiries": 388,
           "subscription_comparison": {
             "freemium": {
-              "page_views": 0,
-              "inquiries": 45
+              "page_views": 9046,
+              "inquiries": 55,
+              "active_listings": 220,
+              "pv_per_listing": 41.12,
+              "inquiries_per_listing": 0.25
             },
             "elite": {
-              "page_views": 8285,
-              "inquiries": 63
+              "page_views": 26049,
+              "inquiries": 131,
+              "active_listings": 323,
+              "pv_per_listing": 80.65,
+              "inquiries_per_listing": 0.4056
             },
             "elite_plus": {
-              "page_views": 16838,
-              "inquiries": 113
+              "page_views": 46287,
+              "inquiries": 202,
+              "active_listings": 266,
+              "pv_per_listing": 174.01,
+              "inquiries_per_listing": 0.7594
             }
-          }
+          },
+          "elite_vs_freemium_inquiries_per_listing_multiplier": 1.62,
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 3.04
         },
         {
           "name": "Ticino",
           "mixpanel_key": "Ticino",
-          "page_views": 32599,
-          "inquiries": 294,
+          "page_views": 87050,
+          "inquiries": 469,
           "subscription_comparison": {
             "freemium": {
-              "page_views": 0,
-              "inquiries": 41
+              "page_views": 14510,
+              "inquiries": 102,
+              "active_listings": 452,
+              "pv_per_listing": 32.1,
+              "inquiries_per_listing": 0.2257
             },
             "elite": {
-              "page_views": 12399,
-              "inquiries": 129
+              "page_views": 40054,
+              "inquiries": 237,
+              "active_listings": 439,
+              "pv_per_listing": 91.24,
+              "inquiries_per_listing": 0.5399
             },
             "elite_plus": {
-              "page_views": 10024,
-              "inquiries": 70
+              "page_views": 32486,
+              "inquiries": 130,
+              "active_listings": 263,
+              "pv_per_listing": 123.52,
+              "inquiries_per_listing": 0.4943
             }
-          }
-        },
-        {
-          "name": "Zurich",
-          "mixpanel_key": "Zurich",
-          "page_views": 0,
-          "inquiries": 178,
-          "subscription_comparison": {
-            "freemium": {
-              "page_views": 0,
-              "inquiries": 2
-            },
-            "elite": {
-              "page_views": 0,
-              "inquiries": 46
-            },
-            "elite_plus": {
-              "page_views": 0,
-              "inquiries": 25
-            }
-          }
+          },
+          "elite_vs_freemium_inquiries_per_listing_multiplier": 2.39,
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 2.19
         },
         {
           "name": "Valais",
           "mixpanel_key": "Valais",
-          "page_views": 0,
-          "inquiries": 110,
+          "page_views": 42431,
+          "inquiries": 279,
           "subscription_comparison": {
             "freemium": {
-              "page_views": 0,
-              "inquiries": 73
+              "page_views": 17006,
+              "inquiries": 164,
+              "active_listings": 694,
+              "pv_per_listing": 24.5,
+              "inquiries_per_listing": 0.2363
             },
             "elite": {
-              "page_views": 0,
-              "inquiries": 15
+              "page_views": 14257,
+              "inquiries": 78,
+              "active_listings": 195,
+              "pv_per_listing": 73.11,
+              "inquiries_per_listing": 0.4
             },
             "elite_plus": {
-              "page_views": 0,
-              "inquiries": 17
+              "page_views": 11168,
+              "inquiries": 37,
+              "active_listings": 67,
+              "pv_per_listing": 166.69,
+              "inquiries_per_listing": 0.5522
             }
-          }
+          },
+          "elite_vs_freemium_inquiries_per_listing_multiplier": 1.69,
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 2.34
         },
         {
           "name": "Geneva",
           "mixpanel_key": "Geneva",
-          "page_views": 0,
-          "inquiries": 0,
+          "page_views": 74958,
+          "inquiries": 289,
           "subscription_comparison": {
             "freemium": {
-              "page_views": 0,
-              "inquiries": 0
+              "page_views": 14372,
+              "inquiries": 48,
+              "active_listings": 154,
+              "pv_per_listing": 93.32,
+              "inquiries_per_listing": 0.3117
             },
             "elite": {
-              "page_views": 0,
-              "inquiries": 0
+              "page_views": 10715,
+              "inquiries": 43,
+              "active_listings": 106,
+              "pv_per_listing": 101.08,
+              "inquiries_per_listing": 0.4057
             },
             "elite_plus": {
-              "page_views": 0,
-              "inquiries": 0
+              "page_views": 49871,
+              "inquiries": 198,
+              "active_listings": 123,
+              "pv_per_listing": 405.46,
+              "inquiries_per_listing": 1.6098
             }
-          }
+          },
+          "elite_vs_freemium_inquiries_per_listing_multiplier": 1.3,
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 5.16
         }
       ]
     },
     {
       "name": "Austria",
-      "page_views": 51550,
-      "inquiries": 288,
-      "inquiry_to_pv_rate_pct": 0.56,
+      "page_views": 145514,
+      "inquiries": 478,
+      "inquiry_to_pv_rate_pct": 0.33,
       "traffic_split_by_viewer_country": [
         {
           "country": "Austria",
@@ -1838,35 +2110,36 @@
       ],
       "subscription_comparison": {
         "freemium": {
-          "page_views": 32215,
-          "inquiries": 204,
-          "active_listings": 5605,
-          "pv_per_listing": 5.75,
-          "inquiries_per_listing": 0.0364
+          "page_views": 91352,
+          "inquiries": 319,
+          "active_listings": 5716,
+          "pv_per_listing": 15.98,
+          "inquiries_per_listing": 0.0558
         },
         "elite": {
-          "page_views": 7610,
-          "inquiries": 42,
-          "active_listings": 134,
-          "pv_per_listing": 56.79,
-          "inquiries_per_listing": 0.3134
+          "page_views": 31878,
+          "inquiries": 121,
+          "active_listings": 221,
+          "pv_per_listing": 144.24,
+          "inquiries_per_listing": 0.5475
         },
         "elite_plus": {
-          "page_views": 8636,
-          "inquiries": 15,
-          "active_listings": 43,
-          "pv_per_listing": 200.84,
-          "inquiries_per_listing": 0.3488
+          "page_views": 22284,
+          "inquiries": 38,
+          "active_listings": 57,
+          "pv_per_listing": 390.95,
+          "inquiries_per_listing": 0.6667
         }
       },
-      "elite_vs_freemium_inquiries_per_listing_multiplier": 8.6,
-      "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 9.6
+      "elite_vs_freemium_inquiries_per_listing_multiplier": 9.81,
+      "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 11.95,
+      "multiplier_reliable": true
     },
     {
       "name": "New Zealand",
-      "page_views": 74569,
-      "inquiries": 443,
-      "inquiry_to_pv_rate_pct": 0.59,
+      "page_views": 98714,
+      "inquiries": 445,
+      "inquiry_to_pv_rate_pct": 0.45,
       "traffic_split_by_viewer_country": [
         {
           "country": "United States",
@@ -1911,35 +2184,36 @@
       ],
       "subscription_comparison": {
         "freemium": {
-          "page_views": 1631,
-          "inquiries": 13,
-          "active_listings": 54,
-          "pv_per_listing": 30.2,
-          "inquiries_per_listing": 0.2407
+          "page_views": 5356,
+          "inquiries": 27,
+          "active_listings": 80,
+          "pv_per_listing": 66.95,
+          "inquiries_per_listing": 0.3375
         },
         "elite": {
-          "page_views": 21387,
-          "inquiries": 109,
-          "active_listings": 209,
-          "pv_per_listing": 102.33,
-          "inquiries_per_listing": 0.5215
+          "page_views": 65172,
+          "inquiries": 293,
+          "active_listings": 247,
+          "pv_per_listing": 263.85,
+          "inquiries_per_listing": 1.1862
         },
         "elite_plus": {
-          "page_views": 8976,
-          "inquiries": 62,
-          "active_listings": 8,
-          "pv_per_listing": 1122.0,
-          "inquiries_per_listing": 7.75
+          "page_views": 28186,
+          "inquiries": 125,
+          "active_listings": 10,
+          "pv_per_listing": 2818.6,
+          "inquiries_per_listing": 12.5
         }
       },
-      "elite_vs_freemium_inquiries_per_listing_multiplier": 2.2,
-      "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 32.2
+      "elite_vs_freemium_inquiries_per_listing_multiplier": 3.51,
+      "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 37.04,
+      "multiplier_reliable": false
     },
     {
       "name": "United Kingdom",
-      "page_views": 359222,
-      "inquiries": 1536,
-      "inquiry_to_pv_rate_pct": 0.43,
+      "page_views": 1036518,
+      "inquiries": 2571,
+      "inquiry_to_pv_rate_pct": 0.25,
       "traffic_split_by_viewer_country": [
         {
           "country": "United Kingdom",
@@ -1984,77 +2258,69 @@
       ],
       "subscription_comparison": {
         "freemium": {
-          "page_views": 75328,
-          "inquiries": 495,
-          "active_listings": 6831,
-          "pv_per_listing": 11.03,
-          "inquiries_per_listing": 0.0725
+          "page_views": 218707,
+          "inquiries": 841,
+          "active_listings": 7527,
+          "pv_per_listing": 29.06,
+          "inquiries_per_listing": 0.1117
         },
         "elite": {
-          "page_views": 199024,
-          "inquiries": 603,
-          "active_listings": 4519,
-          "pv_per_listing": 44.04,
-          "inquiries_per_listing": 0.1334
+          "page_views": 613102,
+          "inquiries": 1234,
+          "active_listings": 5470,
+          "pv_per_listing": 112.08,
+          "inquiries_per_listing": 0.2256
         },
         "elite_plus": {
-          "page_views": 75456,
-          "inquiries": 382,
-          "active_listings": 437,
-          "pv_per_listing": 172.67,
-          "inquiries_per_listing": 0.8741
+          "page_views": 204709,
+          "inquiries": 496,
+          "active_listings": 526,
+          "pv_per_listing": 389.18,
+          "inquiries_per_listing": 0.943
         }
       },
-      "elite_vs_freemium_inquiries_per_listing_multiplier": 1.8,
-      "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 12.1,
+      "elite_vs_freemium_inquiries_per_listing_multiplier": 2.02,
+      "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 8.44,
+      "multiplier_reliable": true,
       "regions": [
         {
           "name": "England",
           "mixpanel_key": "England",
-          "page_views": 299658,
-          "inquiries": 1395,
+          "page_views": 845729,
+          "inquiries": 2245,
           "subscription_comparison": {
             "freemium": {
-              "page_views": 64794,
-              "inquiries": 468
+              "page_views": 186782,
+              "inquiries": 799,
+              "active_listings": 7281,
+              "pv_per_listing": 25.65,
+              "inquiries_per_listing": 0.1097
             },
             "elite": {
-              "page_views": 151206,
-              "inquiries": 494
+              "page_views": 456685,
+              "inquiries": 957,
+              "active_listings": 5151,
+              "pv_per_listing": 88.66,
+              "inquiries_per_listing": 0.1858
             },
             "elite_plus": {
-              "page_views": 74736,
-              "inquiries": 377
+              "page_views": 202262,
+              "inquiries": 489,
+              "active_listings": 442,
+              "pv_per_listing": 457.61,
+              "inquiries_per_listing": 1.1063
             }
-          }
-        },
-        {
-          "name": "Scotland",
-          "mixpanel_key": "Scotland",
-          "page_views": 42011,
-          "inquiries": 99,
-          "subscription_comparison": {
-            "freemium": {
-              "page_views": 7406,
-              "inquiries": 21
-            },
-            "elite": {
-              "page_views": 34501,
-              "inquiries": 75
-            },
-            "elite_plus": {
-              "page_views": 0,
-              "inquiries": 3
-            }
-          }
+          },
+          "elite_vs_freemium_inquiries_per_listing_multiplier": 1.69,
+          "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 10.08
         }
       ]
     },
     {
       "name": "Mexico",
-      "page_views": 89245,
-      "inquiries": 511,
-      "inquiry_to_pv_rate_pct": 0.57,
+      "page_views": 168699,
+      "inquiries": 655,
+      "inquiry_to_pv_rate_pct": 0.39,
       "traffic_split_by_viewer_country": [
         {
           "country": "United States",
@@ -2099,35 +2365,36 @@
       ],
       "subscription_comparison": {
         "freemium": {
-          "page_views": 30251,
-          "inquiries": 187,
-          "active_listings": 4288,
-          "pv_per_listing": 7.05,
-          "inquiries_per_listing": 0.0436
+          "page_views": 84448,
+          "inquiries": 314,
+          "active_listings": 4586,
+          "pv_per_listing": 18.41,
+          "inquiries_per_listing": 0.0685
         },
         "elite": {
-          "page_views": 7166,
-          "inquiries": 22,
-          "active_listings": 335,
-          "pv_per_listing": 21.39,
-          "inquiries_per_listing": 0.0657
+          "page_views": 25642,
+          "inquiries": 97,
+          "active_listings": 382,
+          "pv_per_listing": 67.13,
+          "inquiries_per_listing": 0.2539
         },
         "elite_plus": {
-          "page_views": 19856,
-          "inquiries": 131,
-          "active_listings": 245,
-          "pv_per_listing": 81.04,
-          "inquiries_per_listing": 0.5347
+          "page_views": 58609,
+          "inquiries": 244,
+          "active_listings": 363,
+          "pv_per_listing": 161.46,
+          "inquiries_per_listing": 0.6722
         }
       },
-      "elite_vs_freemium_inquiries_per_listing_multiplier": 1.5,
-      "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 12.3
+      "elite_vs_freemium_inquiries_per_listing_multiplier": 3.71,
+      "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 9.81,
+      "multiplier_reliable": true
     },
     {
       "name": "Netherlands",
-      "page_views": 56910,
-      "inquiries": 152,
-      "inquiry_to_pv_rate_pct": 0.27,
+      "page_views": 97535,
+      "inquiries": 175,
+      "inquiry_to_pv_rate_pct": 0.18,
       "traffic_split_by_viewer_country": [
         {
           "country": "Germany",
@@ -2172,35 +2439,36 @@
       ],
       "subscription_comparison": {
         "freemium": {
-          "page_views": 23968,
-          "inquiries": 38,
-          "active_listings": 528,
-          "pv_per_listing": 45.39,
-          "inquiries_per_listing": 0.072
+          "page_views": 65931,
+          "inquiries": 101,
+          "active_listings": 744,
+          "pv_per_listing": 88.62,
+          "inquiries_per_listing": 0.1358
         },
         "elite": {
-          "page_views": 7369,
-          "inquiries": 34,
-          "active_listings": 54,
-          "pv_per_listing": 136.46,
-          "inquiries_per_listing": 0.6296
+          "page_views": 23866,
+          "inquiries": 62,
+          "active_listings": 59,
+          "pv_per_listing": 404.51,
+          "inquiries_per_listing": 1.0508
         },
         "elite_plus": {
-          "page_views": 3464,
-          "inquiries": 11,
-          "active_listings": 15,
-          "pv_per_listing": 230.93,
-          "inquiries_per_listing": 0.7333
+          "page_views": 7738,
+          "inquiries": 12,
+          "active_listings": 22,
+          "pv_per_listing": 351.73,
+          "inquiries_per_listing": 0.5455
         }
       },
-      "elite_vs_freemium_inquiries_per_listing_multiplier": 8.7,
-      "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 10.2
+      "elite_vs_freemium_inquiries_per_listing_multiplier": 7.74,
+      "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 4.02,
+      "multiplier_reliable": true
     },
     {
       "name": "Canada",
-      "page_views": 198925,
-      "inquiries": 757,
-      "inquiry_to_pv_rate_pct": 0.38,
+      "page_views": 126089,
+      "inquiries": 361,
+      "inquiry_to_pv_rate_pct": 0.29,
       "traffic_split_by_viewer_country": [
         {
           "country": "Canada",
@@ -2245,35 +2513,36 @@
       ],
       "subscription_comparison": {
         "freemium": {
-          "page_views": 3272,
-          "inquiries": 13,
-          "active_listings": 96,
-          "pv_per_listing": 34.08,
-          "inquiries_per_listing": 0.1354
+          "page_views": 15887,
+          "inquiries": 24,
+          "active_listings": 403,
+          "pv_per_listing": 39.42,
+          "inquiries_per_listing": 0.0596
         },
         "elite": {
-          "page_views": 31343,
-          "inquiries": 133,
-          "active_listings": 400,
-          "pv_per_listing": 78.36,
-          "inquiries_per_listing": 0.3325
+          "page_views": 97902,
+          "inquiries": 311,
+          "active_listings": 498,
+          "pv_per_listing": 196.59,
+          "inquiries_per_listing": 0.6245
         },
         "elite_plus": {
-          "page_views": 6379,
-          "inquiries": 21,
-          "active_listings": 18,
-          "pv_per_listing": 354.39,
-          "inquiries_per_listing": 1.1667
+          "page_views": 12300,
+          "inquiries": 26,
+          "active_listings": 16,
+          "pv_per_listing": 768.75,
+          "inquiries_per_listing": 1.625
         }
       },
-      "elite_vs_freemium_inquiries_per_listing_multiplier": 2.5,
-      "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 8.6
+      "elite_vs_freemium_inquiries_per_listing_multiplier": 10.48,
+      "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 27.27,
+      "multiplier_reliable": false
     },
     {
       "name": "Ireland",
-      "page_views": 72683,
-      "inquiries": 292,
-      "inquiry_to_pv_rate_pct": 0.4,
+      "page_views": 87730,
+      "inquiries": 254,
+      "inquiry_to_pv_rate_pct": 0.29,
       "traffic_split_by_viewer_country": [
         {
           "country": "United States",
@@ -2318,33 +2587,36 @@
       ],
       "subscription_comparison": {
         "freemium": {
-          "page_views": 1689,
-          "inquiries": 8,
-          "active_listings": 15,
-          "pv_per_listing": 112.6,
-          "inquiries_per_listing": 0.5333
+          "page_views": 7413,
+          "inquiries": 21,
+          "active_listings": 24,
+          "pv_per_listing": 308.88,
+          "inquiries_per_listing": 0.875
         },
         "elite": {
-          "page_views": 29248,
-          "inquiries": 135,
-          "active_listings": 88,
-          "pv_per_listing": 332.36,
-          "inquiries_per_listing": 1.5341
+          "page_views": 59754,
+          "inquiries": 189,
+          "active_listings": 106,
+          "pv_per_listing": 563.72,
+          "inquiries_per_listing": 1.783
         },
         "elite_plus": {
-          "page_views": 11682,
-          "inquiries": 38,
-          "active_listings": 0
+          "page_views": 20563,
+          "inquiries": 44,
+          "active_listings": 17,
+          "pv_per_listing": 1209.59,
+          "inquiries_per_listing": 2.5882
         }
       },
-      "elite_vs_freemium_inquiries_per_listing_multiplier": 2.9,
-      "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 0.0
+      "elite_vs_freemium_inquiries_per_listing_multiplier": 2.04,
+      "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 2.96,
+      "multiplier_reliable": false
     },
     {
       "name": "Costa Rica",
-      "page_views": 51928,
-      "inquiries": 233,
-      "inquiry_to_pv_rate_pct": 0.45,
+      "page_views": 94854,
+      "inquiries": 317,
+      "inquiry_to_pv_rate_pct": 0.33,
       "traffic_split_by_viewer_country": [
         {
           "country": "United States",
@@ -2389,27 +2661,36 @@
       ],
       "subscription_comparison": {
         "freemium": {
-          "page_views": 16420,
-          "inquiries": 46,
-          "active_listings": 0
+          "page_views": 28330,
+          "inquiries": 77,
+          "active_listings": 1280,
+          "pv_per_listing": 22.13,
+          "inquiries_per_listing": 0.0602
         },
         "elite": {
-          "page_views": 6191,
-          "inquiries": 37,
-          "active_listings": 0
+          "page_views": 20215,
+          "inquiries": 65,
+          "active_listings": 327,
+          "pv_per_listing": 61.82,
+          "inquiries_per_listing": 0.1988
         },
         "elite_plus": {
-          "page_views": 14195,
-          "inquiries": 72,
-          "active_listings": 0
+          "page_views": 46309,
+          "inquiries": 175,
+          "active_listings": 754,
+          "pv_per_listing": 61.42,
+          "inquiries_per_listing": 0.2321
         }
-      }
+      },
+      "elite_vs_freemium_inquiries_per_listing_multiplier": 3.3,
+      "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 3.86,
+      "multiplier_reliable": true
     },
     {
       "name": "South Africa",
-      "page_views": 222451,
-      "inquiries": 1759,
-      "inquiry_to_pv_rate_pct": 0.79,
+      "page_views": 546341,
+      "inquiries": 2727,
+      "inquiry_to_pv_rate_pct": 0.5,
       "traffic_split_by_viewer_country": [
         {
           "country": "South Africa",
@@ -2454,29 +2735,36 @@
       ],
       "subscription_comparison": {
         "freemium": {
-          "page_views": 88969,
-          "inquiries": 726,
-          "active_listings": 0
+          "page_views": 258100,
+          "inquiries": 1342,
+          "active_listings": 4458,
+          "pv_per_listing": 57.9,
+          "inquiries_per_listing": 0.301
         },
         "elite": {
-          "page_views": 59693,
-          "inquiries": 492,
-          "active_listings": 0
+          "page_views": 195075,
+          "inquiries": 947,
+          "active_listings": 1194,
+          "pv_per_listing": 163.38,
+          "inquiries_per_listing": 0.7931
         },
         "elite_plus": {
-          "page_views": 32646,
-          "inquiries": 207,
-          "active_listings": 399,
-          "pv_per_listing": 81.82,
-          "inquiries_per_listing": 0.5188
+          "page_views": 93166,
+          "inquiries": 438,
+          "active_listings": 497,
+          "pv_per_listing": 187.46,
+          "inquiries_per_listing": 0.8813
         }
-      }
+      },
+      "elite_vs_freemium_inquiries_per_listing_multiplier": 2.63,
+      "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 2.93,
+      "multiplier_reliable": true
     },
     {
       "name": "Croatia",
-      "page_views": 35868,
-      "inquiries": 191,
-      "inquiry_to_pv_rate_pct": 0.53,
+      "page_views": 96123,
+      "inquiries": 328,
+      "inquiry_to_pv_rate_pct": 0.34,
       "traffic_split_by_viewer_country": [
         {
           "country": "United States",
@@ -2521,29 +2809,36 @@
       ],
       "subscription_comparison": {
         "freemium": {
-          "page_views": 19344,
-          "inquiries": 84,
-          "active_listings": 0
+          "page_views": 41103,
+          "inquiries": 140,
+          "active_listings": 5275,
+          "pv_per_listing": 7.79,
+          "inquiries_per_listing": 0.0265
         },
         "elite": {
-          "page_views": 9279,
-          "inquiries": 62,
-          "active_listings": 1838,
-          "pv_per_listing": 5.05,
-          "inquiries_per_listing": 0.0337
+          "page_views": 40583,
+          "inquiries": 134,
+          "active_listings": 3048,
+          "pv_per_listing": 13.31,
+          "inquiries_per_listing": 0.044
         },
         "elite_plus": {
-          "page_views": 6142,
-          "inquiries": 40,
-          "active_listings": 0
+          "page_views": 14437,
+          "inquiries": 54,
+          "active_listings": 215,
+          "pv_per_listing": 67.15,
+          "inquiries_per_listing": 0.2512
         }
-      }
+      },
+      "elite_vs_freemium_inquiries_per_listing_multiplier": 1.66,
+      "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 9.48,
+      "multiplier_reliable": true
     },
     {
       "name": "Australia",
-      "page_views": 57678,
-      "inquiries": 290,
-      "inquiry_to_pv_rate_pct": 0.5,
+      "page_views": 69322,
+      "inquiries": 224,
+      "inquiry_to_pv_rate_pct": 0.32,
       "traffic_split_by_viewer_country": [
         {
           "country": "Australia",
@@ -2588,25 +2883,30 @@
       ],
       "subscription_comparison": {
         "freemium": {
-          "page_views": 8240,
-          "inquiries": 32,
-          "active_listings": 237,
-          "pv_per_listing": 34.77,
-          "inquiries_per_listing": 0.135
+          "page_views": 23988,
+          "inquiries": 74,
+          "active_listings": 266,
+          "pv_per_listing": 90.18,
+          "inquiries_per_listing": 0.2782
         },
         "elite": {
-          "page_views": 12305,
-          "inquiries": 69,
-          "active_listings": 0
+          "page_views": 40955,
+          "inquiries": 136,
+          "active_listings": 66,
+          "pv_per_listing": 620.53,
+          "inquiries_per_listing": 2.0606
         },
         "elite_plus": {
-          "page_views": 983,
-          "inquiries": 11,
-          "active_listings": 0
+          "page_views": 4379,
+          "inquiries": 14,
+          "active_listings": 71,
+          "pv_per_listing": 61.68,
+          "inquiries_per_listing": 0.1972
         }
       },
-      "elite_vs_freemium_inquiries_per_listing_multiplier": 0.0,
-      "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 0.0
+      "elite_vs_freemium_inquiries_per_listing_multiplier": 7.41,
+      "elite_plus_vs_freemium_inquiries_per_listing_multiplier": 0.71,
+      "multiplier_reliable": true
     }
   ]
 }
