@@ -1276,14 +1276,21 @@ function render() {
   const conversion = scopeConversionPct(scope);
 
   const stats = [
-    { label: 'Page views / month', value: fmt(Math.round(scope.page_views / 3)) },
+    {
+      label: 'Page views / month',
+      value: fmt(Math.round(scope.page_views / 3)),
+      yoy: scope.page_views_yoy_pct,
+      yoyBaseline: scope.page_views_yoy_baseline,
+      yoyReliable: scope.page_views_yoy_reliable,
+      yoyMetric: 'page_views'  // green up / red down (same as inquiries)
+    },
     {
       label: 'Inquiries / month',
       value: fmt(Math.round(scope.inquiries / 3)),
       yoy: scope.inquiries_yoy_pct,
       yoyBaseline: scope.inquiries_yoy_baseline,
       yoyReliable: scope.inquiries_yoy_reliable,
-      yoyMetric: 'inquiries'  // green up / red down
+      yoyMetric: 'inquiries'
     },
     {
       label: 'Active listings',
@@ -1291,7 +1298,7 @@ function render() {
       yoy: scope.active_listings_yoy_pct,
       yoyBaseline: scope.active_listings_yoy_baseline,
       yoyReliable: scope.active_listings_yoy_reliable,
-      yoyMetric: 'listings'  // green up / muted gray when ≤ 0
+      yoyMetric: 'listings'  // green up / muted gray when not positive
     },
     { label: 'Conversion (inq / pv)', value: fmtPct(conversion) }
   ];
@@ -1301,20 +1308,20 @@ function render() {
       const up = s.yoy > 0;
       const sign = up ? '+' : '';
       const arrow = up ? '↑' : (s.yoy < 0 ? '↓' : '·');
-      // Color rule depends on metric: inquiries shows red for negative; listings shows muted gray for non-positive
+      // Color rule: listings shows muted gray for non-positive; inquiries + page_views show red for negative
       let color;
       if (s.yoyMetric === 'listings') {
         color = up ? 'var(--je-teal-deep)' : 'var(--je-muted-gray)';
       } else {
-        // inquiries: green up, red down
         color = s.yoy >= 0 ? 'var(--je-teal-deep)' : '#C44';
       }
-      const baselineLabel = s.yoyMetric === 'listings' ? 'listings' : 'inquiries';
+      const baselineLabel = s.yoyMetric === 'listings' ? 'listings'
+        : (s.yoyMetric === 'page_views' ? 'page views' : 'inquiries');
       yoyBadge = `<div class="yoy-badge" style="color: ${color};" title="vs prior-year baseline: ${fmt(s.yoyBaseline)} ${baselineLabel}">
         ${arrow} ${sign}${s.yoy}% YoY
       </div>`;
     } else if (s.yoy === null && s.yoyBaseline != null && s.yoyBaseline > 0) {
-      yoyBadge = `<div class="yoy-badge yoy-thin" title="2025 baseline too small for reliable comparison (${s.yoyBaseline})">small 2025 baseline</div>`;
+      yoyBadge = `<div class="yoy-badge yoy-thin" title="prior-year baseline too small for reliable comparison (${s.yoyBaseline})">small baseline</div>`;
     }
     return `
       <div class="stat">
