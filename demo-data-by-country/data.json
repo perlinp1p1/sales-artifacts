@@ -12,9 +12,11 @@
       "multiplier_reliable = false when any tier has <20 qualifying listings (small sample warning)",
       "Tiny regions where any tier had <20 listings are excluded entirely",
       "Viewer-origin split is region-specific when ≥5,000 region page views available; falls back to country-wide otherwise",
-      "Year-on-year growth (inquiries_yoy_pct) compares to the same 3-month window in 2025. Shown only when 2025 baseline had ≥50 inquiries."
+      "Year-on-year growth (inquiries_yoy_pct) compares to the same 3-month window in 2025. Shown only when 2025 baseline had ≥50 inquiries.",
+      "Active listings YoY also shown; uses the same ≥50 baseline rule. Positive growth highlighted; flat or negative shown in muted gray."
     ],
-    "yoy_baseline_period": "Feb–Apr 2025"
+    "yoy_baseline_period": "Feb–Apr 2025",
+    "display_note": "Page views, inquiries, and active listings are shown as a per-month average computed from the trailing 3 complete months. YoY % is unchanged (3-month vs 3-month comparison)."
   },
   "countries": [
     {
@@ -166,7 +168,10 @@
           "total_pv": 185145,
           "inquiries_yoy_pct": 20.9,
           "inquiries_yoy_baseline": 1798,
-          "inquiries_yoy_reliable": true
+          "inquiries_yoy_reliable": true,
+          "active_listings_yoy_pct": -1.2,
+          "active_listings_yoy_baseline": 22462,
+          "active_listings_yoy_reliable": true
         },
         {
           "name": "Balearic Islands",
@@ -243,7 +248,10 @@
           "total_pv": 138988,
           "inquiries_yoy_pct": 53.3,
           "inquiries_yoy_baseline": 1008,
-          "inquiries_yoy_reliable": true
+          "inquiries_yoy_reliable": true,
+          "active_listings_yoy_pct": 17.3,
+          "active_listings_yoy_baseline": 12734,
+          "active_listings_yoy_reliable": true
         },
         {
           "name": "Valencian Community (incl. Costa Blanca)",
@@ -320,7 +328,10 @@
           "total_pv": 59209,
           "inquiries_yoy_pct": 7.4,
           "inquiries_yoy_baseline": 593,
-          "inquiries_yoy_reliable": true
+          "inquiries_yoy_reliable": true,
+          "active_listings_yoy_pct": 5.5,
+          "active_listings_yoy_baseline": 10480,
+          "active_listings_yoy_reliable": true
         },
         {
           "name": "Catalonia (incl. Costa Brava, Barcelona)",
@@ -397,7 +408,10 @@
           "total_pv": 74943,
           "inquiries_yoy_pct": 99.2,
           "inquiries_yoy_baseline": 387,
-          "inquiries_yoy_reliable": true
+          "inquiries_yoy_reliable": true,
+          "active_listings_yoy_pct": 16.9,
+          "active_listings_yoy_baseline": 8763,
+          "active_listings_yoy_reliable": true
         },
         {
           "name": "Canary Islands",
@@ -474,7 +488,10 @@
           "total_pv": 14206,
           "inquiries_yoy_pct": -7.3,
           "inquiries_yoy_baseline": 109,
-          "inquiries_yoy_reliable": true
+          "inquiries_yoy_reliable": true,
+          "active_listings_yoy_pct": 14.1,
+          "active_listings_yoy_baseline": 1912,
+          "active_listings_yoy_reliable": true
         },
         {
           "name": "Madrid",
@@ -551,12 +568,18 @@
           "total_pv": 43069,
           "inquiries_yoy_pct": 42.3,
           "inquiries_yoy_baseline": 305,
-          "inquiries_yoy_reliable": true
+          "inquiries_yoy_reliable": true,
+          "active_listings_yoy_pct": 42.9,
+          "active_listings_yoy_baseline": 3663,
+          "active_listings_yoy_reliable": true
         }
       ],
       "inquiries_yoy_pct": 36.5,
       "inquiries_yoy_baseline": 4395,
-      "inquiries_yoy_reliable": true
+      "inquiries_yoy_reliable": true,
+      "active_listings_yoy_pct": 10.2,
+      "active_listings_yoy_baseline": 63136,
+      "active_listings_yoy_reliable": true
     },
     {
       "name": "Italy",
@@ -707,7 +730,10 @@
           "total_pv": 210258,
           "inquiries_yoy_pct": 73.1,
           "inquiries_yoy_baseline": 1441,
-          "inquiries_yoy_reliable": true
+          "inquiries_yoy_reliable": true,
+          "active_listings_yoy_pct": 57.6,
+          "active_listings_yoy_baseline": 11058,
+          "active_listings_yoy_reliable": true
         },
         {
           "name": "Lombardy",
@@ -784,7 +810,10 @@
           "total_pv": 133913,
           "inquiries_yoy_pct": 75.1,
           "inquiries_yoy_baseline": 1209,
-          "inquiries_yoy_reliable": true
+          "inquiries_yoy_reliable": true,
+          "active_listings_yoy_pct": 44.4,
+          "active_listings_yoy_baseline": 5388,
+          "active_listings_yoy_reliable": true
         },
         {
           "name": "Sardinia",
@@ -861,7 +890,10 @@
           "total_pv": 49540,
           "inquiries_yoy_pct": 58.4,
           "inquiries_yoy_baseline": 524,
-          "inquiries_yoy_reliable": true
+          "inquiries_yoy_reliable": true,
+          "active_listings_yoy_pct": 16.4,
+          "active_listings_yoy_baseline": 1595,
+          "active_listings_yoy_reliable": true
         },
         {
           "name": "Sicily",
@@ -938,7 +970,10 @@
           "total_pv": 32628,
           "inquiries_yoy_pct": 68.1,
           "inquiries_yoy_baseline": 263,
-          "inquiries_yoy_reliable": true
+          "inquiries_yoy_reliable": true,
+          "active_listings_yoy_pct": 58.8,
+          "active_listings_yoy_baseline": 1152,
+          "active_listings_yoy_reliable": true
         },
         {
           "name": "Veneto",
@@ -1015,7 +1050,10 @@
           "total_pv": 33192,
           "inquiries_yoy_pct": 61.2,
           "inquiries_yoy_baseline": 250,
-          "inquiries_yoy_reliable": true
+          "inquiries_yoy_reliable": true,
+          "active_listings_yoy_pct": 60.7,
+          "active_listings_yoy_baseline": 2354,
+          "active_listings_yoy_reliable": true
         },
         {
           "name": "Piedmont",
@@ -1092,7 +1130,10 @@
           "total_pv": 41450,
           "inquiries_yoy_pct": 18.4,
           "inquiries_yoy_baseline": 479,
-          "inquiries_yoy_reliable": true
+          "inquiries_yoy_reliable": true,
+          "active_listings_yoy_pct": 36.4,
+          "active_listings_yoy_baseline": 1264,
+          "active_listings_yoy_reliable": true
         },
         {
           "name": "Apulia",
@@ -1169,7 +1210,10 @@
           "total_pv": 26820,
           "inquiries_yoy_pct": 78.1,
           "inquiries_yoy_baseline": 311,
-          "inquiries_yoy_reliable": true
+          "inquiries_yoy_reliable": true,
+          "active_listings_yoy_pct": 68.4,
+          "active_listings_yoy_baseline": 971,
+          "active_listings_yoy_reliable": true
         },
         {
           "name": "Umbria",
@@ -1246,7 +1290,10 @@
           "total_pv": 28547,
           "inquiries_yoy_pct": 57.2,
           "inquiries_yoy_baseline": 236,
-          "inquiries_yoy_reliable": true
+          "inquiries_yoy_reliable": true,
+          "active_listings_yoy_pct": 23.7,
+          "active_listings_yoy_baseline": 1014,
+          "active_listings_yoy_reliable": true
         },
         {
           "name": "Campania",
@@ -1323,12 +1370,18 @@
           "total_pv": 22258,
           "inquiries_yoy_pct": 52.2,
           "inquiries_yoy_baseline": 180,
-          "inquiries_yoy_reliable": true
+          "inquiries_yoy_reliable": true,
+          "active_listings_yoy_pct": 29.3,
+          "active_listings_yoy_baseline": 625,
+          "active_listings_yoy_reliable": true
         }
       ],
       "inquiries_yoy_pct": 62.7,
       "inquiries_yoy_baseline": 6455,
-      "inquiries_yoy_reliable": true
+      "inquiries_yoy_reliable": true,
+      "active_listings_yoy_pct": 48.8,
+      "active_listings_yoy_baseline": 32206,
+      "active_listings_yoy_reliable": true
     },
     {
       "name": "Portugal",
@@ -1479,7 +1532,10 @@
           "total_pv": 88968,
           "inquiries_yoy_pct": 19.0,
           "inquiries_yoy_baseline": 877,
-          "inquiries_yoy_reliable": true
+          "inquiries_yoy_reliable": true,
+          "active_listings_yoy_pct": -0.2,
+          "active_listings_yoy_baseline": 12033,
+          "active_listings_yoy_reliable": true
         },
         {
           "name": "Lisbon",
@@ -1556,7 +1612,10 @@
           "total_pv": 84572,
           "inquiries_yoy_pct": 42.3,
           "inquiries_yoy_baseline": 1037,
-          "inquiries_yoy_reliable": true
+          "inquiries_yoy_reliable": true,
+          "active_listings_yoy_pct": 6.6,
+          "active_listings_yoy_baseline": 12017,
+          "active_listings_yoy_reliable": true
         },
         {
           "name": "Porto",
@@ -1633,7 +1692,10 @@
           "total_pv": 21111,
           "inquiries_yoy_pct": 5.6,
           "inquiries_yoy_baseline": 197,
-          "inquiries_yoy_reliable": true
+          "inquiries_yoy_reliable": true,
+          "active_listings_yoy_pct": 11.0,
+          "active_listings_yoy_baseline": 4577,
+          "active_listings_yoy_reliable": true
         },
         {
           "name": "Setubal",
@@ -1710,7 +1772,10 @@
           "total_pv": 17597,
           "inquiries_yoy_pct": 6.2,
           "inquiries_yoy_baseline": 227,
-          "inquiries_yoy_reliable": true
+          "inquiries_yoy_reliable": true,
+          "active_listings_yoy_pct": 6.7,
+          "active_listings_yoy_baseline": 3363,
+          "active_listings_yoy_reliable": true
         },
         {
           "name": "Madeira",
@@ -1787,12 +1852,18 @@
           "total_pv": 17661,
           "inquiries_yoy_pct": 18.8,
           "inquiries_yoy_baseline": 149,
-          "inquiries_yoy_reliable": true
+          "inquiries_yoy_reliable": true,
+          "active_listings_yoy_pct": -1.4,
+          "active_listings_yoy_baseline": 2266,
+          "active_listings_yoy_reliable": true
         }
       ],
       "inquiries_yoy_pct": 19.1,
       "inquiries_yoy_baseline": 2930,
-      "inquiries_yoy_reliable": true
+      "inquiries_yoy_reliable": true,
+      "active_listings_yoy_pct": 6.6,
+      "active_listings_yoy_baseline": 39120,
+      "active_listings_yoy_reliable": true
     },
     {
       "name": "United States",
@@ -1943,7 +2014,10 @@
           "total_pv": 171171,
           "inquiries_yoy_pct": 172.3,
           "inquiries_yoy_baseline": 343,
-          "inquiries_yoy_reliable": true
+          "inquiries_yoy_reliable": true,
+          "active_listings_yoy_pct": 280.1,
+          "active_listings_yoy_baseline": 4688,
+          "active_listings_yoy_reliable": true
         },
         {
           "name": "California",
@@ -2020,7 +2094,10 @@
           "total_pv": 202564,
           "inquiries_yoy_pct": 312.7,
           "inquiries_yoy_baseline": 213,
-          "inquiries_yoy_reliable": true
+          "inquiries_yoy_reliable": true,
+          "active_listings_yoy_pct": 486.8,
+          "active_listings_yoy_baseline": 2360,
+          "active_listings_yoy_reliable": true
         },
         {
           "name": "New York",
@@ -2097,7 +2174,10 @@
           "total_pv": 111098,
           "inquiries_yoy_pct": 221.4,
           "inquiries_yoy_baseline": 229,
-          "inquiries_yoy_reliable": true
+          "inquiries_yoy_reliable": true,
+          "active_listings_yoy_pct": 45.0,
+          "active_listings_yoy_baseline": 5413,
+          "active_listings_yoy_reliable": true
         },
         {
           "name": "Texas",
@@ -2174,7 +2254,10 @@
           "total_pv": 86355,
           "inquiries_yoy_pct": 143.3,
           "inquiries_yoy_baseline": 127,
-          "inquiries_yoy_reliable": true
+          "inquiries_yoy_reliable": true,
+          "active_listings_yoy_pct": 180.5,
+          "active_listings_yoy_baseline": 3600,
+          "active_listings_yoy_reliable": true
         },
         {
           "name": "Colorado",
@@ -2251,7 +2334,10 @@
           "total_pv": 26720,
           "inquiries_yoy_pct": -35.9,
           "inquiries_yoy_baseline": 92,
-          "inquiries_yoy_reliable": true
+          "inquiries_yoy_reliable": true,
+          "active_listings_yoy_pct": 408.9,
+          "active_listings_yoy_baseline": 516,
+          "active_listings_yoy_reliable": true
         },
         {
           "name": "Hawaii",
@@ -2328,7 +2414,10 @@
           "total_pv": 18527,
           "inquiries_yoy_pct": null,
           "inquiries_yoy_baseline": 21,
-          "inquiries_yoy_reliable": false
+          "inquiries_yoy_reliable": false,
+          "active_listings_yoy_pct": -1.5,
+          "active_listings_yoy_baseline": 397,
+          "active_listings_yoy_reliable": true
         },
         {
           "name": "Georgia",
@@ -2405,7 +2494,10 @@
           "total_pv": 32297,
           "inquiries_yoy_pct": 65.8,
           "inquiries_yoy_baseline": 76,
-          "inquiries_yoy_reliable": true
+          "inquiries_yoy_reliable": true,
+          "active_listings_yoy_pct": 127.8,
+          "active_listings_yoy_baseline": 2062,
+          "active_listings_yoy_reliable": true
         },
         {
           "name": "North Carolina",
@@ -2482,7 +2574,10 @@
           "total_pv": 23007,
           "inquiries_yoy_pct": null,
           "inquiries_yoy_baseline": 29,
-          "inquiries_yoy_reliable": false
+          "inquiries_yoy_reliable": false,
+          "active_listings_yoy_pct": 209.4,
+          "active_listings_yoy_baseline": 838,
+          "active_listings_yoy_reliable": true
         },
         {
           "name": "Washington",
@@ -2559,12 +2654,18 @@
           "total_pv": 12290,
           "inquiries_yoy_pct": null,
           "inquiries_yoy_baseline": 10,
-          "inquiries_yoy_reliable": false
+          "inquiries_yoy_reliable": false,
+          "active_listings_yoy_pct": 9.5,
+          "active_listings_yoy_baseline": 592,
+          "active_listings_yoy_reliable": true
         }
       ],
       "inquiries_yoy_pct": 155.2,
       "inquiries_yoy_baseline": 1465,
-      "inquiries_yoy_reliable": true
+      "inquiries_yoy_reliable": true,
+      "active_listings_yoy_pct": 156.9,
+      "active_listings_yoy_baseline": 30975,
+      "active_listings_yoy_reliable": true
     },
     {
       "name": "UAE",
@@ -2715,12 +2816,18 @@
           "total_pv": 71820,
           "inquiries_yoy_pct": -21.6,
           "inquiries_yoy_baseline": 1707,
-          "inquiries_yoy_reliable": true
+          "inquiries_yoy_reliable": true,
+          "active_listings_yoy_pct": 8.5,
+          "active_listings_yoy_baseline": 9715,
+          "active_listings_yoy_reliable": true
         }
       ],
       "inquiries_yoy_pct": -20.0,
       "inquiries_yoy_baseline": 1841,
-      "inquiries_yoy_reliable": true
+      "inquiries_yoy_reliable": true,
+      "active_listings_yoy_pct": 5.0,
+      "active_listings_yoy_baseline": 11263,
+      "active_listings_yoy_reliable": true
     },
     {
       "name": "France",
@@ -2871,7 +2978,10 @@
           "total_pv": 215710,
           "inquiries_yoy_pct": 99.8,
           "inquiries_yoy_baseline": 1372,
-          "inquiries_yoy_reliable": true
+          "inquiries_yoy_reliable": true,
+          "active_listings_yoy_pct": 40.4,
+          "active_listings_yoy_baseline": 20420,
+          "active_listings_yoy_reliable": true
         },
         {
           "name": "Île-de-France (Paris)",
@@ -2948,7 +3058,10 @@
           "total_pv": 123859,
           "inquiries_yoy_pct": 171.1,
           "inquiries_yoy_baseline": 353,
-          "inquiries_yoy_reliable": true
+          "inquiries_yoy_reliable": true,
+          "active_listings_yoy_pct": 107.3,
+          "active_listings_yoy_baseline": 7038,
+          "active_listings_yoy_reliable": true
         },
         {
           "name": "Nouvelle-Aquitaine",
@@ -3025,7 +3138,10 @@
           "total_pv": 47696,
           "inquiries_yoy_pct": 85.9,
           "inquiries_yoy_baseline": 284,
-          "inquiries_yoy_reliable": true
+          "inquiries_yoy_reliable": true,
+          "active_listings_yoy_pct": 89.0,
+          "active_listings_yoy_baseline": 4221,
+          "active_listings_yoy_reliable": true
         },
         {
           "name": "Occitanie",
@@ -3102,7 +3218,10 @@
           "total_pv": 41691,
           "inquiries_yoy_pct": 133.8,
           "inquiries_yoy_baseline": 228,
-          "inquiries_yoy_reliable": true
+          "inquiries_yoy_reliable": true,
+          "active_listings_yoy_pct": 127.7,
+          "active_listings_yoy_baseline": 3302,
+          "active_listings_yoy_reliable": true
         },
         {
           "name": "Auvergne-Rhône-Alpes",
@@ -3179,12 +3298,18 @@
           "total_pv": 40818,
           "inquiries_yoy_pct": 172.7,
           "inquiries_yoy_baseline": 209,
-          "inquiries_yoy_reliable": true
+          "inquiries_yoy_reliable": true,
+          "active_listings_yoy_pct": 106.0,
+          "active_listings_yoy_baseline": 3595,
+          "active_listings_yoy_reliable": true
         }
       ],
       "inquiries_yoy_pct": 127.5,
       "inquiries_yoy_baseline": 2936,
-      "inquiries_yoy_reliable": true
+      "inquiries_yoy_reliable": true,
+      "active_listings_yoy_pct": 77.1,
+      "active_listings_yoy_baseline": 45153,
+      "active_listings_yoy_reliable": true
     },
     {
       "name": "Greece",
@@ -3335,7 +3460,10 @@
           "total_pv": 38647,
           "inquiries_yoy_pct": 124.6,
           "inquiries_yoy_baseline": 334,
-          "inquiries_yoy_reliable": true
+          "inquiries_yoy_reliable": true,
+          "active_listings_yoy_pct": 51.3,
+          "active_listings_yoy_baseline": 5176,
+          "active_listings_yoy_reliable": true
         },
         {
           "name": "Peloponnese & Ionian Islands",
@@ -3412,7 +3540,10 @@
           "total_pv": 36720,
           "inquiries_yoy_pct": 97.8,
           "inquiries_yoy_baseline": 271,
-          "inquiries_yoy_reliable": true
+          "inquiries_yoy_reliable": true,
+          "active_listings_yoy_pct": 52.7,
+          "active_listings_yoy_baseline": 2046,
+          "active_listings_yoy_reliable": true
         },
         {
           "name": "Crete",
@@ -3448,7 +3579,10 @@
           "total_pv": 0,
           "inquiries_yoy_pct": 84.1,
           "inquiries_yoy_baseline": 132,
-          "inquiries_yoy_reliable": true
+          "inquiries_yoy_reliable": true,
+          "active_listings_yoy_pct": 78.8,
+          "active_listings_yoy_baseline": 1012,
+          "active_listings_yoy_reliable": true
         },
         {
           "name": "Thessaly & Central Greece",
@@ -3525,7 +3659,10 @@
           "total_pv": 3960,
           "inquiries_yoy_pct": null,
           "inquiries_yoy_baseline": 26,
-          "inquiries_yoy_reliable": false
+          "inquiries_yoy_reliable": false,
+          "active_listings_yoy_pct": 82.8,
+          "active_listings_yoy_baseline": 244,
+          "active_listings_yoy_reliable": true
         },
         {
           "name": "Aegean Islands",
@@ -3561,12 +3698,18 @@
           "total_pv": 0,
           "inquiries_yoy_pct": 62.2,
           "inquiries_yoy_baseline": 217,
-          "inquiries_yoy_reliable": true
+          "inquiries_yoy_reliable": true,
+          "active_listings_yoy_pct": 46.3,
+          "active_listings_yoy_baseline": 2147,
+          "active_listings_yoy_reliable": true
         }
       ],
       "inquiries_yoy_pct": 72.4,
       "inquiries_yoy_baseline": 1214,
-      "inquiries_yoy_reliable": true
+      "inquiries_yoy_reliable": true,
+      "active_listings_yoy_pct": 36.5,
+      "active_listings_yoy_baseline": 13446,
+      "active_listings_yoy_reliable": true
     },
     {
       "name": "Germany",
@@ -3643,7 +3786,10 @@
       "multiplier_reliable": true,
       "inquiries_yoy_pct": 83.4,
       "inquiries_yoy_baseline": 211,
-      "inquiries_yoy_reliable": true
+      "inquiries_yoy_reliable": true,
+      "active_listings_yoy_pct": 57.2,
+      "active_listings_yoy_baseline": 582,
+      "active_listings_yoy_reliable": true
     },
     {
       "name": "Switzerland",
@@ -3794,7 +3940,10 @@
           "total_pv": 31231,
           "inquiries_yoy_pct": 70.9,
           "inquiries_yoy_baseline": 227,
-          "inquiries_yoy_reliable": true
+          "inquiries_yoy_reliable": true,
+          "active_listings_yoy_pct": 42.9,
+          "active_listings_yoy_baseline": 566,
+          "active_listings_yoy_reliable": true
         },
         {
           "name": "Ticino",
@@ -3871,7 +4020,10 @@
           "total_pv": 28716,
           "inquiries_yoy_pct": 175.9,
           "inquiries_yoy_baseline": 170,
-          "inquiries_yoy_reliable": true
+          "inquiries_yoy_reliable": true,
+          "active_listings_yoy_pct": 101.0,
+          "active_listings_yoy_baseline": 574,
+          "active_listings_yoy_reliable": true
         },
         {
           "name": "Valais",
@@ -3948,7 +4100,10 @@
           "total_pv": 11053,
           "inquiries_yoy_pct": 92.4,
           "inquiries_yoy_baseline": 145,
-          "inquiries_yoy_reliable": true
+          "inquiries_yoy_reliable": true,
+          "active_listings_yoy_pct": 19.8,
+          "active_listings_yoy_baseline": 798,
+          "active_listings_yoy_reliable": true
         },
         {
           "name": "Geneva",
@@ -4025,12 +4180,18 @@
           "total_pv": 92,
           "inquiries_yoy_pct": 189.0,
           "inquiries_yoy_baseline": 100,
-          "inquiries_yoy_reliable": true
+          "inquiries_yoy_reliable": true,
+          "active_listings_yoy_pct": 23.2,
+          "active_listings_yoy_baseline": 311,
+          "active_listings_yoy_reliable": true
         }
       ],
       "inquiries_yoy_pct": 142.5,
       "inquiries_yoy_baseline": 852,
-      "inquiries_yoy_reliable": true
+      "inquiries_yoy_reliable": true,
+      "active_listings_yoy_pct": 47.6,
+      "active_listings_yoy_baseline": 2518,
+      "active_listings_yoy_reliable": true
     },
     {
       "name": "Austria",
@@ -4107,7 +4268,10 @@
       "multiplier_reliable": true,
       "inquiries_yoy_pct": 147.7,
       "inquiries_yoy_baseline": 193,
-      "inquiries_yoy_reliable": true
+      "inquiries_yoy_reliable": true,
+      "active_listings_yoy_pct": 995.8,
+      "active_listings_yoy_baseline": 547,
+      "active_listings_yoy_reliable": true
     },
     {
       "name": "New Zealand",
@@ -4184,7 +4348,10 @@
       "multiplier_reliable": false,
       "inquiries_yoy_pct": 267.8,
       "inquiries_yoy_baseline": 121,
-      "inquiries_yoy_reliable": true
+      "inquiries_yoy_reliable": true,
+      "active_listings_yoy_pct": 42.2,
+      "active_listings_yoy_baseline": 237,
+      "active_listings_yoy_reliable": true
     },
     {
       "name": "United Kingdom",
@@ -4335,12 +4502,18 @@
           "total_pv": 274648,
           "inquiries_yoy_pct": 83.4,
           "inquiries_yoy_baseline": 1224,
-          "inquiries_yoy_reliable": true
+          "inquiries_yoy_reliable": true,
+          "active_listings_yoy_pct": 76.1,
+          "active_listings_yoy_baseline": 7312,
+          "active_listings_yoy_reliable": true
         }
       ],
       "inquiries_yoy_pct": 99.3,
       "inquiries_yoy_baseline": 1290,
-      "inquiries_yoy_reliable": true
+      "inquiries_yoy_reliable": true,
+      "active_listings_yoy_pct": 76.5,
+      "active_listings_yoy_baseline": 7661,
+      "active_listings_yoy_reliable": true
     },
     {
       "name": "Mexico",
@@ -4417,7 +4590,10 @@
       "multiplier_reliable": true,
       "inquiries_yoy_pct": 116.9,
       "inquiries_yoy_baseline": 302,
-      "inquiries_yoy_reliable": true
+      "inquiries_yoy_reliable": true,
+      "active_listings_yoy_pct": 160.0,
+      "active_listings_yoy_baseline": 2050,
+      "active_listings_yoy_reliable": true
     },
     {
       "name": "Netherlands",
@@ -4494,7 +4670,10 @@
       "multiplier_reliable": true,
       "inquiries_yoy_pct": 59.1,
       "inquiries_yoy_baseline": 110,
-      "inquiries_yoy_reliable": true
+      "inquiries_yoy_reliable": true,
+      "active_listings_yoy_pct": 31.4,
+      "active_listings_yoy_baseline": 628,
+      "active_listings_yoy_reliable": true
     },
     {
       "name": "Canada",
@@ -4571,7 +4750,10 @@
       "multiplier_reliable": false,
       "inquiries_yoy_pct": 203.4,
       "inquiries_yoy_baseline": 119,
-      "inquiries_yoy_reliable": true
+      "inquiries_yoy_reliable": true,
+      "active_listings_yoy_pct": -20.3,
+      "active_listings_yoy_baseline": 1150,
+      "active_listings_yoy_reliable": true
     },
     {
       "name": "Ireland",
@@ -4648,7 +4830,10 @@
       "multiplier_reliable": false,
       "inquiries_yoy_pct": 60.8,
       "inquiries_yoy_baseline": 158,
-      "inquiries_yoy_reliable": true
+      "inquiries_yoy_reliable": true,
+      "active_listings_yoy_pct": 33.6,
+      "active_listings_yoy_baseline": 110,
+      "active_listings_yoy_reliable": true
     },
     {
       "name": "Costa Rica",
@@ -4725,7 +4910,10 @@
       "multiplier_reliable": true,
       "inquiries_yoy_pct": 112.8,
       "inquiries_yoy_baseline": 149,
-      "inquiries_yoy_reliable": true
+      "inquiries_yoy_reliable": true,
+      "active_listings_yoy_pct": 169.8,
+      "active_listings_yoy_baseline": 875,
+      "active_listings_yoy_reliable": true
     },
     {
       "name": "South Africa",
@@ -4802,7 +4990,10 @@
       "multiplier_reliable": true,
       "inquiries_yoy_pct": 111.6,
       "inquiries_yoy_baseline": 1289,
-      "inquiries_yoy_reliable": true
+      "inquiries_yoy_reliable": true,
+      "active_listings_yoy_pct": 38.0,
+      "active_listings_yoy_baseline": 4455,
+      "active_listings_yoy_reliable": true
     },
     {
       "name": "Croatia",
@@ -4879,7 +5070,10 @@
       "multiplier_reliable": true,
       "inquiries_yoy_pct": 32.8,
       "inquiries_yoy_baseline": 247,
-      "inquiries_yoy_reliable": true
+      "inquiries_yoy_reliable": true,
+      "active_listings_yoy_pct": 48.6,
+      "active_listings_yoy_baseline": 5747,
+      "active_listings_yoy_reliable": true
     },
     {
       "name": "Australia",
@@ -4956,7 +5150,10 @@
       "multiplier_reliable": true,
       "inquiries_yoy_pct": 54.5,
       "inquiries_yoy_baseline": 145,
-      "inquiries_yoy_reliable": true
+      "inquiries_yoy_reliable": true,
+      "active_listings_yoy_pct": 78.3,
+      "active_listings_yoy_baseline": 226,
+      "active_listings_yoy_reliable": true
     }
   ]
 }
