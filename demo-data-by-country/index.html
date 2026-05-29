@@ -807,34 +807,46 @@ footer {
     break-after: avoid;
   }
 
-  .regions-table { font-size: 8.5pt !important; width: 100%; table-layout: auto; }
-  .regions-table th {
+  .regions-table {
     font-size: 7.5pt !important;
-    padding: 5px 8px !important;
+    width: 100%;
+    table-layout: auto;
+  }
+  .regions-table th {
+    font-size: 6.5pt !important;
+    padding: 5px 6px !important;
     border-bottom: 1px solid #999 !important;
     color: #333 !important;
-    letter-spacing: 1px !important;
+    letter-spacing: 0.5px !important;
     white-space: nowrap;
   }
   .regions-table td {
-    padding: 6px 8px !important;
+    padding: 5px 6px !important;
     border-bottom: 1px solid #eee !important;
     vertical-align: middle !important;
   }
-  /* First column (region name) — allow wrap but tighter */
+  /* Region name column — allow wrap to two lines if needed */
   .regions-table td:first-child {
     line-height: 1.25 !important;
-    padding-right: 12px !important;
+    padding-right: 10px !important;
+    max-width: 35mm !important;
   }
-  /* YoY column needs more space AND must not wrap */
-  .regions-table th:nth-child(4),
-  .regions-table td:nth-child(4) {
-    padding-left: 16px !important;
-    padding-right: 12px !important;
-    min-width: 70px !important;
+  /* All numeric columns: no wrap (short values stay on one line) */
+  .regions-table th.num,
+  .regions-table td.num {
     white-space: nowrap !important;
   }
-  .regions-table td:nth-child(4) > span {
+  /* Both YoY columns (4 = Inq YoY, 5 = Listings YoY): a bit more breathing room */
+  .regions-table th:nth-child(4),
+  .regions-table td:nth-child(4),
+  .regions-table th:nth-child(5),
+  .regions-table td:nth-child(5) {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+    min-width: 50px !important;
+  }
+  .regions-table td:nth-child(4) > span,
+  .regions-table td:nth-child(5) > span {
     white-space: nowrap !important;
     display: inline-block !important;
   }
@@ -844,16 +856,10 @@ footer {
   .regions-table tr.active td:first-child { box-shadow: none !important; }
   .regions-table tr.clickable { cursor: default !important; }
 
-  /* Notes block at the end */
+  /* Hide "About this data" notes block in print to keep PDF on one page */
   .notes {
-    font-size: 7.5pt !important;
-    padding: 8px 12px !important;
-    margin-top: 12px !important;
-    background: #f7f7f7 !important;
-    page-break-inside: avoid;
-    border-radius: 3px !important;
+    display: none !important;
   }
-  .notes strong { font-size: 7.5pt !important; margin-bottom: 4px !important; }
 }
 </style>
 </head>
