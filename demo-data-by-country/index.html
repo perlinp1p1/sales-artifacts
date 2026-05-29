@@ -986,9 +986,10 @@ async function loadData() {
 }
 
 function initUI() {
-  document.getElementById('period-badge').textContent = DATA.metadata.period;
+  // Period badge shows "Monthly avg · {period}" since stats are displayed as per-month averages
+  document.getElementById('period-badge').textContent = `Monthly avg · ${DATA.metadata.period}`;
   document.getElementById('footer-meta').textContent =
-    `JamesEdition · Internal · ${DATA.metadata.period}`;
+    `JamesEdition · Internal · Monthly avg · ${DATA.metadata.period}`;
 
   SORTED_COUNTRIES = [...DATA.countries].sort((a,b) => b.page_views - a.page_views);
   document.getElementById('country-search').placeholder =
@@ -1229,7 +1230,7 @@ function render() {
   document.getElementById('print-scope').textContent = isRegion
     ? `${currentCountry.name} — ${currentRegion.name}`
     : currentCountry.name;
-  document.getElementById('print-period').textContent = DATA.metadata.period;
+  document.getElementById('print-period').textContent = `Monthly avg · ${DATA.metadata.period}`;
 
   // Header
   document.getElementById('selected-country-name').textContent = `${flag} ${currentCountry.name}`;
@@ -1264,34 +1265,51 @@ function render() {
   }
 
   // Stat cards (4): page views, inquiries, active listings, conversion %
+  // Display values are MONTHLY AVERAGES — pool is 3 months, divide by 3 for display
   const sub = scope.subscription_comparison;
   const activeListings = sumActiveListings(sub);
   const conversion = scopeConversionPct(scope);
 
   const stats = [
-    { label: 'Page views', value: fmt(scope.page_views) },
+    { label: 'Page views / month', value: fmt(Math.round(scope.page_views / 3)) },
     {
-      label: 'Inquiries',
-      value: fmt(scope.inquiries),
+      label: 'Inquiries / month',
+      value: fmt(Math.round(scope.inquiries / 3)),
       yoy: scope.inquiries_yoy_pct,
       yoyBaseline: scope.inquiries_yoy_baseline,
-      yoyReliable: scope.inquiries_yoy_reliable
+      yoyReliable: scope.inquiries_yoy_reliable,
+      yoyMetric: 'inquiries'  // green up / red down
     },
-    { label: 'Active listings', value: activeListings != null ? fmt(activeListings) : '—' },
+    {
+      label: 'Active listings',
+      value: activeListings != null ? fmt(activeListings) : '—',
+      yoy: scope.active_listings_yoy_pct,
+      yoyBaseline: scope.active_listings_yoy_baseline,
+      yoyReliable: scope.active_listings_yoy_reliable,
+      yoyMetric: 'listings'  // green up / muted gray when ≤ 0
+    },
     { label: 'Conversion (inq / pv)', value: fmtPct(conversion) }
   ];
   document.getElementById('stat-grid').innerHTML = stats.map(s => {
     let yoyBadge = '';
     if (s.yoy != null && s.yoyReliable) {
-      const up = s.yoy >= 0;
+      const up = s.yoy > 0;
       const sign = up ? '+' : '';
-      const color = up ? 'var(--je-teal-deep)' : '#C44';
-      const arrow = up ? '↑' : '↓';
-      yoyBadge = `<div class="yoy-badge" style="color: ${color};" title="vs Feb–Apr 2025: ${fmt(s.yoyBaseline)} inquiries">
+      const arrow = up ? '↑' : (s.yoy < 0 ? '↓' : '·');
+      // Color rule depends on metric: inquiries shows red for negative; listings shows muted gray for non-positive
+      let color;
+      if (s.yoyMetric === 'listings') {
+        color = up ? 'var(--je-teal-deep)' : 'var(--je-muted-gray)';
+      } else {
+        // inquiries: green up, red down
+        color = s.yoy >= 0 ? 'var(--je-teal-deep)' : '#C44';
+      }
+      const baselineLabel = s.yoyMetric === 'listings' ? 'listings' : 'inquiries';
+      yoyBadge = `<div class="yoy-badge" style="color: ${color};" title="vs prior-year baseline: ${fmt(s.yoyBaseline)} ${baselineLabel}">
         ${arrow} ${sign}${s.yoy}% YoY
       </div>`;
-    } else if (s.yoy === null && s.label === 'Inquiries' && s.yoyBaseline != null) {
-      yoyBadge = `<div class="yoy-badge yoy-thin" title="2025 baseline too small for reliable comparison (${s.yoyBaseline} inquiries)">small 2025 baseline</div>`;
+    } else if (s.yoy === null && s.yoyBaseline != null && s.yoyBaseline > 0) {
+      yoyBadge = `<div class="yoy-badge yoy-thin" title="2025 baseline too small for reliable comparison (${s.yoyBaseline})">small 2025 baseline</div>`;
     }
     return `
       <div class="stat">
@@ -1437,19 +1455,19 @@ function renderSubPanel(scope, isRegion) {
       headlineLabel = 'inquiries';
     }
 
-    // Detail stats below headline
+    // Detail stats below headline — monthly averages for flows, raw for stocks
     const detailRows = [];
     if (hasPerListing && d.inquiries_per_listing != null) {
-      detailRows.push(`<div class="tier-stat"><span class="tier-stat-label">Inq / listing</span><span class="tier-stat-value">${fmtInqPerListing(d.inquiries_per_listing)}</span></div>`);
+      detailRows.push(`<div class="tier-stat"><span class="tier-stat-label">Inq / listing / mo</span><span class="tier-stat-value">${fmtInqPerListing(d.inquiries_per_listing / 3)}</span></div>`);
     }
-    detailRows.push(`<div class="tier-stat"><span class="tier-stat-label">Page views</span><span class="tier-stat-value">${fmt(d.page_views)}</span></div>`);
+    detailRows.push(`<div class="tier-stat"><span class="tier-stat-label">Page views / mo</span><span class="tier-stat-value">${fmt(Math.round(d.page_views / 3))}</span></div>`);
     if (hasPerListing) {
-      detailRows.push(`<div class="tier-stat"><span class="tier-stat-label">Inquiries</span><span class="tier-stat-value">${fmt(d.inquiries)}</span></div>`);
+      detailRows.push(`<div class="tier-stat"><span class="tier-stat-label">Inquiries / mo</span><span class="tier-stat-value">${fmt(Math.round(d.inquiries / 3))}</span></div>`);
       if (d.active_listings != null) {
         detailRows.push(`<div class="tier-stat"><span class="tier-stat-label">Active listings</span><span class="tier-stat-value">${fmt(d.active_listings)}</span></div>`);
       }
       if (d.pv_per_listing != null) {
-        detailRows.push(`<div class="tier-stat"><span class="tier-stat-label">PV / listing</span><span class="tier-stat-value">${fmtPvPerListing(d.pv_per_listing)}</span></div>`);
+        detailRows.push(`<div class="tier-stat"><span class="tier-stat-label">PV / listing / mo</span><span class="tier-stat-value">${fmtPvPerListing(d.pv_per_listing / 3)}</span></div>`);
       }
     }
 
@@ -1490,7 +1508,8 @@ function renderRegionsTable() {
     <thead><tr>
       <th>Region / state</th>
       <th class="num">Page views</th>
-      <th class="num">Inquiries</th>
+      <th class="num">Page views / mo</th>
+      <th class="num">Inquiries / mo</th>
       <th class="num">YoY</th>
       <th class="num">Conv. rate</th>
       <th class="num">Elite + plus share (pv)</th>
@@ -1509,20 +1528,20 @@ function renderRegionsTable() {
             elitShare = ((s.elite.page_views + s.elite_plus.page_views) / total) * 100;
           }
         }
-        // YoY
+        // YoY (inquiries)
         let yoyCell = '<span style="color: var(--je-muted-gray)">—</span>';
         if (r.inquiries_yoy_pct != null && r.inquiries_yoy_reliable) {
           const up = r.inquiries_yoy_pct >= 0;
           const color = up ? 'var(--je-teal-deep)' : '#C44';
           const sign = up ? '+' : '';
           const arrow = up ? '↑' : '↓';
-          yoyCell = `<span style="color: ${color}; font-weight: 600;" title="vs Feb–Apr 2025: ${fmt(r.inquiries_yoy_baseline)} inquiries">${arrow} ${sign}${r.inquiries_yoy_pct}%</span>`;
+          yoyCell = `<span style="color: ${color}; font-weight: 600;" title="vs prior-year baseline: ${fmt(r.inquiries_yoy_baseline)} inquiries">${arrow} ${sign}${r.inquiries_yoy_pct}%</span>`;
         }
         return `
           <tr class="clickable ${active ? 'active' : ''}" data-key="${key.replace(/"/g,'&quot;')}">
             <td>${r.name}</td>
-            <td class="num">${fmt(r.page_views)}</td>
-            <td class="num">${fmt(r.inquiries)}</td>
+            <td class="num">${fmt(Math.round(r.page_views / 3))}</td>
+            <td class="num">${fmt(Math.round(r.inquiries / 3))}</td>
             <td class="num">${yoyCell}</td>
             <td class="num">${fmtPct(conv)}</td>
             <td class="num">${elitShare != null ? elitShare.toFixed(1) + '%' : '—'}</td>
