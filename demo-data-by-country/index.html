@@ -347,8 +347,8 @@ h3 {
 /* Two-column layout */
 .row {
   display: grid;
-  grid-template-columns: 1fr 1.3fr;
-  gap: 32px;
+  grid-template-columns: 0.85fr 1.6fr;
+  gap: 28px;
   margin-bottom: 40px;
 }
 @media (max-width: 1100px) { .row { grid-template-columns: 1fr; } }
@@ -493,12 +493,17 @@ h3 {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+  gap: 8px;
 }
-.tier-stat-label { color: var(--je-mid-gray); }
+.tier-stat-label {
+  color: var(--je-mid-gray);
+  white-space: nowrap;
+}
 .tier-stat-value {
   font-variant-numeric: tabular-nums;
   color: var(--je-black);
   font-weight: 500;
+  white-space: nowrap;
 }
 
 .region-only-note {
@@ -1507,10 +1512,10 @@ function renderRegionsTable() {
   document.getElementById('regions-table').innerHTML = `
     <thead><tr>
       <th>Region / state</th>
-      <th class="num">Page views</th>
       <th class="num">Page views / mo</th>
       <th class="num">Inquiries / mo</th>
-      <th class="num">YoY</th>
+      <th class="num">Inq YoY</th>
+      <th class="num">Listings YoY</th>
       <th class="num">Conv. rate</th>
       <th class="num">Elite + plus share (pv)</th>
     </tr></thead>
@@ -1528,21 +1533,31 @@ function renderRegionsTable() {
             elitShare = ((s.elite.page_views + s.elite_plus.page_views) / total) * 100;
           }
         }
-        // YoY (inquiries)
-        let yoyCell = '<span style="color: var(--je-muted-gray)">—</span>';
+        // Inquiries YoY: green up / red down
+        let inqYoyCell = '<span style="color: var(--je-muted-gray)">—</span>';
         if (r.inquiries_yoy_pct != null && r.inquiries_yoy_reliable) {
           const up = r.inquiries_yoy_pct >= 0;
           const color = up ? 'var(--je-teal-deep)' : '#C44';
           const sign = up ? '+' : '';
           const arrow = up ? '↑' : '↓';
-          yoyCell = `<span style="color: ${color}; font-weight: 600;" title="vs prior-year baseline: ${fmt(r.inquiries_yoy_baseline)} inquiries">${arrow} ${sign}${r.inquiries_yoy_pct}%</span>`;
+          inqYoyCell = `<span style="color: ${color}; font-weight: 600;" title="vs prior-year baseline: ${fmt(r.inquiries_yoy_baseline)} inquiries">${arrow} ${sign}${r.inquiries_yoy_pct}%</span>`;
+        }
+        // Listings YoY: green up / muted gray when not positive
+        let listYoyCell = '<span style="color: var(--je-muted-gray)">—</span>';
+        if (r.active_listings_yoy_pct != null && r.active_listings_yoy_reliable) {
+          const up = r.active_listings_yoy_pct > 0;
+          const color = up ? 'var(--je-teal-deep)' : 'var(--je-muted-gray)';
+          const sign = up ? '+' : '';
+          const arrow = up ? '↑' : (r.active_listings_yoy_pct < 0 ? '↓' : '·');
+          listYoyCell = `<span style="color: ${color}; font-weight: 600;" title="vs prior-year baseline: ${fmt(r.active_listings_yoy_baseline)} listings">${arrow} ${sign}${r.active_listings_yoy_pct}%</span>`;
         }
         return `
           <tr class="clickable ${active ? 'active' : ''}" data-key="${key.replace(/"/g,'&quot;')}">
             <td>${r.name}</td>
             <td class="num">${fmt(Math.round(r.page_views / 3))}</td>
             <td class="num">${fmt(Math.round(r.inquiries / 3))}</td>
-            <td class="num">${yoyCell}</td>
+            <td class="num">${inqYoyCell}</td>
+            <td class="num">${listYoyCell}</td>
             <td class="num">${fmtPct(conv)}</td>
             <td class="num">${elitShare != null ? elitShare.toFixed(1) + '%' : '—'}</td>
           </tr>
