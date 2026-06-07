@@ -1425,7 +1425,8 @@ function renderSubPanel(scope, isRegion) {
     ? (currentRegion.elite_plus_vs_freemium_inquiries_per_listing_multiplier ?? null)
     : currentCountry.elite_plus_vs_freemium_inquiries_per_listing_multiplier;
 
-  const tiers = [
+  // Build tier list — only include tiers that actually exist in subscription_comparison
+  const allTiers = [
     {
       key: 'freemium',
       cls: 'freemium',
@@ -1451,17 +1452,32 @@ function renderSubPanel(scope, isRegion) {
       multiplierLabel: 'inq/listing vs freemium'
     }
   ];
+  const tiers = allTiers.filter(t => t.data != null);
+
+  const hasFreemium = !!sub.freemium;
+  const hasAnyPaid = !!(sub.elite || sub.elite_plus);
 
   document.getElementById('tier-grid').innerHTML = tiers.map(t => {
     const d = t.data || {};
 
-    // Headline: multiplier for elite/elite_plus, "baseline" for freemium
-    // (Falls back to inq/listing if multiplier not available — e.g. region without per-listing data)
+    // Headline rules:
+    // - freemium-only markets: show inq/listing directly (no multiplier baseline label since there's nothing to compare to)
+    // - freemium with paid tiers present: "1× baseline"
+    // - paid tier with valid multiplier: show ratio
+    // - paid tier without multiplier (freemium missing or both 0): show inq/listing
     let headline, headlineLabel;
     if (t.key === 'freemium') {
-      headline = '1×';
-      headlineLabel = 'baseline';
-    } else if (t.multiplier != null) {
+      if (hasAnyPaid) {
+        headline = '1×';
+        headlineLabel = 'baseline';
+      } else if (hasPerListing && d.inquiries_per_listing != null) {
+        headline = fmtInqPerListing(d.inquiries_per_listing);
+        headlineLabel = 'inquiries per listing';
+      } else {
+        headline = fmt(d.inquiries);
+        headlineLabel = 'inquiries';
+      }
+    } else if (t.multiplier != null && hasFreemium) {
       headline = fmtRatio(t.multiplier);
       headlineLabel = 'more inquiries per listing vs. Freemium';
     } else if (hasPerListing && d.inquiries_per_listing != null) {
@@ -1499,7 +1515,9 @@ function renderSubPanel(scope, isRegion) {
     `;
   }).join('');
 
-  if (isRegion) {
+  if (!hasAnyPaid) {
+    footEl.innerHTML = `<em>No paid listings in this market yet.</em>`;
+  } else if (isRegion) {
     const hasRegionMult = !!(currentRegion.elite_vs_freemium_inquiries_per_listing_multiplier || currentRegion.elite_plus_vs_freemium_inquiries_per_listing_multiplier);
     if (!hasRegionMult) {
       footEl.innerHTML = `<em>Per-listing multipliers are country-level only for this region. Switch to whole country for the multiplier.</em>`;
