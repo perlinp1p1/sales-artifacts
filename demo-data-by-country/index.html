@@ -344,6 +344,76 @@ h3 {
 @media (max-width: 900px) { .stat-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 480px) { .stat-grid { grid-template-columns: 1fr; } }
 
+/* Lead value panel */
+.lead-stats {
+  display: flex;
+  gap: 48px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+.lead-median .stat-value { font-size: 40px; }
+.lead-avg .stat-value { font-size: 24px; color: var(--je-mid-gray); }
+.lead-caption {
+  font-size: 12px;
+  color: var(--je-light-gray);
+  margin-top: 10px;
+}
+.lead-warn {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--je-warning, #E79E32);
+  margin-left: 8px;
+  cursor: help;
+}
+
+/* Price bucket stacked bar */
+.bucket-section { margin-top: 26px; padding-top: 22px; border-top: 1px solid var(--je-divider); }
+.bucket-title {
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--je-light-gray);
+  margin-bottom: 12px;
+}
+.bucket-bar {
+  display: flex;
+  width: 100%;
+  height: 34px;
+  border-radius: 4px;
+  overflow: hidden;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+.bucket-seg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  cursor: help;
+  min-width: 0;
+  transition: filter 120ms;
+}
+.bucket-seg:hover { filter: brightness(1.08); }
+.bucket-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  margin-top: 12px;
+  font-size: 11px;
+  color: var(--je-mid-gray);
+}
+.bucket-legend-item { display: flex; align-items: center; gap: 5px; white-space: nowrap; }
+.bucket-dot {
+  width: 9px; height: 9px; border-radius: 2px; flex-shrink: 0;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
 /* Two-column layout */
 .row {
   display: grid;
@@ -918,6 +988,26 @@ footer {
 
     <div class="stat-grid" id="stat-grid"></div>
 
+    <div class="panel hidden" id="lead-panel" style="margin-bottom: 40px;">
+      <h3 id="lead-title">Lead value</h3>
+      <div class="lead-stats">
+        <div class="stat lead-median" style="box-shadow: none; padding: 0;">
+          <div class="stat-label">Median lead value</div>
+          <div class="stat-value" id="lead-median-val">—</div>
+        </div>
+        <div class="stat lead-avg" style="box-shadow: none; padding: 0;">
+          <div class="stat-label">Average lead value</div>
+          <div class="stat-value" id="lead-avg-val">—</div>
+        </div>
+      </div>
+      <div class="lead-caption" id="lead-caption"></div>
+      <div class="bucket-section hidden" id="bucket-section">
+        <div class="bucket-title" id="bucket-title">Share of inquiries by asking price</div>
+        <div class="bucket-bar" id="bucket-bar"></div>
+        <div class="bucket-legend" id="bucket-legend"></div>
+      </div>
+    </div>
+
     <div class="row">
       <div class="panel">
         <h3 id="origin-title">Where viewers come from</h3>
@@ -1386,6 +1476,9 @@ function render() {
     `;
   }).join('');
 
+  // ---- Lead value + price buckets panel ----
+  renderLeadPanel(scope, isRegion);
+
   // ---- Subscription panel (3 tiers side by side) ----
   renderSubPanel(scope, isRegion);
 
@@ -1401,6 +1494,71 @@ function render() {
       DATA.metadata.notes.map(n => `· ${n}`).join('<br>');
   } else {
     notesEl.classList.add('hidden');
+  }
+}
+
+// Teal ramp, light to deep, for the 11 price buckets
+const BUCKET_COLORS = [
+  '#E3F1F0','#CBE6E4','#B2DAD8','#98CECB','#7EC2BE',
+  '#63B5B1','#47A8A3','#2A9A95','#0E8C87','#00787F','#006C75'
+];
+
+function renderLeadPanel(scope, isRegion) {
+  const panel = document.getElementById('lead-panel');
+  const country = currentCountry;
+
+  // Lead values: prefer scope-level, fall back to country-level with a note
+  const scopeLV = scope.lead_values || null;
+  const countryLV = country.lead_values || null;
+  const lv = scopeLV || countryLV;
+  const lvIsFallback = isRegion && !scopeLV && !!countryLV;
+
+  // Price buckets are country-level only
+  const pb = country.price_buckets || null;
+
+  if (!lv && !pb) { panel.classList.add('hidden'); return; }
+  panel.classList.remove('hidden');
+
+  const period = DATA.metadata.lead_values_period || '';
+  document.getElementById('lead-title').innerHTML =
+    `Lead value <span style="font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--je-muted-gray);">· ${period} · asking price of inquired listings</span>`;
+
+  // Stats
+  if (lv) {
+    document.getElementById('lead-median-val').textContent = lv.median_display;
+    document.getElementById('lead-avg-val').textContent = lv.average_display;
+    let cap = `Based on ${fmt(lv.leads)} inquiries`;
+    if (lvIsFallback) cap += ` · country-wide (no region-level lead data)`;
+    if (lv.reliable === false) {
+      cap += ` <span class="lead-warn" title="Fewer than 30 inquiries in this window. Values may not be representative.">⚠ small sample</span>`;
+    }
+    document.getElementById('lead-caption').innerHTML = cap;
+    document.querySelector('.lead-stats').style.display = '';
+  } else {
+    document.querySelector('.lead-stats').style.display = 'none';
+    document.getElementById('lead-caption').innerHTML = '';
+  }
+
+  // Buckets
+  const bs = document.getElementById('bucket-section');
+  if (pb && pb.buckets && pb.buckets.length) {
+    bs.classList.remove('hidden');
+    const scopeNote = isRegion ? ' · country-wide' : '';
+    document.getElementById('bucket-title').textContent =
+      `Share of inquiries by asking price (${fmt(pb.total_priced_inquiries)} priced inquiries${scopeNote})`;
+
+    document.getElementById('bucket-bar').innerHTML = pb.buckets.map((b, i) => {
+      const textColor = i >= 6 ? '#fff' : 'var(--je-black)';
+      const showLabel = b.pct >= 7;
+      return `<div class="bucket-seg" style="width: ${b.pct}%; background: ${BUCKET_COLORS[i]}; color: ${textColor};"
+        title="${b.label}: ${b.pct}% of inquiries">${showLabel ? b.pct.toFixed(0) + '%' : ''}</div>`;
+    }).join('');
+
+    document.getElementById('bucket-legend').innerHTML = pb.buckets.map((b, i) =>
+      `<span class="bucket-legend-item"><span class="bucket-dot" style="background: ${BUCKET_COLORS[i]};"></span>${b.label} · ${b.pct}%</span>`
+    ).join('');
+  } else {
+    bs.classList.add('hidden');
   }
 }
 
